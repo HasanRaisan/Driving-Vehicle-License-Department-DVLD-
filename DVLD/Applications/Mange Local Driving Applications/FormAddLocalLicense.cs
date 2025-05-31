@@ -125,7 +125,7 @@ namespace DVLD.Driving_Licenses_Services
 
 
 
-            if (clsLicenses.isLicenseExistByPersonID(this.PersonID, this.LicenseClassID))
+            if (clsLicenses.isLicenseExistByPersonIDAndLicenseClassID(this.PersonID, this.LicenseClassID))
             {
                 MessageBox.Show("Person already have a license with the same applied driving class, Choose diffrent driving class", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 

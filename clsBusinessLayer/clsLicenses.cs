@@ -158,9 +158,9 @@ namespace BusinessLayer
            return clsLicenseDataAccess.UpdateLicenseActivationStatus(this._LicenseID,this._IsActive);
         }
 
-       static public bool isLicenseExistByPersonID( int PersonID , int LicenseClassID)
+       static public bool isLicenseExistByPersonIDAndLicenseClassID( int PersonID , int LicenseClassID)
         {
-            return clsLicenseDataAccess.GetLicenseIDByPersonID(PersonID, LicenseClassID) != -1;
+            return clsLicenseDataAccess.GetLicenseIDByPersonIDAndLicenceClassID(PersonID, LicenseClassID) != -1;
         }
 
         public static string GetIssueReasonText(enIssueReason IssueReason)

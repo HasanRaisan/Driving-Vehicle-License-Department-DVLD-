@@ -366,7 +366,7 @@ namespace DataAccessLayer
         }
 
 
-        public static int GetLicenseIDByPersonID(int PersonID, int LicenseClassID)
+        public static int GetLicenseIDByPersonIDAndLicenceClassID(int PersonID, int LicenseClassID)
         {
             int LicenseID = -1;
             try
