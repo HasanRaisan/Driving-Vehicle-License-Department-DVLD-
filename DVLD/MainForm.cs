@@ -21,11 +21,40 @@ namespace DVLD
     {
 
         clsUsers clsUser = new clsUsers();
-
-        public MainForm(clsUsers clsUser)
+        FormLoginScreen _formLoginScreen = new FormLoginScreen();
+        public MainForm(clsUsers clsUser , FormLoginScreen form)
         {
             this.clsUser = clsUser; 
+
+            this._formLoginScreen = form;
             InitializeComponent();     
+        }
+
+
+
+  
+        //users
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormMangeUsers mangeUsers = new FormMangeUsers();
+            mangeUsers.ShowDialog();
+        }
+        private void showCurrentUserDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           FormShowUserDetails UserDatails = new FormShowUserDetails(clsGlobal.CurrentUser.UserID);
+            UserDatails.ShowDialog();
+            
+        }
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormChangePassword ChangePassword = new FormChangePassword(clsUser.UserID);
+            ChangePassword.ShowDialog();
+        }
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsGlobal.CurrentUser = null;
+            _formLoginScreen.Show();
+            this.Close();
         }
 
 
@@ -36,39 +65,6 @@ namespace DVLD
             mangePeople.ShowDialog();
         }
 
-        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormMangeUsers mangeUsers = new FormMangeUsers();
-            mangeUsers.ShowDialog();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-  
-
-        private void showCurrentUserDetailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           FormShowUserDetails UserDatails = new FormShowUserDetails(clsUser.UserID);
-            UserDatails.ShowDialog();
-            
-        }
-
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormChangePassword ChangePassword = new FormChangePassword(clsUser.UserID);
-            ChangePassword.ShowDialog();
-        }
-
-        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
-        {                                                                    
-            this.Hide();
-            FormLoginScreen formLoginScreen = new FormLoginScreen();    
-            formLoginScreen.ShowDialog();
-
-        }
 
         private void applicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -83,28 +79,19 @@ namespace DVLD
             formTestTypes.ShowDialog();
         }
 
-        private void toolStripSeparator1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void localLicenesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAddLocalLicense formLocalLicense = new FormAddLocalLicense(clsUser.UserName);
+            FormAddLocalLicense formLocalLicense = new FormAddLocalLicense();
             formLocalLicense.ShowDialog();
-        }
-
-        private void mangeApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MangeLoacalDrivingLicenseApplications mange = new MangeLoacalDrivingLicenseApplications(clsUser.UserName);
+            MangeLoacalDrivingLicenseApplications mange = new MangeLoacalDrivingLicenseApplications();
             mange.ShowDialog();
         }
 
+        // drivers
         private void driversToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormDrivers formDrivers = new FormDrivers();
@@ -113,9 +100,19 @@ namespace DVLD
 
         private void internationlDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var formInternational = new FormAddNewInternationlalLicense(clsUser.UserName);
+            var formInternational = new FormAddNewInternationlalLicense();
             formInternational.ShowDialog();
         }
+
+        /*========================*/
+        /*========================*/
+
+
+
+
+
+
+
 
         private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -168,7 +165,7 @@ namespace DVLD
 
         private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var MangeLocalApplication = new MangeLoacalDrivingLicenseApplications(clsUser.UserName);
+            var MangeLocalApplication = new MangeLoacalDrivingLicenseApplications();
             MangeLocalApplication.ShowDialog();
         }
     }

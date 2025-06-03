@@ -58,7 +58,6 @@
             this.linlEditPerson = new System.Windows.Forms.LinkLabel();
             this.lblName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProfileImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -108,11 +107,11 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Person Information";
             // 
-            // pbPersonPicture
+            // ProfileImage
             // 
             this.ProfileImage.Image = global::DVLD.Properties.Resources.person_man;
             this.ProfileImage.Location = new System.Drawing.Point(1096, 135);
-            this.ProfileImage.Name = "pbPersonPicture";
+            this.ProfileImage.Name = "ProfileImage";
             this.ProfileImage.Size = new System.Drawing.Size(249, 253);
             this.ProfileImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ProfileImage.TabIndex = 117;
@@ -391,23 +390,10 @@
             this.label3.TabIndex = 87;
             this.label3.Text = "Gender";
             // 
-            // btnClose
-            // 
-            this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(1246, 518);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(133, 46);
-            this.btnClose.TabIndex = 134;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click_1);
-            // 
             // UserControlShowPersonDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox1);
             this.Name = "UserControlShowPersonDetails";
             this.Size = new System.Drawing.Size(1406, 590);
@@ -428,8 +414,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox ProfileImage;
         private System.Windows.Forms.Label lblCountry;

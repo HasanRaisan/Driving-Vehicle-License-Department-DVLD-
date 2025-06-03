@@ -26,8 +26,8 @@ namespace DVLD
         public delegate void DelSendPersonIDBack(int PersonID);
         public DelSendPersonIDBack SendPersonIDBack;
 
-        public event Action<int> OnPersonSelected;
 
+        public event Action<int> OnPersonSelected;
         public void PersonSelected(int PersonID)
         {
             Action<int> Handler = OnPersonSelected;
@@ -36,10 +36,11 @@ namespace DVLD
         }
 
         int PersonID =-1;
+
         public UserConShopPersonDetailWithFilter()
         {
             InitializeComponent();
-           
+          
         }
 
         private void btnAddPerson_Click(object sender, EventArgs e)
@@ -70,34 +71,71 @@ namespace DVLD
 
             return false;
         }
+
+
+
+        // two function for get person id (1- add new person  2- search)
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
 
             if (IsPersonExist())
             {
                 LoadPersonInfo(this.PersonID);
+                _SendPersonID(); // send person id using delegate or event
             }
             else
             {
                 MessageBox.Show("Person is not found","Infromation",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 this.PersonID = -1;
                 this.userControlShowPersonDetails1.RestData();
-
             }
             
         }
-        public void LoadPersonInfo(int PersonID)
+        private int RecievPersonIDFormAddNewPerson(int PersonID)
         {
-            // send person id using delegate
+            this.PersonID = PersonID;
+
+            LoadPersonInfo(PersonID);
+            _SendPersonID(); // send person id using delegate or event
+
+            txtFindBy.Text = PersonID.ToString();
+            groupBox1.Enabled = false;
+
+            return PersonID;
+        }
+
+        private void _SendPersonID()
+        {
+            // two way to sned person id
+            // 1- send person id using delegate
             if (SendPersonIDBack != null) SendPersonIDBack.Invoke(PersonID);
 
-            // send person id usin EVNT OnPersonSelected
+            // 2- send person id usin EVENT OnPersonSelected
             PersonSelected(PersonID);
 
+        }
 
+
+
+        // TO GET PERSON ID FROM BOTH ADD NEW AND SEARCH 
+        public int GetPersonID()
+        {
+            return this.PersonID;
+        }
+
+
+        public void LoadPersonInfo(int PersonID)
+        {
             this.userControlShowPersonDetails1.SetPersonID(PersonID);
             this.userControlShowPersonDetails1.EnabledLinkLabelEditPerson(true);
         }
+        public void ResetPersonData()
+        {
+            this.userControlShowPersonDetails1.RestData();
+        }
+
+
         private void UserConShopPersonDetailWithFilter_Load(object sender, EventArgs e)
         {
             cbFindBy.Items.Add("Person ID");
@@ -143,22 +181,9 @@ namespace DVLD
             }
         }
 
-        // two function for get person id (1- add new person  2- search)
-        private int RecievPersonIDFormAddNewPerson(int PersonID)
-        {
-            this.PersonID = PersonID;
+        
 
-            LoadPersonInfo(PersonID);
-            txtFindBy.Text = PersonID.ToString();
-            groupBox1.Enabled = false;
-            //if (DelSendPersonIDBack !=  null) DelSendPersonIDBack.Invoke(PersonID);
-            return PersonID;
-        }
-        public int GetPersonID()
-        {
-           // from both add new and search
-            return this.PersonID;
-        }
+
 
         public void FilterFocus()
         {

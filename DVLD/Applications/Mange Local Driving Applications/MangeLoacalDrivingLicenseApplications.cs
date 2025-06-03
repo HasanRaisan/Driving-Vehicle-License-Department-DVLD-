@@ -14,12 +14,10 @@ namespace DVLD.Mange_Applications
 {
     public partial class MangeLoacalDrivingLicenseApplications : Form
     {
-        clsUsers clsUser = new clsUsers();
 
-        public MangeLoacalDrivingLicenseApplications(string userUsername)
+        public MangeLoacalDrivingLicenseApplications()
         {
             InitializeComponent();
-            clsUser = clsUsers.FindUser(userUsername);
         }
         private DataTable GetDataTable()
         {
@@ -81,7 +79,7 @@ namespace DVLD.Mange_Applications
         }
         private void AddApplication_Click(object sender, EventArgs e)
         {
-            FormAddLocalLicense formAddLocalLicense = new FormAddLocalLicense(clsUser.UserName);
+            FormAddLocalLicense formAddLocalLicense = new FormAddLocalLicense();
             formAddLocalLicense.ShowDialog();
 
             if (dgvApplications.Rows.Count == 0)
@@ -259,7 +257,7 @@ namespace DVLD.Mange_Applications
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             const int VisionTestID = 1;
-            FormListAppointmentTest form = new FormListAppointmentTest(clsUser.UserID, (int)dgvApplications.CurrentRow.Cells[0].Value, VisionTestID);
+            FormListAppointmentTest form = new FormListAppointmentTest( (int)dgvApplications.CurrentRow.Cells[0].Value, VisionTestID);
             form.ShowDialog();
             LoadDataToDataGridView();
         }
@@ -267,7 +265,7 @@ namespace DVLD.Mange_Applications
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             const int WrittenTestID = 2;
-            FormListAppointmentTest form = new FormListAppointmentTest(clsUser.UserID, (int)dgvApplications.CurrentRow.Cells[0].Value, WrittenTestID);
+            FormListAppointmentTest form = new FormListAppointmentTest( (int)dgvApplications.CurrentRow.Cells[0].Value, WrittenTestID);
             form.ShowDialog();
             LoadDataToDataGridView();
         }
@@ -275,7 +273,7 @@ namespace DVLD.Mange_Applications
         private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             const int StreetTestID = 3;
-            FormListAppointmentTest form = new FormListAppointmentTest(clsUser.UserID, (int)dgvApplications.CurrentRow.Cells[0].Value, StreetTestID);
+            FormListAppointmentTest form = new FormListAppointmentTest( (int)dgvApplications.CurrentRow.Cells[0].Value, StreetTestID);
             form.ShowDialog();
             LoadDataToDataGridView();
         }
@@ -402,7 +400,7 @@ namespace DVLD.Mange_Applications
         // driver  and status (cmpleted)
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frmIssue = new FormIssuDrivingLicenseForTheFirstTime((int)dgvApplications.CurrentRow.Cells[0].Value,clsUser.UserID);
+            var frmIssue = new FormIssuDrivingLicenseForTheFirstTime((int)dgvApplications.CurrentRow.Cells[0].Value);
             frmIssue.ShowDialog();
             LoadDataToDataGridView();
         }

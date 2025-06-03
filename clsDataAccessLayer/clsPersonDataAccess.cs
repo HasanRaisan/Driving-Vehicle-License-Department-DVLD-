@@ -10,7 +10,7 @@ namespace DataAccessLayer
     public class clsPersonDataAccess
     {
         static public bool FindPersonByID(int PersonID, ref string NationalNo, ref string FirstName, ref string SecondName, ref string ThirdName,
-             ref string LastName, ref DateTime DateOfBirth, ref bool Gendor, ref string Address, ref string Phone, ref string Email,
+             ref string LastName, ref DateTime DateOfBirth, ref short Gendor, ref string Address, ref string Phone, ref string Email,
              ref int NationalityCountryID, ref string ImagePath)
         {
 
@@ -40,13 +40,12 @@ namespace DataAccessLayer
                             ThirdName = (string)reader["ThirdName"];
                             LastName = (string)reader["LastName"];
                             DateOfBirth = (DateTime)reader["DateOfBirth"];
-                            //Gendor = (bool)reader["Gendor"];
+                            Gendor = (byte)reader["Gendor"];
                             Address = (string)reader["Address"];
                             Phone = (string)reader["Phone"];
                             NationalityCountryID = (int)reader["NationalityCountryID"];
                             Email = reader["Email"] != DBNull.Value ? (string)reader["Email"] : "";
                             ImagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : "";
-
 
 
                         }
@@ -66,7 +65,7 @@ namespace DataAccessLayer
 
 
         static public bool FindPersonByNationalNo(string NationalNo,  ref int PersonID , ref string FirstName, ref string SecondName, ref string ThirdName,
-            ref string LastName, ref DateTime DateOfBirth, ref bool Gendor, ref string Address, ref string Phone, ref string Email,
+            ref string LastName, ref DateTime DateOfBirth, ref short Gendor, ref string Address, ref string Phone, ref string Email,
             ref int NationalityCountryID, ref string ImagePath)
         {
             bool idFound = false;
@@ -92,12 +91,13 @@ namespace DataAccessLayer
                             ThirdName = (string)reader["ThirdName"];
                             LastName = (string)reader["LastName"];
                             DateOfBirth = (DateTime)reader["DateOfBirth"];
-                            //   Gendor = (bool)reader["Gendor"];
                             Address = (string)reader["Address"];
                             Phone = (string)reader["Phone"];
                             Email = (string)reader["Email"];
                             NationalityCountryID = (int)reader["NationalityCountryID"];
                             ImagePath = (string)reader["ImagePath"];
+                            Gendor = (byte)reader["Gendor"];
+
                         }
                     }
                 }
@@ -112,7 +112,7 @@ namespace DataAccessLayer
 
 
         static public bool UpdatePerson(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName,
-              string LastName, DateTime DateOfBirth, bool Gendor, string Address, string Phone, string Email,
+              string LastName, DateTime DateOfBirth, short Gendor, string Address, string Phone, string Email,
               int NationalityCountryID, string ImagePath)
         { 
             int rowAffected = 0;
@@ -161,7 +161,7 @@ namespace DataAccessLayer
 
 
         static public int AddPerson( string NationalNo, string FirstName, string SecondName, string ThirdName,
-              string LastName, DateTime DateOfBirth, bool Gendor, string Address, string Phone, string Email,
+              string LastName, DateTime DateOfBirth, short Gendor, string Address, string Phone, string Email,
               int NationalityCountryID, string ImagePath)
         {
 

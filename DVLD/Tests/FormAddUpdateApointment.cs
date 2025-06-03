@@ -22,7 +22,6 @@ namespace DVLD.Mange_Applications
         private enCreationMode _CreationMode = enCreationMode.FirstTimeSchedule;
 
 
-        int UserID = -1;
         int _TestTypeID = -1; 
 
         private clsLocalDrivingLicensesApplication _LocalDrivingLicenseApplication;
@@ -32,10 +31,9 @@ namespace DVLD.Mange_Applications
 
         clsTestTypes clsTestType;
 
-        public FormAddUpdateApointment(int UserID ,int LDLAppID, int TestTypeID , int AppointmentID = -1)
+        public FormAddUpdateApointment( int LDLAppID, int TestTypeID , int AppointmentID = -1)
         {
             InitializeComponent();
-            this.UserID = UserID;
             this._LocalDrivingLicenseApplicationID = LDLAppID;
             this._TestTypeID = TestTypeID;
             this._TestAppointmentID = AppointmentID;

@@ -177,7 +177,7 @@ namespace DVLD.International_Applications
 
         private void AddPerson_Click(object sender, EventArgs e)
         {
-            var formAdd = new FormAddNewInternationlalLicense(this.Username);
+            var formAdd = new FormAddNewInternationlalLicense();
             formAdd.ShowDialog();
         }
 

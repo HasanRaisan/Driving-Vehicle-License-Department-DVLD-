@@ -6,7 +6,6 @@ namespace DVLD.International_Applications
 {
     public partial class FormAddNewInternationlalLicense : Form
     {
-        private string _username = string.Empty;
         private int _LicenseID = -1;
 
 
@@ -20,15 +19,6 @@ namespace DVLD.International_Applications
             return _personID; 
         }
 
-        private int _userID = -1;
-        private int GetUserID()
-        { 
-            if(_userID == -1)
-            {
-                _userID = clsUsers.GetUserIDByUserName(this._username);
-            }
-            return _userID;
-        }
 
 
         private clsLicenses _clsLicense = null;
@@ -41,10 +31,9 @@ namespace DVLD.International_Applications
             
         }
 
-        public FormAddNewInternationlalLicense(string Username)
+        public FormAddNewInternationlalLicense()
         {
             InitializeComponent();
-            this._username = Username;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -73,7 +62,7 @@ namespace DVLD.International_Applications
             if (clsLicenses.IsLicenseExist(this._LicenseID))
             {
                 this.userControlDrivingLicenseInfo1.SetLicenseID(this._LicenseID);
-                this.userControlShowInternationalLincenseApplicationDetails1.SetLocalLicenseIDAndUsername(this._LicenseID, this._username);
+                this.userControlShowInternationalLincenseApplicationDetails1.SetLocalLicenseIDAndUsername(this._LicenseID, clsGlobal.CurrentUser.UserName);
                 this.linkLabelShoLicensesHistory.Enabled = true;
        
             }
@@ -135,7 +124,7 @@ namespace DVLD.International_Applications
             clsApplication._ApplicantPersonID = GetPersonIDForLicenseID();
             clsApplication._PaidFees = clsAppType.ApplicationFees;
             clsApplication._ApplicationTypeID = clsAppType.ApplicationID;
-            clsApplication._CreatedByUserID = GetUserID();
+            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
             clsApplication._LicenseClassID = LicenseInfo()._LicenseClassID;
 
             if (clsApplication.Save())
@@ -162,9 +151,9 @@ namespace DVLD.International_Applications
                 clsIntLicense.ExpirationDate =LicenseInfo()._ExpirationDate;
                 clsIntLicense.IssuedUsingLocalLicenseID = this._LicenseID;
                 clsIntLicense.IsActive = true;
-                clsIntLicense.CreatedByUserID = GetUserID();
+                clsIntLicense.CreatedByUserID = clsGlobal.CurrentUser.UserID;
 
-               if( clsIntLicense.Save())
+                if ( clsIntLicense.Save())
                {
                     MessageBox.Show($"Internationl license has issued successfully with ID [{clsIntLicense.InternationalLicenseID}]", "License Issued", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -196,7 +185,8 @@ namespace DVLD.International_Applications
         {
             this._clsLicense = null;
             this._personID = -1;
-            this._userID = -1;
+            this.linkLabelShowLicnesInfo.Enabled = false;
+            this.linkLabelShoLicensesHistory.Enabled = false;
         }
     }
 }

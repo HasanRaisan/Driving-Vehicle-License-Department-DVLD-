@@ -16,13 +16,11 @@ namespace DVLD.Mange_Applications
 {
     public partial class FormListAppointmentTest : Form
     {
-        int UserID = -1;
         int LDLAppID = -1;
         int TestTypeID = -1;
 
-        public FormListAppointmentTest(int UserID , int LDLAppID, int TestTypeID)
+        public FormListAppointmentTest(int LDLAppID, int TestTypeID)
         {
-            this.UserID = UserID;
             this.LDLAppID = LDLAppID;
             this.TestTypeID = TestTypeID;
             InitializeComponent();
@@ -84,7 +82,7 @@ namespace DVLD.Mange_Applications
                 MessageBox.Show("This person already passed this test before, you can only retake faild test", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-                    FormAddUpdateApointment addApointment = new FormAddUpdateApointment(this.UserID, this.LDLAppID,this.TestTypeID);
+                    FormAddUpdateApointment addApointment = new FormAddUpdateApointment(this.LDLAppID,this.TestTypeID);
                 addApointment.ShowDialog();
                 _LoadDataToDataGridView();
         }
@@ -103,7 +101,7 @@ namespace DVLD.Mange_Applications
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormTakeTest formTakeTest = new FormTakeTest(UserID,(int) dgvTestAppointments.CurrentRow.Cells[0].Value);
+            FormTakeTest formTakeTest = new FormTakeTest((int) dgvTestAppointments.CurrentRow.Cells[0].Value);
             formTakeTest.ShowDialog();
             this.UserConShowBasicApplicationInfo1.LoadData();
             btnAddAnApointment.Enabled = false;
@@ -113,7 +111,7 @@ namespace DVLD.Mange_Applications
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var FormUpdate = new FormAddUpdateApointment(UserID,LDLAppID,TestTypeID,(int)dgvTestAppointments.CurrentRow.Cells[0].Value);
+            var FormUpdate = new FormAddUpdateApointment(LDLAppID,TestTypeID,(int)dgvTestAppointments.CurrentRow.Cells[0].Value);
             FormUpdate.ShowDialog();
             _LoadDataToDataGridView();
         }

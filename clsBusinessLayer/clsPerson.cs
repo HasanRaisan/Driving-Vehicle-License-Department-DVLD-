@@ -18,7 +18,7 @@ namespace BusinessLayer
         public string _ThirdName           { get; set; }
         public string _LastName            { get; set; }
         public DateTime _DateOfBirth       { get; set; }
-        public bool _Gendor                { get; set; }
+        public short _Gendor                { get; set; }
         public string _Address { get; set; }
         public string _Phone               { get; set; }
         public string _Email               { get; set; }
@@ -41,7 +41,7 @@ namespace BusinessLayer
         }
 
         private clsPerson(int PersonID ,string NationalNo, string FirstName, string SecondName, string ThirdName,
-              string LastName, DateTime DateOfBirth, bool Gendor, string Address, string Phone, string Email,
+              string LastName, DateTime DateOfBirth, short Gendor, string Address, string Phone, string Email,
               int NationalityCountryID, string ImagePath)
         {
             this._PersonID = PersonID;
@@ -74,7 +74,7 @@ namespace BusinessLayer
                 string _ThirdName = "";
                 string _LastName = "";
                 DateTime _DateOfBirth = DateTime.Now;
-                bool _Gendor = false;
+                short _Gendor = 0;
                 string _Address = "";
                 string _Phone = "";
                 string _Email = "";
@@ -102,7 +102,7 @@ namespace BusinessLayer
                 string _ThirdName = "";
                 string _LastName = "";
                 DateTime _DateOfBirth = DateTime.Now;
-                bool _Gendor = false;
+                short _Gendor = 0;
                 string _Address = "";
                 string _Phone = "";
                 string _Email = "";

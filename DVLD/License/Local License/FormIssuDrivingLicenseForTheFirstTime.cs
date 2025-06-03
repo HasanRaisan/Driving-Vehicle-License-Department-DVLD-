@@ -14,17 +14,15 @@ namespace DVLD.Mange_Applications
     public partial class FormIssuDrivingLicenseForTheFirstTime : Form
     {
         int LDLAppID = -1;
-        int UserID = -1;
 
         clsLocalDrivingLicensesApplication LocalDrvingApplication;
 
 
-        public FormIssuDrivingLicenseForTheFirstTime(int LDLAppID,int UserID)
+        public FormIssuDrivingLicenseForTheFirstTime(int LDLAppID)
         {
 
             InitializeComponent();
             this.LDLAppID = LDLAppID;
-            this.UserID = UserID;
             this.UserConShowBasicApplicationInfo1.SetLDLAppID(LDLAppID);
         }
 
@@ -57,7 +55,7 @@ namespace DVLD.Mange_Applications
             if (CheckDriver != null) return CheckDriver._DriverID;
 
             clsDrivers clsDriver = new clsDrivers();
-            clsDriver._CreatedByUserID  = this.UserID;
+            clsDriver._CreatedByUserID  = clsGlobal.CurrentUser.UserID;
             clsDriver._PersonID = LocalDrvingApplication.PersonInfo._PersonID;
 
             if(clsDriver.Save()) {return clsDriver._DriverID; } else return -1;
@@ -108,7 +106,7 @@ namespace DVLD.Mange_Applications
             License._LicenseClassID = LocalDrvingApplication.LicenseClassInfo.LicenseClassID;
             License._DriverID = DriverID;
             License._ApplicationID = LocalDrvingApplication.BaseApplicationID;
-            License._CreatedByUserID = this.UserID;
+            License._CreatedByUserID = clsGlobal.CurrentUser.UserID;
             License._PaidFees = LocalDrvingApplication.LicenseClassInfo.ClassFees; 
             License._IsActive = true;
             License.IssueReason = clsLicenses.enIssueReason.FirstTime;

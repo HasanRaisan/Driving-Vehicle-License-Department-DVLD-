@@ -341,17 +341,20 @@ namespace DataAccessLayer
                         command.Parameters.AddWithValue("@Username", UserName);
                         command.Parameters.AddWithValue("@Password", Password);
                         connection.Open();
-                        SqlDataReader reader = command.ExecuteReader();
-                        if (reader.Read())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            // The record was found
-                            isFound = true;
-                            UserID = (int)reader["UserID"];
-                            PersonID = (int)reader["PersonID"];
-                            UserName = (string)reader["UserName"];
-                            Password = (string)reader["Password"];
-                            IsActive = (bool)reader["IsActive"];
+                            if (reader.Read())
+                            {
+                                // The record was found
+                                isFound = true;
+                                UserID = (int)reader["UserID"];
+                                PersonID = (int)reader["PersonID"];
+                                UserName = (string)reader["UserName"];
+                                Password = (string)reader["Password"];
+                                IsActive = (bool)reader["IsActive"];
+                            }
                         }
+
                     }
                 }
             }
@@ -396,6 +399,8 @@ namespace DataAccessLayer
             }
             return (rowsAffected > 0);
         }
+
+
 
     }
 }

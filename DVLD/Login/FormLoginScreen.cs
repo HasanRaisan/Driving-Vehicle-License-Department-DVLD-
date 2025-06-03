@@ -47,24 +47,23 @@ namespace DVLD
 
         private bool _CheckUsernameAndPassword()
         {
-            clsUser = clsUsers.FindUser(txtUserName.Text);
+            clsUser = clsUsers.FindByUsernameAndPassword(txtUserName.Text.Trim(),txtPassword.Text.Trim());
             if (clsUser != null)
             {
-                if (clsUser.Password == txtPassword.Text)
-                {
-                    IsUserActive = clsUser.IsActive;
+                IsUserActive = clsUser.IsActive;
 
-                    if (cbRememberMe.Checked)
-                    {
-                        clsGlobal.RememberUsernameAndPassword2(txtUserName.Text.Trim(), txtPassword.Text.Trim());
-                    }
-                    else
-                    {
-                        clsGlobal.RememberUsernameAndPassword2("", "");
-                    }
-                    return true;
+                if (cbRememberMe.Checked)
+                {
+                    //store username and password
+                    clsGlobal.RememberUsernameAndPassword2(txtUserName.Text.Trim(), txtPassword.Text.Trim());
                 }
-                else return false;
+                else
+                {
+                    //remove stored username and password
+                    clsGlobal.RememberUsernameAndPassword2("", "");
+                }
+                return true;
+
             }
             else return false;
         }
@@ -84,10 +83,9 @@ namespace DVLD
 
                     if (IsUserActive)
                     {
-
-                        this.Hide();
                         clsGlobal.CurrentUser = clsUser;
-                        MainForm mainForm = new MainForm(clsUser);
+                        this.Hide();
+                        MainForm mainForm = new MainForm(clsUser,this);
                         mainForm.ShowDialog();
 
                     }

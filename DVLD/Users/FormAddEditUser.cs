@@ -61,6 +61,7 @@ namespace DVLD
             {
                 lblHeadLine.Text = "Add User";
                 clsUser = new clsUsers();
+                this.userConShopPersonDetailWithFilter1.ResetPersonData();
             }
 
         }

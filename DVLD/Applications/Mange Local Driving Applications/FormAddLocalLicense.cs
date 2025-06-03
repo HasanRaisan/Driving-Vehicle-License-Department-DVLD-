@@ -15,13 +15,11 @@ namespace DVLD.Driving_Licenses_Services
     public partial class FormAddLocalLicense : Form
     {
         int PersonID = -1;
-        string Username = string.Empty;
         int LicenseClassID = -1;
 
-        public FormAddLocalLicense(string Username)
+        public FormAddLocalLicense()
         {
             InitializeComponent();
-            this.Username = Username;
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -35,7 +33,7 @@ namespace DVLD.Driving_Licenses_Services
         {
             LoadComboBoxLicenseClasses();
             lblAppDateValue.Text = DateTime.Now.ToString("yyyy/MM/dd");
-            lblUsernameValue.Text = Username.ToString();
+            lblUsernameValue.Text = clsGlobal.CurrentUser.UserName.ToString();
 
         }
         private void btnNext_Click(object sender, EventArgs e)
@@ -99,7 +97,7 @@ namespace DVLD.Driving_Licenses_Services
             clsApplications clsApplication = new BusinessLayer.clsApplications();
 
             clsApplication._ApplicantPersonID = this.PersonID;
-            clsApplication._CreatedByUserID = clsUsers.FindUser(this.Username).UserID;
+            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
             clsApplication._ApplicationTypeID = 1; // local driving license ID in apps types
             clsApplication._PaidFees = (decimal) Convert.ToSingle(lblFees.Text); // local driving license fees (from apps types table)
             clsApplication._LicenseClassID = cbLicenseClass.SelectedIndex + 1;

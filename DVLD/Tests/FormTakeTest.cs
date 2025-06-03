@@ -14,14 +14,12 @@ namespace DVLD.Mange_Applications
 {
     public partial class FormTakeTest : Form
     {
-        int UserID = -1;
         int AppointmentID = -1;
 
-        public FormTakeTest(int UserID, int AppointmentID)
+        public FormTakeTest( int AppointmentID)
         {
             InitializeComponent();
 
-            this.UserID = UserID;
             this.AppointmentID = AppointmentID;
 
         }
@@ -115,7 +113,7 @@ namespace DVLD.Mange_Applications
                 var clsTest = new clsTests();
 
                 clsTest._TestAppointmentID = this.AppointmentID;
-                clsTest._CreatedByUserID = this.UserID;
+                clsTest._CreatedByUserID = clsGlobal.CurrentUser.UserID;
                 clsTest._Notes = txtNotes.Text;
                 clsTest._TestResult = radioButtonPass.Checked? true: false;
 

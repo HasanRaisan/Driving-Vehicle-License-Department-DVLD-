@@ -73,7 +73,7 @@ namespace DVLD
                 pbDriverPicture.Image = Image.FromFile(LicenseDetailsInfo.PersonInfo._ImagePath);
             else
             {
-                if (LicenseDetailsInfo.PersonInfo._Gendor)
+                if (LicenseDetailsInfo.PersonInfo._Gendor == 1)
                     pbDriverPicture.Image = Resources.person_man;
                 else pbDriverPicture.Image = Resources.admin_female;
             }

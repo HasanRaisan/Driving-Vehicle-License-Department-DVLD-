@@ -172,7 +172,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(481, 6);
-            this.toolStripSeparator1.Click += new System.EventHandler(this.toolStripSeparator1_Click);
             // 
             // mangeApplicationsToolStripMenuItem
             // 
@@ -182,7 +181,6 @@
             this.mangeApplicationsToolStripMenuItem.Name = "mangeApplicationsToolStripMenuItem";
             this.mangeApplicationsToolStripMenuItem.Size = new System.Drawing.Size(484, 76);
             this.mangeApplicationsToolStripMenuItem.Text = "Mange Applications";
-            this.mangeApplicationsToolStripMenuItem.Click += new System.EventHandler(this.mangeApplicationsToolStripMenuItem_Click);
             // 
             // localDrivingLicenseApplicationsToolStripMenuItem
             // 
@@ -349,7 +347,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

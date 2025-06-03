@@ -26,11 +26,10 @@ namespace DVLD
 
         void FormShowUserDetails_Load(object sender, EventArgs e)
         {
-           this.userControlShowPersonDetails1.SetPersonID(clsUsers.FindUser(this.UserID).PersonID);
-            this.userControlShowPersonDetails1.LoadPersonDetail();
+            this.userControlShowPersonDetails1.SetPersonID(clsUsers.FindUser(this.UserID).PersonID);
+            this.userControlUserDetails1.SetUserID(this.UserID);
+            
             this.userControlShowPersonDetails1.Close = CloseShowDetails;
-
-            this.userControlUserDetails1.SetUserID(this.UserID);           
         }
 
         private void CloseShowDetails()

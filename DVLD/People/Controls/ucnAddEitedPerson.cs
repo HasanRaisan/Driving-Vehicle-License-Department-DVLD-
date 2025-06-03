@@ -116,7 +116,7 @@ namespace DVLD
                 dtpDateOfBirth.Value = clsPerson._DateOfBirth;
                 txbNationalNo.Text = clsPerson._NationalNo;
 
-                if (clsPerson._Gendor)
+                if (clsPerson._Gendor == 1)
                 {
                     rbMale.Checked = true;
                 }
@@ -136,7 +136,7 @@ namespace DVLD
                 else
                 {
                     pbPersonPicture.Image = null; linlRemovePicture.Visible = false;
-                    if (clsPerson._Gendor)
+                    if (clsPerson._Gendor == 1)
                     {
                         pbPersonPicture.Image = Resources.admin_female;
                     }
@@ -203,6 +203,20 @@ namespace DVLD
             return true;
         }
 
+        private void DisableAllFields()
+        {
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is TextBox || ctrl is ComboBox || ctrl is RadioButton 
+                    || ctrl is DateTimePicker || ctrl is Button || ctrl is LinkLabel)
+                {
+                        ctrl.Enabled = false;
+                }
+            }
+            
+        }
+
+
         private void btnSave_Click(object sender, EventArgs e)
         {
 
@@ -230,16 +244,17 @@ namespace DVLD
             if(pbPersonPicture.ImageLocation != null)
                 clsPerson._ImagePath = pbPersonPicture.ImageLocation.ToString();
 
-            clsPerson._Gendor = rbFemale.Checked ? false : true;
+            clsPerson._Gendor = rbFemale.Checked ? (short)0 : (short)1;
 
             if (clsPerson.Save())
             {
                 btnSave.Visible = false;
+                DisableAllFields();
 
                 if (PersonID == -1)
                 {
                     MessageBox.Show("Person detail has saved successfully","Saving Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    if(SendPersonID != null)
+                    if (SendPersonID != null)
                     SendPersonID.Invoke(clsPerson._PersonID);
                 }
                 else MessageBox.Show("Person detail has edited successfully","Saving Success",MessageBoxButtons.OK,MessageBoxIcon.Information);

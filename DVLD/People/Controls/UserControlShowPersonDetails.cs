@@ -62,13 +62,14 @@ namespace DVLD
             lblAddress.Text = "???";
             lblDateOfBirth.Text = "???";
             lblPhone.Text = "???";
-
-            ProfileImage.Image = Image.FromFile("C:\\Programming\\DVLD Icons\\person_man.png");
-            //pbPersonPicture.Image = Image.FromFile("C:\\Programming\\DVLD Icons\\person_man.png");
-
             lblGender.Text = "???";
             lblEmail.Text = "???";
             lblCountry.Text = "???";
+
+            if (DateTime.Today.Day % 2 == 0)
+                ProfileImage.Image = Resources.person_man;
+            else
+                ProfileImage.Image = Resources.admin_female;
 
             EnabledLinkLabelEditPerson(false);
 
@@ -99,10 +100,10 @@ namespace DVLD
                 ProfileImage.ImageLocation =Person._ImagePath;
             } else
             {
-                if (Person._Gendor) ProfileImage.Image = Resources.person_man;
+                if (Person._Gendor == 1) ProfileImage.Image = Resources.person_man;
                 else ProfileImage.Image = Resources.admin_female;
             }
-            lblGender.Text = Person._Gendor ? "Male" : "Female";
+            lblGender.Text = Person._Gendor == 0 ? "Female" : "Male";
 
             if (Person._Email != null) lblEmail.Text = Person._Email;
             lblCountry.Text = clsCountryBusinessLayer.FindCountry(Person._NationalityCountryID).CountryName.ToString();
