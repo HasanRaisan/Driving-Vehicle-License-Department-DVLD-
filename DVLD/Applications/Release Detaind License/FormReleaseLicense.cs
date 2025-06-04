@@ -16,7 +16,7 @@ namespace DVLD.Serveces
 {
     public partial class FormReleaseLicense : Form
     {
-        private string _username = string.Empty;
+        //private string _username = string.Empty;
         private int _licenseID = -1;
         private bool _isDirect = false;
         clsLicenses _clsLicenseInfo = null;
@@ -33,25 +33,24 @@ namespace DVLD.Serveces
             return _personID;
         }
 
-        private int _userID = -1;
-        private int GetUserID()
+        //private int _userID = -1;
+        //private int GetUserID()
+        //{
+        //    if (_userID == -1)
+        //    {
+        //        _userID = clsUsers.GetUserIDByUserName(this._username);
+        //    }
+        //    return _userID;
+        //}
+
+
+
+
+
+
+
+        public FormReleaseLicense()
         {
-            if (_userID == -1)
-            {
-                _userID = clsUsers.GetUserIDByUserName(this._username);
-            }
-            return _userID;
-        }
-
-
-
-
-
-
-
-        public FormReleaseLicense(string username)
-        {
-            this._username = username;
             InitializeComponent();
         }
 
@@ -112,7 +111,7 @@ namespace DVLD.Serveces
             }
             else
             {
-                this.userControlReleaseLicense1.SetDetainInfoAndUsername(this._DetainInfo, this._username);
+                this.userControlReleaseLicense1.SetDetainInfoAndUsername(this._DetainInfo, clsGlobal.CurrentUser.UserName);
                 this.btnRelease.Enabled = true;
             }
         }
@@ -123,7 +122,7 @@ namespace DVLD.Serveces
         {
             this._clsLicenseInfo = null;
             this._personID = -1;
-            this._userID = -1;
+            //this._userID = -1;
 
             this.btnRelease.Enabled = false;
             this.linkLabelShoLicensesHistory.Enabled = false;
@@ -160,7 +159,7 @@ namespace DVLD.Serveces
             clsApplication._ApplicantPersonID = GetPersonIDForLicenseID();
             clsApplication._PaidFees = clsAppType.ApplicationFees;
             clsApplication._ApplicationTypeID = clsAppType.ApplicationID;
-            clsApplication._CreatedByUserID = GetUserID();
+            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
             clsApplication._LicenseClassID = _clsLicenseInfo._LicenseClassID;
 
             if (clsApplication.Save())
@@ -176,7 +175,7 @@ namespace DVLD.Serveces
             if (ApplicationInfo == null) { return; }
 
             _DetainInfo.ReleaseDate = DateTime.Now;
-            _DetainInfo.ReleasedByUserID = GetUserID();
+            _DetainInfo.ReleasedByUserID = clsGlobal.CurrentUser.UserID;
             _DetainInfo.ReleaseApplicationID = ApplicationInfo._ApplicationID;
 
             if (MessageBox.Show("Are you sure you want to release this license?", "Relese License", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -236,7 +235,7 @@ namespace DVLD.Serveces
             }
             else
             {
-                this.userControlReleaseLicense1.SetDetainInfoAndUsername(this._DetainInfo, this._username);
+                this.userControlReleaseLicense1.SetDetainInfoAndUsername(this._DetainInfo, clsGlobal.CurrentUser.UserName);
                 this.btnRelease.Enabled = true;
             }
         }

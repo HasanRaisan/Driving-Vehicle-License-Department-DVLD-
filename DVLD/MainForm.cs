@@ -65,7 +65,6 @@ namespace DVLD
             mangePeople.ShowDialog();
         }
 
-
         private void applicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormApplicationsTypes formApplications = new FormApplicationsTypes();
@@ -97,69 +96,47 @@ namespace DVLD
             FormDrivers formDrivers = new FormDrivers();
             formDrivers.ShowDialog();
         }
-
         private void internationlDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var formInternational = new FormAddNewInternationlalLicense();
             formInternational.ShowDialog();
         }
 
-        /*========================*/
-        /*========================*/
-
-
-
-
-
-
-
 
         private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var formRenewDrivngLicense = new FormRenwedLicense(clsUser.UserName);
+            var formRenewDrivngLicense = new FormRenwedLicense();
             formRenewDrivngLicense.ShowDialog();
         }
 
         private void remplacementDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var showReplacement = new FormReplacementForDamagedOrLostLicenses(clsUser.UserName);
+            var showReplacement = new FormReplacementForDamagedOrLostLicenses();
             showReplacement.ShowDialog();
         }
 
         private void detainDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var showDetain = new FormDetainLicense(clsUser.UserName);
+            var showDetain = new FormDetainLicense();
             showDetain.ShowDialog();
 
-        }
-
-        private void rleaseDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var ShowRelease = new FormReleaseLicense(clsUser.UserName);
-            ShowRelease.ShowDialog();
-        }
-
-        private void detainDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var ShowDetains = new FormManageDetainLicense(clsUser.UserName);
-            ShowDetains.ShowDialog();
-        }
-
-        private void detainToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var ManageApplications = new FormManageDetainLicense(clsUser.UserName);
-            ManageApplications.ShowDialog();
         }
 
         private void detainDrivingLicenseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            var showDetain = new FormDetainLicense(clsUser.UserName);
+            var showDetain = new FormDetainLicense();
             showDetain.ShowDialog();
+        }
+
+        private void rleaseDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ShowRelease = new FormReleaseLicense();
+            ShowRelease.ShowDialog();
         }
 
         private void releaseDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ShowRelease = new FormReleaseLicense(clsUser.UserName);
+            var ShowRelease = new FormReleaseLicense();
             ShowRelease.ShowDialog();
         }
 
@@ -167,6 +144,20 @@ namespace DVLD
         {
             var MangeLocalApplication = new MangeLoacalDrivingLicenseApplications();
             MangeLocalApplication.ShowDialog();
+        } 
+
+
+        private void detainDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ShowDetains = new FormManageDetainLicense();
+            ShowDetains.ShowDialog();
         }
+
+        private void detainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ManageApplications = new FormManageDetainLicense();
+            ManageApplications.ShowDialog();
+        }
+
     }
 }

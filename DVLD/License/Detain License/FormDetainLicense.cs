@@ -15,7 +15,7 @@ namespace DVLD.Serveces
     public partial class FormDetainLicense : Form
     {
 
-        string _username = string.Empty;
+       // string _username = string.Empty;
 
         private int _licenseID = -1;
 
@@ -30,15 +30,15 @@ namespace DVLD.Serveces
             return _personID;
         }
 
-        private int _userID = -1;
-        private int GetUserID()
-        {
-            if (_userID == -1)
-            {
-                _userID = clsUsers.GetUserIDByUserName(this._username);
-            }
-            return _userID;
-        }
+        //private int _userID = -1;
+        //private int GetUserID()
+        //{
+        //    if (_userID == -1)
+        //    {
+        //        _userID = clsUsers.GetUserIDByUserName(this._username);
+        //    }
+        //    return _userID;
+        //}
 
         clsLicenses _clsLicenseInfo = null;
         private clsLicenses LicenseInfo()
@@ -51,9 +51,8 @@ namespace DVLD.Serveces
 
 
 
-        public FormDetainLicense(string username)
+        public FormDetainLicense()
         {
-            this._username = username;
             InitializeComponent();
         }
 
@@ -121,7 +120,7 @@ namespace DVLD.Serveces
 
                 if (!clsDetainLicense.IsLicenseDetainedByLicenseID(this._licenseID))
                 {
-                    this.userControlDetainInfo1.SetUsernameAndLicenseID(this._username, this._licenseID);
+                    this.userControlDetainInfo1.SetUsernameAndLicenseID(clsGlobal.CurrentUser.UserName, this._licenseID);
                     this.btnDetain.Enabled = true;
                     this.userControlDetainInfo1.FocusTextFees();
                 }
@@ -160,7 +159,7 @@ namespace DVLD.Serveces
 
             var detain = new clsDetainLicense();
             detain.LicenseID = this._licenseID;
-            detain.CreatedByUserID = GetUserID();
+            detain.CreatedByUserID = clsGlobal.CurrentUser.UserID;
             detain.DetainDate = DateTime.Now;
             detain.FineFees = FineFees;
 
@@ -193,7 +192,7 @@ namespace DVLD.Serveces
         {
             this._clsLicenseInfo = null;
             this._personID = -1;
-            this._userID = -1;
+            //this._userID = -1;
 
             this.btnDetain.Enabled = false;
             this.linkLabelShoLicensesHistory.Enabled = false;

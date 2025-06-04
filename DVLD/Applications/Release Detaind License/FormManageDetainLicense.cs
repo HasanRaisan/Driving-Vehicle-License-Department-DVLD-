@@ -10,10 +10,8 @@ namespace DVLD.Serveces
 {
     public partial class FormManageDetainLicense : Form
     {
-        string _useraname = string.Empty;
-        public FormManageDetainLicense(string username)
+        public FormManageDetainLicense()
         {
-            _useraname = username;
             InitializeComponent();
         }
 
@@ -114,14 +112,17 @@ namespace DVLD.Serveces
 
         private void btnDetainLicense_Click(object sender, EventArgs e)
         {
-            var ShowDetainLicense = new FormDetainLicense(this._useraname);
+            var ShowDetainLicense = new FormDetainLicense();
             ShowDetainLicense.ShowDialog();
+            LoadDataToDataGridView();
+
         }
 
         private void btnRleaseLicense_Click(object sender, EventArgs e)
         {
-            var ShowReleaseLicense = new FormReleaseLicense(this._useraname);
+            var ShowReleaseLicense = new FormReleaseLicense();
             ShowReleaseLicense.ShowDialog();
+            LoadDataToDataGridView();
         }
 
 
@@ -163,7 +164,7 @@ namespace DVLD.Serveces
 
         private void releasDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var releaseLicense = new FormReleaseLicense(_useraname);
+            var releaseLicense = new FormReleaseLicense();
 
             releaseLicense.SetLicensIDForDirectRelease((int)dgvDetains.CurrentRow.Cells["L.ID"].Value);
 

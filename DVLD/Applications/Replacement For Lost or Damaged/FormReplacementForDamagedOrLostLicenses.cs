@@ -15,7 +15,7 @@ namespace DVLD.Serveces
 {
     public partial class FormReplacementForDamagedOrLostLicenses : Form
     {
-        string _username = string.Empty;
+        //string _username = string.Empty;
         byte _applicationTypeID = 0;
         int _oldLicenseID = -1;
 
@@ -34,15 +34,15 @@ namespace DVLD.Serveces
             return _personID;
         }
 
-        private int _userID = -1;
-        private int GetUserID()
-        {
-            if (_userID == -1)
-            {
-                _userID = clsUsers.GetUserIDByUserName(this._username);
-            }
-            return _userID;
-        }
+        //private int _userID = -1;
+        //private int GetUserID()
+        //{
+        //    if (_userID == -1)
+        //    {
+        //        _userID = clsUsers.GetUserIDByUserName(this._username);
+        //    }
+        //    return _userID;
+        //}
 
 
         private clsLicenses _clsLicense = null;
@@ -56,10 +56,9 @@ namespace DVLD.Serveces
         }
 
 
-        public FormReplacementForDamagedOrLostLicenses(string username)
+        public FormReplacementForDamagedOrLostLicenses()
         {
             InitializeComponent();
-            this._username = username;
         }
 
         clsLicenses OldLicenseInfo = null;
@@ -122,7 +121,7 @@ namespace DVLD.Serveces
                     // check activation 
                     if (OldLicenseInfo._IsActive)
                     {
-                      this.userControlShowReplacementApplicationDetails1.SetOldLicenseIDAndUsername(this._oldLicenseID, this._username);
+                      this.userControlShowReplacementApplicationDetails1.SetOldLicenseIDAndUsername(this._oldLicenseID, clsGlobal.CurrentUser.UserName);
 
                         btnReplae.Enabled = true;
                     }
@@ -164,7 +163,7 @@ namespace DVLD.Serveces
             clsApplication._ApplicantPersonID = GetPersonIDForLicenseID();
             clsApplication._PaidFees = clsAppType.ApplicationFees;
             clsApplication._ApplicationTypeID = clsAppType.ApplicationID;
-            clsApplication._CreatedByUserID = GetUserID();
+            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
             clsApplication._LicenseClassID = LicenseInfo()._LicenseClassID;
 
             if (clsApplication.Save())
@@ -186,7 +185,7 @@ namespace DVLD.Serveces
                 var NewLicense = new clsLicenses();
 
                 NewLicense._LicenseClassID = LicenseInfo()._LicenseClassID;
-                NewLicense._CreatedByUserID = GetUserID();
+                NewLicense._CreatedByUserID = clsGlobal.CurrentUser.UserID;
                 // no fees for replacement
                 NewLicense._PaidFees = 0;
                 NewLicense._DriverID = LicenseInfo()._DriverID;
@@ -235,7 +234,6 @@ namespace DVLD.Serveces
         {
             this._clsLicense = null;
             this._personID = -1;
-            this._userID = -1;
 
         }
 
