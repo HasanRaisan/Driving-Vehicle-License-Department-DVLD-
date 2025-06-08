@@ -94,7 +94,7 @@ namespace BusinessLayer
         static public clsPerson FindPerson(string NationalID)
         {
 
-            if (clsPersonDataAccess.IsPersonExist(NationalID))
+            if (clsPersonDataAccess.IsPersonExistNationalNo(NationalID))
             {
                 int _PersonID = -1;
                 string _FirstName = "";
@@ -139,7 +139,7 @@ namespace BusinessLayer
 
         static public bool IsPersonExist(string NationalNo)
         {
-            return clsPersonDataAccess.IsPersonExist(NationalNo);
+            return clsPersonDataAccess.IsPersonExistNationalNo(NationalNo);
         }
 
         static public DataTable GetPeople()
