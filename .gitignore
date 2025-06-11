@@ -33,7 +33,7 @@ _ReSharper*/
 # Other
 *.db
 *.sqlite
-*.bak
+# *.bak
 *.swp
 *.tmp
 
