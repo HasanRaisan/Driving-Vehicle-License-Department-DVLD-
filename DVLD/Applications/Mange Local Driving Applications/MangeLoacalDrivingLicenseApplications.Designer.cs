@@ -65,6 +65,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnClose.BackColor = System.Drawing.Color.White;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.ForeColor = System.Drawing.Color.Blue;
             this.btnClose.Location = new System.Drawing.Point(1273, 786);
             this.btnClose.Name = "btnClose";
@@ -130,7 +131,7 @@
             this.tblHeadLine.TabIndex = 10;
             this.tblHeadLine.Text = "Mange Local Driving License Applications ";
             // 
-            // dgvDetains
+            // dgvApplications
             // 
             this.dgvApplications.AllowUserToAddRows = false;
             this.dgvApplications.AllowUserToDeleteRows = false;
@@ -273,13 +274,13 @@
             this.showPersonLicenseToolStripMenuItem.Text = "Show Person License";
             this.showPersonLicenseToolStripMenuItem.Click += new System.EventHandler(this.showPersonLicenseToolStripMenuItem_Click);
             // 
-            // cbFliterByActvation
+            // cbFliterByStatus
             // 
             this.cbFliterByStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbFliterByStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFliterByStatus.FormattingEnabled = true;
             this.cbFliterByStatus.Location = new System.Drawing.Point(418, 330);
-            this.cbFliterByStatus.Name = "lbjsnvk";
+            this.cbFliterByStatus.Name = "cbFliterByStatus";
             this.cbFliterByStatus.Size = new System.Drawing.Size(154, 28);
             this.cbFliterByStatus.TabIndex = 18;
             this.cbFliterByStatus.SelectedValueChanged += new System.EventHandler(this.cbFliterByStatus_SelectedValueChanged);
@@ -312,6 +313,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1468, 852);
             this.Controls.Add(this.cbFliterByStatus);
             this.Controls.Add(this.AddPerson);
@@ -323,7 +326,9 @@
             this.Controls.Add(this.lblFilterBy);
             this.Controls.Add(this.tblHeadLine);
             this.Controls.Add(this.dgvApplications);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MangeLoacalDrivingLicenseApplications";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MangeLoacalDrivingLicenseApplications";
             this.Load += new System.EventHandler(this.MangeLoacalDrivingLicenseApplications_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvApplications)).EndInit();

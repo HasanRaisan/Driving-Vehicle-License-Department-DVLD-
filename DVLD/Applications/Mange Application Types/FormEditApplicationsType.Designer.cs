@@ -114,6 +114,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::DVLD.Properties.Resources.close__3_;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.Location = new System.Drawing.Point(195, 604);
@@ -152,8 +153,11 @@
             // 
             // FormEditApplicationsType
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(798, 688);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnCancel);
@@ -165,7 +169,9 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.lblHeadLine);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormEditApplicationsType";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Change Applications Fee Price";
             this.Load += new System.EventHandler(this.FormEditApplications_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

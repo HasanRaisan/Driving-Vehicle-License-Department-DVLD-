@@ -73,7 +73,7 @@ namespace DVLD.Mange_Applications
                     txtNotes.Text = clsTest._Notes;
                     lblFees.Text = clsTestAppointment._PaidFees.ToString();
                 }
-                Save.Enabled = false;
+                btnSave.Enabled = false;
                 lblTestAlreadyTakenMessage.Visible = true;
                 txtNotes.Enabled = false;
 

@@ -212,6 +212,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnClose.BackColor = System.Drawing.Color.White;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.ForeColor = System.Drawing.Color.Blue;
             this.btnClose.Location = new System.Drawing.Point(1216, 709);
             this.btnClose.Name = "btnClose";
@@ -247,10 +248,12 @@
             // 
             // MangePeople
             // 
+            this.AcceptButton = this.AddPerson;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1335, 774);
             this.Controls.Add(this.AddPerson);
             this.Controls.Add(this.btnClose);

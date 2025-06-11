@@ -54,7 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblHeadLine = new System.Windows.Forms.Label();
             this.pbTestImage = new System.Windows.Forms.PictureBox();
-            this.Save = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.lblResult = new System.Windows.Forms.Label();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.radioButtonPass = new System.Windows.Forms.RadioButton();
@@ -366,19 +366,19 @@
             this.pbTestImage.TabIndex = 0;
             this.pbTestImage.TabStop = false;
             // 
-            // Save
+            // btnSave
             // 
-            this.Save.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Save.Image = global::DVLD.Properties.Resources.diskette__1_;
-            this.Save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Save.Location = new System.Drawing.Point(564, 1188);
-            this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(155, 50);
-            this.Save.TabIndex = 116;
-            this.Save.Text = "Save";
-            this.Save.UseVisualStyleBackColor = false;
-            this.Save.Click += new System.EventHandler(this.Save_Click);
+            this.btnSave.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::DVLD.Properties.Resources.diskette__1_;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(564, 1188);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(155, 50);
+            this.btnSave.TabIndex = 116;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.Save_Click);
             // 
             // lblResult
             // 
@@ -470,8 +470,11 @@
             // 
             // FormTakeTest
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(979, 1264);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.txtNotes);
@@ -482,8 +485,10 @@
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.groupBoxMain);
-            this.Controls.Add(this.Save);
+            this.Controls.Add(this.btnSave);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormTakeTest";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Take Test";
             this.Load += new System.EventHandler(this.FormTakeTest_Load);
             this.groupBoxMain.ResumeLayout(false);
@@ -511,7 +516,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblApplicantPersonFullName;
         private System.Windows.Forms.Label lblLDLAppID;
-        private System.Windows.Forms.Button Save;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pictureBox5;

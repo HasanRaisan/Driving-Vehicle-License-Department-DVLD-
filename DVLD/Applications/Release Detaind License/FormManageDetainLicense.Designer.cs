@@ -67,6 +67,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnClose.BackColor = System.Drawing.Color.White;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.ForeColor = System.Drawing.Color.Blue;
             this.btnClose.Location = new System.Drawing.Point(1265, 720);
             this.btnClose.Name = "btnClose";
@@ -171,7 +172,7 @@
             this.toolStripSeparator1,
             this.releasDetainedLicenseToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(310, 171);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(310, 138);
             // 
             // showPersonDetailsToolStripMenuItem
             // 
@@ -223,6 +224,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1443, 784);
             this.Controls.Add(this.btnRleaseLicense);
             this.Controls.Add(this.btnDetainLicense);
@@ -234,7 +237,9 @@
             this.Controls.Add(this.lblFilterBy);
             this.Controls.Add(this.lbHeadLine);
             this.Controls.Add(this.dgvDetains);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormManageDetainLicense";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormManageDetainLicense";
             this.Load += new System.EventHandler(this.FormManageDetainLicense_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

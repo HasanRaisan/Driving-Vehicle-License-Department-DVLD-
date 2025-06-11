@@ -58,6 +58,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnClose.BackColor = System.Drawing.Color.White;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.ForeColor = System.Drawing.Color.Blue;
             this.btnClose.Location = new System.Drawing.Point(1220, 789);
             this.btnClose.Name = "btnClose";
@@ -254,8 +255,11 @@
             // 
             // FormMangeUsers
             // 
+            this.AcceptButton = this.AddPerson;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1339, 856);
             this.Controls.Add(this.AddPerson);
             this.Controls.Add(this.btnClose);

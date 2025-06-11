@@ -37,24 +37,24 @@
             this.lblLocalRecords = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvLocalLicenses = new System.Windows.Forms.DataGridView();
+            this.cmsLocalLicenses = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showLicenseDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblInternationalRecords = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvInternationalLicense = new System.Windows.Forms.DataGridView();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.cmsLocalLicenses = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.showLicenseDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsInternationLicense = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showLicenseDetailsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnClose = new System.Windows.Forms.Button();
             this.userControlShowPersonDetails1 = new DVLD.UserControlShowPersonDetails();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxDriverLicenses.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalLicenses)).BeginInit();
+            this.cmsLocalLicenses.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInternationalLicense)).BeginInit();
-            this.cmsLocalLicenses.SuspendLayout();
             this.cmsInternationLicense.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,6 +150,21 @@
             this.dgvLocalLicenses.Size = new System.Drawing.Size(1702, 150);
             this.dgvLocalLicenses.TabIndex = 3;
             // 
+            // cmsLocalLicenses
+            // 
+            this.cmsLocalLicenses.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.cmsLocalLicenses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showLicenseDetailsToolStripMenuItem});
+            this.cmsLocalLicenses.Name = "contextMenuStrip1";
+            this.cmsLocalLicenses.Size = new System.Drawing.Size(248, 36);
+            // 
+            // showLicenseDetailsToolStripMenuItem
+            // 
+            this.showLicenseDetailsToolStripMenuItem.Name = "showLicenseDetailsToolStripMenuItem";
+            this.showLicenseDetailsToolStripMenuItem.Size = new System.Drawing.Size(247, 32);
+            this.showLicenseDetailsToolStripMenuItem.Text = "Show License Details";
+            this.showLicenseDetailsToolStripMenuItem.Click += new System.EventHandler(this.showLicenseDetailsToolStripMenuItem_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.lblInternationalRecords);
@@ -200,35 +215,6 @@
             this.dgvInternationalLicense.Size = new System.Drawing.Size(1697, 150);
             this.dgvInternationalLicense.TabIndex = 0;
             // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(1649, 1049);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(155, 50);
-            this.btnClose.TabIndex = 133;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // cmsLocalLicenses
-            // 
-            this.cmsLocalLicenses.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.cmsLocalLicenses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showLicenseDetailsToolStripMenuItem});
-            this.cmsLocalLicenses.Name = "contextMenuStrip1";
-            this.cmsLocalLicenses.Size = new System.Drawing.Size(248, 36);
-            // 
-            // showLicenseDetailsToolStripMenuItem
-            // 
-            this.showLicenseDetailsToolStripMenuItem.Name = "showLicenseDetailsToolStripMenuItem";
-            this.showLicenseDetailsToolStripMenuItem.Size = new System.Drawing.Size(247, 32);
-            this.showLicenseDetailsToolStripMenuItem.Text = "Show License Details";
-            this.showLicenseDetailsToolStripMenuItem.Click += new System.EventHandler(this.showLicenseDetailsToolStripMenuItem_Click);
-            // 
             // cmsInternationLicense
             // 
             this.cmsInternationLicense.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -244,6 +230,21 @@
             this.showLicenseDetailsToolStripMenuItem1.Text = "Show License Details";
             this.showLicenseDetailsToolStripMenuItem1.Click += new System.EventHandler(this.showLicenseDetailsToolStripMenuItem1_Click);
             // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(1649, 1049);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(155, 50);
+            this.btnClose.TabIndex = 133;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // userControlShowPersonDetails1
             // 
             this.userControlShowPersonDetails1.Location = new System.Drawing.Point(398, 161);
@@ -255,13 +256,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1816, 1111);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBoxDriverLicenses);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblHeadLine);
             this.Controls.Add(this.userControlShowPersonDetails1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormShowPersonLicensesHistory";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormShowPersonLicensesHistory";
             this.Load += new System.EventHandler(this.FormShowPersonLicensesHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -270,10 +275,10 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalLicenses)).EndInit();
+            this.cmsLocalLicenses.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInternationalLicense)).EndInit();
-            this.cmsLocalLicenses.ResumeLayout(false);
             this.cmsInternationLicense.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

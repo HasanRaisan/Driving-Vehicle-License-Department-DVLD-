@@ -159,5 +159,9 @@ namespace DVLD
             ManageApplications.ShowDialog();
         }
 
+        private void newDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

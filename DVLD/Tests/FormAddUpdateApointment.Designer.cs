@@ -465,6 +465,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -478,12 +479,17 @@
             // 
             // FormAddUpdateApointment
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(902, 1234);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBoxMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormAddUpdateApointment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Apointment";
             this.Load += new System.EventHandler(this.FormAddApointment_Load);
             this.groupBoxMain.ResumeLayout(false);

@@ -315,6 +315,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Location = new System.Drawing.Point(580, 649);
             this.btnClose.Name = "btnClose";
@@ -326,13 +327,18 @@
             // 
             // FormAddLocalLicense
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1699, 1056);
             this.Controls.Add(this.lblHeadLine);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormAddLocalLicense";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Local License";
             this.Activated += new System.EventHandler(this.FormAddLocalLicense_Activated);
             this.Load += new System.EventHandler(this.FormLocalLicense_Load);

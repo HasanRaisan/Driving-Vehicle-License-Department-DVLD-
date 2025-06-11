@@ -60,6 +60,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Image = global::DVLD.Properties.Resources.close__3_;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -106,6 +107,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -119,8 +121,11 @@
             // 
             // FormIssuDrivingLicenseForTheFirstTime
             // 
+            this.AcceptButton = this.btnIssue;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1304, 964);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.txtNotes);
@@ -129,7 +134,9 @@
             this.Controls.Add(this.btnIssue);
             this.Controls.Add(this.UserConShowBasicApplicationInfo1);
             this.Controls.Add(this.btnClose);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormIssuDrivingLicenseForTheFirstTime";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormIssuDrivingLicenseForTheFirstTime";
             this.Load += new System.EventHandler(this.FormIssuDrivingLicenseForTheFirstTime_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();

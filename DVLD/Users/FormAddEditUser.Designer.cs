@@ -264,6 +264,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(1081, 639);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(272, 67);
@@ -301,10 +302,12 @@
             // 
             // FormAddEditUser
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1517, 942);
             this.Controls.Add(this.lblHeadLine);
             this.Controls.Add(this.btnCancel);

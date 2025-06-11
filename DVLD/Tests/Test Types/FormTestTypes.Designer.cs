@@ -90,12 +90,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editTestTypeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(241, 69);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(192, 36);
             // 
             // editTestTypeToolStripMenuItem
             // 
             this.editTestTypeToolStripMenuItem.Name = "editTestTypeToolStripMenuItem";
-            this.editTestTypeToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.editTestTypeToolStripMenuItem.Size = new System.Drawing.Size(191, 32);
             this.editTestTypeToolStripMenuItem.Text = "Edit Test Type";
             this.editTestTypeToolStripMenuItem.Click += new System.EventHandler(this.editTestTypeToolStripMenuItem_Click);
             // 
@@ -113,6 +113,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnClose.AutoSize = true;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.Blue;
             this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
@@ -129,13 +130,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1194, 725);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblRecordsNum);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblHeadLine);
             this.Controls.Add(this.dgvTestType);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormTestTypes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Application Test Types";
             this.Load += new System.EventHandler(this.FormApplicationTestTypes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestType)).EndInit();

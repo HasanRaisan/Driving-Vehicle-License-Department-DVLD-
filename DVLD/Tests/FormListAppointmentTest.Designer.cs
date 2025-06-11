@@ -110,6 +110,7 @@
             // 
             // btnAddAnApointment
             // 
+            this.btnAddAnApointment.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAddAnApointment.Location = new System.Drawing.Point(1199, 933);
             this.btnAddAnApointment.Name = "btnAddAnApointment";
             this.btnAddAnApointment.Size = new System.Drawing.Size(96, 53);
@@ -139,6 +140,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,8 +164,11 @@
             // 
             // FormListAppointmentTest
             // 
+            this.AcceptButton = this.btnAddAnApointment;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1307, 1286);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pictureBox1);
@@ -173,7 +178,9 @@
             this.Controls.Add(this.dgvTestAppointments);
             this.Controls.Add(this.lblTestTypeName);
             this.Controls.Add(this.UserConShowBasicApplicationInfo1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormListAppointmentTest";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormSchdulApointmet";
             this.Load += new System.EventHandler(this.FormSchdulApointmet_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestAppointments)).EndInit();

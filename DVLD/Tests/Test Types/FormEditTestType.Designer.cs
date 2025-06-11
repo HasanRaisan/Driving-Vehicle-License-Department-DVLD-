@@ -144,6 +144,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::DVLD.Properties.Resources.close__3_;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.Location = new System.Drawing.Point(208, 765);
@@ -172,8 +173,11 @@
             // 
             // FormEditTestType
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(809, 861);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtDescription);
@@ -187,7 +191,9 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.lblHeadLine);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormEditTestType";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormEditTestType";
             this.Load += new System.EventHandler(this.FormEditTestType_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

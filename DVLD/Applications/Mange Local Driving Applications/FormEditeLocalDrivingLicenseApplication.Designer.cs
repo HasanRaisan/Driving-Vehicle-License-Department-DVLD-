@@ -99,6 +99,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -131,8 +132,11 @@
             // 
             // FormEditeLocalDrivingLicenseApplication
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1434, 866);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
@@ -142,7 +146,9 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.userControlShowPersonDetails1);
             this.Controls.Add(this.btnClose);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormEditeLocalDrivingLicenseApplication";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormEditeLocalDrivingLicenseApplication";
             this.Load += new System.EventHandler(this.FormEditeLocalDrivingLicenseApplication_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
