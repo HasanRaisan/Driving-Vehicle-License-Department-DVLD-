@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTakeTest));
             this.groupBoxMain = new System.Windows.Forms.GroupBox();
-            this.lblTestAlreadyTaken = new System.Windows.Forms.Label();
+            this.lblTestAlreadyTakenMessage = new System.Windows.Forms.Label();
             this.lblTestIDValue = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.lblTestID = new System.Windows.Forms.Label();
@@ -78,7 +78,7 @@
             // 
             // groupBoxMain
             // 
-            this.groupBoxMain.Controls.Add(this.lblTestAlreadyTaken);
+            this.groupBoxMain.Controls.Add(this.lblTestAlreadyTakenMessage);
             this.groupBoxMain.Controls.Add(this.lblTestIDValue);
             this.groupBoxMain.Controls.Add(this.pictureBox8);
             this.groupBoxMain.Controls.Add(this.lblTestID);
@@ -109,16 +109,16 @@
             this.groupBoxMain.TabStop = false;
             this.groupBoxMain.Text = "Test Type Name";
             // 
-            // lblTestAlreadyTaken
+            // lblTestAlreadyTakenMessage
             // 
-            this.lblTestAlreadyTaken.AutoSize = true;
-            this.lblTestAlreadyTaken.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestAlreadyTaken.ForeColor = System.Drawing.Color.Red;
-            this.lblTestAlreadyTaken.Location = new System.Drawing.Point(161, 338);
-            this.lblTestAlreadyTaken.Name = "lblTestAlreadyTaken";
-            this.lblTestAlreadyTaken.Size = new System.Drawing.Size(577, 29);
-            this.lblTestAlreadyTaken.TabIndex = 128;
-            this.lblTestAlreadyTaken.Text = "Person already sat this test, appointment locked.";
+            this.lblTestAlreadyTakenMessage.AutoSize = true;
+            this.lblTestAlreadyTakenMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTestAlreadyTakenMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblTestAlreadyTakenMessage.Location = new System.Drawing.Point(161, 338);
+            this.lblTestAlreadyTakenMessage.Name = "lblTestAlreadyTakenMessage";
+            this.lblTestAlreadyTakenMessage.Size = new System.Drawing.Size(577, 29);
+            this.lblTestAlreadyTakenMessage.TabIndex = 128;
+            this.lblTestAlreadyTakenMessage.Text = "Person already sat this test, appointment locked.";
             // 
             // lblTestIDValue
             // 
@@ -538,6 +538,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.Label lblTestAlreadyTaken;
+        private System.Windows.Forms.Label lblTestAlreadyTakenMessage;
     }
 }

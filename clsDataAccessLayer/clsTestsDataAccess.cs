@@ -1,11 +1,8 @@
 ﻿using clsDataAccessLayer;
 using ConnectionDataBaseLincense;
 using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -31,32 +28,25 @@ namespace DataAccessLayer
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
 
-                    string query = "INSERT INTO Tests (TestAppointmentID, TestResult, Notes, CreatedByUserID) VALUES" +
-                                   "(@TestAppointmentID ,@TestResult, @Notes, @CreatedByUserID) SELECT SCOPE_IDENTITY(); ";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand("AddNewTest", connection))
                     {
+                       command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
-
-                        if (string.IsNullOrEmpty(Notes))
-                            command.Parameters.AddWithValue("@Notes", DBNull.Value);
-                        else
-                            command.Parameters.AddWithValue("@Notes", Notes);
-
+                        command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(Notes) ? DBNull.Value : (object)Notes);
                         command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
                         command.Parameters.AddWithValue("@TestResult", TestResult);
 
+                        SqlParameter outPutID = new SqlParameter("@NewTestID", System.Data.SqlDbType.Int)
+                        { Direction = ParameterDirection.Output };
+
+                        command.Parameters.Add(outPutID);
 
                         connection.Open();
 
-                        object result = command.ExecuteScalar();
+                        command.ExecuteNonQuery();
 
-                        if (result != null && int.TryParse(result.ToString(), out int resultID))
-                        {
-                            TestID = resultID;
-                        }
-
+                        TestID = (outPutID.Value != DBNull.Value) ? Convert.ToInt32(outPutID.Value) : -1;
                     }
                 }
             }

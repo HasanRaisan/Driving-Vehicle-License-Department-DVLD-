@@ -315,7 +315,7 @@ namespace DVLD.Mange_Applications
                 _Mode = enMode.Update;
                 this.Text = "Update Appointment";
                 MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                dateTimePickerDate.Enabled = false;
             }
             else
                 MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

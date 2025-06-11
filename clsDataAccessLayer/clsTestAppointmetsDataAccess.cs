@@ -54,7 +54,8 @@ namespace DataAccessLayer
 
             return (rowAffected > 0);
         }
-        
+
+        // Not used -- moved to add new test id 
         static public bool LocckedTestAppointment(int TestAppointmentID)
         {
             bool IsLocked = true;

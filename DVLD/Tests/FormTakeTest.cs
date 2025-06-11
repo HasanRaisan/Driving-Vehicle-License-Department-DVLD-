@@ -74,7 +74,7 @@ namespace DVLD.Mange_Applications
                     lblFees.Text = clsTestAppointment._PaidFees.ToString();
                 }
                 Save.Enabled = false;
-                lblTestAlreadyTaken.Visible = true;
+                lblTestAlreadyTakenMessage.Visible = true;
                 txtNotes.Enabled = false;
 
             }
@@ -100,7 +100,7 @@ namespace DVLD.Mange_Applications
 
         private void FormTakeTest_Load(object sender, EventArgs e)
         {
-            lblTestAlreadyTaken.Visible = false;
+            lblTestAlreadyTakenMessage.Visible = false;
             LoadDate();
 
         }
@@ -117,12 +117,18 @@ namespace DVLD.Mange_Applications
                 clsTest._Notes = txtNotes.Text;
                 clsTest._TestResult = radioButtonPass.Checked? true: false;
 
-                if(!clsTestAppointmets.LockedTestAppointment(this.AppointmentID))
+            
+
+
+               /* 
+                                 if(!clsTestAppointmets.LockedTestAppointment(this.AppointmentID))
                 {
                     MessageBox.Show("Failed to blocked the appointemt. Please try again.", "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-            
+                 
+               */
+
                 if (clsTest.Save())
                 {
                       MessageBox.Show("The result has been saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -133,10 +139,15 @@ namespace DVLD.Mange_Applications
                       MessageBox.Show("Failed to save the result. Please try again.", "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             
                 }
+
+
+
+
+
             }
 
 
-           
+
         }
     }
 }

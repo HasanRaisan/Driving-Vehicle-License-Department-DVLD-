@@ -16,20 +16,24 @@ namespace BusinessLayer
       public string _Notes { get; set; }
       public int _CreatedByUserID { get; set; }
 
+
+        public   clsTests() { }
+
+
         private bool _AddNewTest()
         {
-           int TestAppointmentID = int.MinValue;
+            int TestAppointmentID = int.MinValue;
             bool TestResult = false;
             string Notes = string.Empty;
             int CreatedByUserID = int.MinValue;
 
             this._TestID = clsTestsDataAccess.AddNewTest(this._TestAppointmentID, this._TestResult, this._Notes, this._CreatedByUserID);
 
-                return (this._TestID != -1);
+            return (this._TestID != -1);
 
         }
 
-      private  clsTests(int TestID, int TestAppointment, bool TestResult, string Notes)
+        private clsTests(int TestID, int TestAppointment, bool TestResult, string Notes)
         {
             this._Notes = Notes;
             this._TestID = TestID;
@@ -37,7 +41,6 @@ namespace BusinessLayer
             this._TestAppointmentID = TestAppointment;
         }
 
-     public   clsTests() { }
 
         public static clsTests FindTestByTestAppointment(int TestAppointmentID)
         {
