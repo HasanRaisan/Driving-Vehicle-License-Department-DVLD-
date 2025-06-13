@@ -35,9 +35,11 @@ namespace DVLD
 
         }
 
+        DataTable _peopleData = clsPerson.GetPeople();
+
         private DataTable LoadDataTable()
         {
-          return clsPerson.GetPeople();
+            return _peopleData;
         }
 
         private void LoadDataToDataGridView()
@@ -69,13 +71,14 @@ namespace DVLD
                 cbFilterBy.Items.Add(dc.ColumnName);     
             }
 
+
             cbFilterBy.SelectedIndex = 0;
 
         }
 
         private void FilterDataGridView()
         { 
-            DataView dataview = LoadDataTable().AsDataView();
+            DataView dataview = _peopleData.AsDataView();
 
             if (cbFilterBy.SelectedIndex > 0 && !string.IsNullOrEmpty(txbFilter.Text))
             {
@@ -84,7 +87,7 @@ namespace DVLD
 
                 if (dataview.Table.Columns[ColumnName].DataType == typeof(string))
                 {
-                    dataview.RowFilter = $"[{ColumnName}]  LIKE '%{FilterValue}%'";
+                    dataview.RowFilter = $"[{ColumnName}] = '{FilterValue.Replace("'", "''")}'";
                 }
                 else if (dataview.Table.Columns[ColumnName].DataType == typeof(int))
                 {
