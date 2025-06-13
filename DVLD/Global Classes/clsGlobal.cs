@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayer;
 using Microsoft.Win32;
-
 
 namespace DVLD
 {
     internal static class clsGlobal
     {
-        public static clsUsers CurrentUser;
+        private static clsUsers _CurrentUser;
+        public static clsUsers CurrentUser
+        {
+            get => _CurrentUser;
+            set
+            {                
+                _CurrentUser = value;
+                DVLD_Shared.ClsGlobal.CurrentUserID = _CurrentUser.UserID;
+            }
+        }
 
         public static bool RememberUsernameAndPassword(string Username, string Password)
         {
@@ -205,9 +208,6 @@ namespace DVLD
             }
             return false;
         }
-
-
-
     }
 
 }

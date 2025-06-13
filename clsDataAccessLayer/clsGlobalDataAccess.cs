@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace clsDataAccessLayer
 {
-    internal class clsGlobalDataAccess
+    internal static class clsGlobalDataAccess
     {
 
         public static void LogError(Exception ex)

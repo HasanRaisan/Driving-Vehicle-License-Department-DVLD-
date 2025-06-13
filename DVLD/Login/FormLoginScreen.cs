@@ -85,7 +85,7 @@ namespace DVLD
                     {
                         clsGlobal.CurrentUser = clsUser;
                         this.Hide();
-                        MainForm mainForm = new MainForm(clsUser,this);
+                        MainForm mainForm = new MainForm(this);
                         mainForm.ShowDialog();
 
                     }

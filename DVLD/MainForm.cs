@@ -20,19 +20,13 @@ namespace DVLD
     public partial class MainForm : Form
     {
 
-        clsUsers clsUser = new clsUsers();
         FormLoginScreen _formLoginScreen = new FormLoginScreen();
-        public MainForm(clsUsers clsUser , FormLoginScreen form)
+        public MainForm(FormLoginScreen form)
         {
-            this.clsUser = clsUser; 
-
             this._formLoginScreen = form;
             InitializeComponent();     
         }
 
-
-
-  
         //users
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -47,7 +41,7 @@ namespace DVLD
         }
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormChangePassword ChangePassword = new FormChangePassword(clsUser.UserID);
+            FormChangePassword ChangePassword = new FormChangePassword(clsGlobal.CurrentUser.UserID);
             ChangePassword.ShowDialog();
         }
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)

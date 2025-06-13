@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Runtime.InteropServices.WindowsRuntime;
 using clsDataAccessLayer;
 using ConnectionDataBaseLincense;
+using DVLD_Shared;
+
 
 namespace DataAccessLayer
 {
@@ -31,6 +33,7 @@ namespace DataAccessLayer
                     command.Parameters.AddWithValue("@Address", Address);
                     command.Parameters.AddWithValue("@Phone", Phone);
                     command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
+                    command.Parameters.AddWithValue("@CreatedByUserID", ClsGlobal.CurrentUserID);
 
                     command.Parameters.AddWithValue("@ThirdName", string.IsNullOrWhiteSpace(ThirdName) ? DBNull.Value : (object)ThirdName);
                     command.Parameters.AddWithValue("@Email", string.IsNullOrWhiteSpace(Email) ? DBNull.Value : (object)Email);
@@ -51,7 +54,6 @@ namespace DataAccessLayer
             {
                 clsGlobalDataAccess.LogError(ex);
             }
-
             return personID;
         }
 
@@ -148,6 +150,7 @@ namespace DataAccessLayer
                     command.Parameters.AddWithValue("@Address", Address);
                     command.Parameters.AddWithValue("@Phone", Phone);
                     command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
+                    command.Parameters.AddWithValue("@UpdatedByUserID", ClsGlobal.CurrentUserID);
 
                     command.Parameters.AddWithValue("@ThirdName", string.IsNullOrWhiteSpace(ThirdName) ? DBNull.Value : (object)ThirdName);
                     command.Parameters.AddWithValue("@Email", string.IsNullOrWhiteSpace(Email) ? DBNull.Value : (object)Email);
@@ -266,6 +269,7 @@ namespace DataAccessLayer
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PersonID", PersonID);
+                    command.Parameters.AddWithValue("@DeletedByUserID", ClsGlobal.CurrentUserID);
 
                     connection.Open();
                     int affectedRows = command.ExecuteNonQuery();
