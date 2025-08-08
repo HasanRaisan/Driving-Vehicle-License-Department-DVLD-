@@ -1,48 +1,49 @@
-# 🪪 نظام إدارة رخص القيادة DVLD
+# 🪪 DVLD Driving License Management System
 
-نظام مكتبي مخصص لإدارة عمليات إصدار وتجديد رخص القيادة بمختلف أنواعها، ضمن بيئة تسهّل التعامل مع بيانات السائقين والطلبات.
-
----
-
-## 🚀 الخدمات الأساسية
-
-- 🆕 إصدار رخصة قيادة لأول مرة.
-- ♻️ تجديد رخصة منتهية.
-- 🔁 استبدال رخصة مفقودة أو تالفة.
-- 🌍 إصدار رخصة قيادة دولية.
-- 🔓 فك حجز الرخصة الموقوفة.
+A desktop application designed to manage the issuance and renewal of various types of driving licenses, providing an environment that facilitates handling driver data and requests.
 
 ---
 
-## ⚙️ التقنيات المستخدمة
+## 🚀 Core Services
 
-- **C#** مع **.NET Framework**.
-- **SQL Server** لإدارة وتخزين البيانات.
-  
----
-
-## 🎯 المميزات
-
-- 🖥️ واجهة رسومية مبسّطة لإضافة السائقين وإدارة كافة أنواع الطلبات.
-- ✅ نظام تحقق داخلي لضمان مطابقة الطلبات للشروط واللوائح قبل تنفيذها.
-- 📋 تنظيم واضح للبيانات وسهولة في التصفّح والبحث.
-
----
-## 📦 ملاحظات
-
-- النظام مكتبي ولا يتطلب اتصالاً بالإنترنت.
-- يمكن تطويره لاحقًا ليتكامل مع أنظمة المرور الرسمية أو خدمات إلكترونية.
+- 🆕 Issue a new driving license for the first time.
+- ♻️ Renew an expired license.
+- 🔁 Replace a lost or damaged license.
+- 🌍 Issue an international driving license.
+- 🔓 Release a suspended license.
 
 ---
 
-## 👨‍💻 المطور
+## ⚙️ Technologies Used
+
+- **C#** with **.NET Framework**
+- **Windows Form**
+- **SQL Server** for data management and storage
+
+---
+
+## 🎯 Features
+
+- 🖥️ Simple graphical interface for adding drivers and managing all types of requests.
+- ✅ Internal verification system to ensure requests meet conditions and regulations before execution.
+- 📋 Clear data organization with easy browsing and searching.
+
+---
+
+## 📦 Notes
+
+- The system is desktop-based and does not require an internet connection.
+- Can be extended later to integrate with official traffic systems or e-services.
+
+---
+
+## 👨‍💻 Developer
 
 - **Hassan Risan**  
 - [GitHub: HassanRisan](https://github.com/HassanRisan)
 
 ---
 
-## 📜 الترخيص
+## 📜 License
 
-هذا المشروع لأغراض تعليمية أو تجريبية. لم يتم اعتماده رسميًا من أي جهة حكومية.
-
+This project is for educational or experimental purposes. It has not been officially approved by any government authority.
