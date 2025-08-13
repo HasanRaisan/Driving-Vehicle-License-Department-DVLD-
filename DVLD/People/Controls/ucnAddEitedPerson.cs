@@ -65,7 +65,7 @@ namespace DVLD
         }
         private void LoadComboBoxCountries()
         {
-            DataTable dtCountris = clsCountryBusinessLayer.GetCountries();
+            DataTable dtCountris = clsCountry.GetCountries();
             
             foreach ( DataRow c in dtCountris.Rows)
             {
@@ -239,7 +239,7 @@ namespace DVLD
             clsPerson._Phone = txbPhone.Text;
             clsPerson._NationalNo = txbNationalNo.Text;
             clsPerson._Address = txbAddress.Text;
-            clsPerson._NationalityCountryID = clsCountryBusinessLayer.FindCountry(cbCountry.SelectedIndex+1).CountryID;
+            clsPerson._NationalityCountryID = clsCountry.Find(cbCountry.SelectedIndex+1).CountryID;
             clsPerson._Email = txbEmail.Text;
             if(pbPersonPicture.ImageLocation != null)
                 clsPerson._ImagePath = pbPersonPicture.ImageLocation.ToString();
@@ -255,7 +255,7 @@ namespace DVLD
                 {
                     MessageBox.Show("Person detail has saved successfully","Saving Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     if (SendPersonID != null)
-                    SendPersonID.Invoke(clsPerson._PersonID);
+                    SendPersonID.Invoke(clsPerson.PersonID);
                 }
                 else MessageBox.Show("Person detail has edited successfully","Saving Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
 

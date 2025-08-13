@@ -15,7 +15,7 @@ namespace DVLD
     public partial class FormChangePassword : Form
     {
         int UserID = -1; 
-        clsUsers clsUser = new clsUsers();
+        clsUser clsUser = new clsUser();
 
         bool Validation = true;
 
@@ -24,7 +24,7 @@ namespace DVLD
             InitializeComponent();
             this.UserID = UserID;
 
-            clsUser = clsUsers.FindUser(UserID);
+            clsUser = clsUser.FindUser(UserID);
 
             this.userControlShowPersonDetails1.SetPersonID(clsUser.PersonID);
             this.userControlShowPersonDetails1.EnabledLinkLabelEditPerson(true);

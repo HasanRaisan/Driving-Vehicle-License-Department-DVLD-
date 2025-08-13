@@ -8,16 +8,6 @@ namespace DataAccessLayer
 {
     public class clsTestsDataAccess
     {
-        /*
-        Tests
-        TestAppointmentID
-        TestResult
-        Notes
-        CreatedByUserID
-         
-         */
-
-
         static public int AddNewTest(int TestAppointmentID, bool TestResult, string Notes, int CreatedByUserID)
         {
 
@@ -30,7 +20,7 @@ namespace DataAccessLayer
 
                     using (SqlCommand command = new SqlCommand("AddNewTest", connection))
                     {
-                       command.CommandType = CommandType.StoredProcedure;
+                        command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(Notes) ? DBNull.Value : (object)Notes);
@@ -59,7 +49,7 @@ namespace DataAccessLayer
 
         }
 
-        static public bool FindTest(int TestAppointmentID, ref int TestID  , ref bool TestResult , ref string Notes)
+        static public bool FindTest(int TestAppointmentID, ref int TestID, ref bool TestResult, ref string Notes)
         {
             bool isFound = false;
             try
@@ -93,6 +83,41 @@ namespace DataAccessLayer
             }
 
             return isFound;
+        }
+
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID)
+        {
+            byte PassedTestCount = 0;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = @"SELECT PassedTestCount = count(TestTypeID)
+                         FROM Tests INNER JOIN
+                         TestAppointments ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+						 where LocalDrivingLicenseApplicationID =@LocalDrivingLicenseApplicationID and TestResult=1";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+                        connection.Open();
+
+                        object result = command.ExecuteScalar();
+                        if (result != null && byte.TryParse(result.ToString(), out byte ptCount))
+                        {
+                            PassedTestCount = ptCount;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                clsGlobalDataAccess.LogError(ex);
+            }
+            return PassedTestCount;
+
+
         }
     }
 }

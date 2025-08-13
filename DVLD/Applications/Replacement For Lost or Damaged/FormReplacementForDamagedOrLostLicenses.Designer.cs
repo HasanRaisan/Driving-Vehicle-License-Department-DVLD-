@@ -30,19 +30,19 @@
         {
             this.lblHeadLine = new System.Windows.Forms.Label();
             this.GroupBoxFilter = new System.Windows.Forms.GroupBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbReplaecementFor = new System.Windows.Forms.GroupBox();
             this.rbLostLicense = new System.Windows.Forms.RadioButton();
             this.rbDamagedLicense = new System.Windows.Forms.RadioButton();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnCanel = new System.Windows.Forms.Button();
-            this.btnReplae = new System.Windows.Forms.Button();
             this.linkLabelShowLicnesInfo = new System.Windows.Forms.LinkLabel();
             this.linkLabelShoLicensesHistory = new System.Windows.Forms.LinkLabel();
             this.userControlShowReplacementApplicationDetails1 = new DVLD.Applcations_user_controls.UserControlShowReplacementApplicationDetails();
             this.userControlDrivingLicenseInfo1 = new DVLD.UserControlDrivingLicenseInfo();
+            this.btnReplae = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnCanel = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.GroupBoxFilter.SuspendLayout();
             this.gbReplaecementFor.SuspendLayout();
             this.SuspendLayout();
@@ -69,17 +69,6 @@
             this.GroupBoxFilter.TabIndex = 7;
             this.GroupBoxFilter.TabStop = false;
             this.GroupBoxFilter.Text = "Filter By License ID";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSearch.BackgroundImage = global::DVLD.Properties.Resources.eye;
-            this.btnSearch.Location = new System.Drawing.Point(678, 33);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(68, 48);
-            this.btnSearch.TabIndex = 2;
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtLicenseID
             // 
@@ -137,48 +126,6 @@
             this.rbDamagedLicense.UseVisualStyleBackColor = true;
             this.rbDamagedLicense.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(644, 1050);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(255, 50);
-            this.btnClose.TabIndex = 145;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            // 
-            // btnCanel
-            // 
-            this.btnCanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnCanel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCanel.Image = global::DVLD.Properties.Resources.close__3_;
-            this.btnCanel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCanel.Location = new System.Drawing.Point(1102, 1050);
-            this.btnCanel.Name = "btnCanel";
-            this.btnCanel.Size = new System.Drawing.Size(189, 50);
-            this.btnCanel.TabIndex = 144;
-            this.btnCanel.Text = "Cancel";
-            this.btnCanel.UseVisualStyleBackColor = false;
-            // 
-            // btnReplae
-            // 
-            this.btnReplae.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnReplae.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReplae.Image = global::DVLD.Properties.Resources.diskette__1_;
-            this.btnReplae.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReplae.Location = new System.Drawing.Point(1314, 1050);
-            this.btnReplae.Name = "btnReplae";
-            this.btnReplae.Size = new System.Drawing.Size(189, 50);
-            this.btnReplae.TabIndex = 143;
-            this.btnReplae.Text = "Replace";
-            this.btnReplae.UseVisualStyleBackColor = false;
-            this.btnReplae.Click += new System.EventHandler(this.btnReplace_Click);
-            // 
             // linkLabelShowLicnesInfo
             // 
             this.linkLabelShowLicnesInfo.AutoSize = true;
@@ -216,6 +163,60 @@
             this.userControlDrivingLicenseInfo1.Name = "userControlDrivingLicenseInfo1";
             this.userControlDrivingLicenseInfo1.Size = new System.Drawing.Size(1491, 533);
             this.userControlDrivingLicenseInfo1.TabIndex = 0;
+            // 
+            // btnReplae
+            // 
+            this.btnReplae.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnReplae.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReplae.Image = global::DVLD.Properties.Resources.diskette__1_;
+            this.btnReplae.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReplae.Location = new System.Drawing.Point(1314, 1050);
+            this.btnReplae.Name = "btnReplae";
+            this.btnReplae.Size = new System.Drawing.Size(189, 50);
+            this.btnReplae.TabIndex = 143;
+            this.btnReplae.Text = "Replace";
+            this.btnReplae.UseVisualStyleBackColor = false;
+            this.btnReplae.Click += new System.EventHandler(this.btnReplace_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Image = global::DVLD.Properties.Resources.close__3_;
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(644, 1050);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(255, 50);
+            this.btnClose.TabIndex = 145;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = false;
+            // 
+            // btnCanel
+            // 
+            this.btnCanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnCanel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCanel.Image = global::DVLD.Properties.Resources.close__3_;
+            this.btnCanel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCanel.Location = new System.Drawing.Point(1102, 1050);
+            this.btnCanel.Name = "btnCanel";
+            this.btnCanel.Size = new System.Drawing.Size(189, 50);
+            this.btnCanel.TabIndex = 144;
+            this.btnCanel.Text = "Cancel";
+            this.btnCanel.UseVisualStyleBackColor = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSearch.BackgroundImage = global::DVLD.Properties.Resources.search__2_;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSearch.Location = new System.Drawing.Point(680, 23);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(85, 65);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // FormReplacementForDamagedOrLostLicenses
             // 

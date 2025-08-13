@@ -26,7 +26,7 @@ namespace DVLD
 
         void LoadLocalLicenses()
         {
-            dgvLocalLicenses.DataSource = clsLicenses.GetAllLicenseForPersonByPersonID(this.PersonID);
+            dgvLocalLicenses.DataSource = clsLicense.GetAllLicenseForPersonByPersonID(this.PersonID);
 
             byte LicensesCount = (byte) dgvLocalLicenses.Rows.Count;
             lblLocalRecords.Text = LicensesCount > 2 ? $"# Rocords: {LicensesCount}" : $"# Rocord: {LicensesCount}";
@@ -36,7 +36,7 @@ namespace DVLD
 
         void LoadInternationalLicenses()
         {
-            dgvInternationalLicense.DataSource = clsInternationalLicenses.GetAllLicenseInternationalForPersonByPersonID(this.PersonID);
+            dgvInternationalLicense.DataSource = clsInternationalLicense.GetAllLicenseInternationalForPersonByPersonID(this.PersonID);
 
             byte LicensesCount = (byte)dgvInternationalLicense.Rows.Count;
             lblInternationalRecords.Text = LicensesCount > 2 ? $"# Rocords: {LicensesCount}" : $"# Rocord: {LicensesCount}";

@@ -26,7 +26,7 @@ namespace DVLD
         bool Validation  = true;
 
 
-        clsUsers clsUser;
+        clsUser clsUser;
 
         public FormAddEditUser(int UserID)
         {
@@ -60,14 +60,14 @@ namespace DVLD
             else
             {
                 lblHeadLine.Text = "Add User";
-                clsUser = new clsUsers();
+                clsUser = new clsUser();
                 this.userConShopPersonDetailWithFilter1.ResetPersonData();
             }
 
         }
         private void LoadUserInfoToEdit()
         {
-             clsUser = clsUsers.FindUser(this.UserID);
+             clsUser = clsUser.FindUser(this.UserID);
             this.PersonID = clsUser.PersonID;
             this.userConShopPersonDetailWithFilter1.LoadPersonInfo(PersonID);
             this.userConShopPersonDetailWithFilter1.SetPersonIDInTextBox(PersonID.ToString());
@@ -91,7 +91,7 @@ namespace DVLD
 
             if (tabControl1.SelectedIndex == 0)
             {
-                if (clsUsers.IsUserExistByPersonID(PersonID))
+                if (clsUser.IsUserExistByPersonID(PersonID))
                 {
                     MessageBox.Show("This person is already user.","Already user",MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -117,7 +117,7 @@ namespace DVLD
 
                 //this.PersonID = this.userConShopPersonDetailWithFilter1.GetPersonID();
 
-                if (clsUsers.IsUserExistByPersonID(PersonID))
+                if (clsUser.IsUserExistByPersonID(PersonID))
                 {
                     MessageBox.Show("This person is already user.", "Already user", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     e.Cancel = true;
@@ -149,7 +149,7 @@ namespace DVLD
                 errorProvider1.SetError(txtUserName, null);
             }
 
-            if (this.clsUser.UserName != txtUserName.Text.Trim() &&  clsUsers.IsUserExist(txtUserName.Text.Trim()))
+            if (this.clsUser.UserName != txtUserName.Text.Trim() &&  clsUser.IsUserExist(txtUserName.Text.Trim()))
             {
                 errorProvider1.SetError(txtUserName, "this username is already used");
                 this.Validation = false;

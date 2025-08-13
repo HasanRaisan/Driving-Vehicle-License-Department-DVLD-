@@ -60,7 +60,7 @@ namespace DVLD.Mange_Applications
 
         private void _LoadDataToDataGridView()
         {
-            DataTable dtTestAppointments = clsTestAppointmets.GetAllApplicationAppointments(this.LDLAppID);
+            DataTable dtTestAppointments = clsTestAppointment.GetAllApplicationAppointments(this.LDLAppID);
             dgvTestAppointments.DataSource = dtTestAppointments;
 
             if (dtTestAppointments.Rows.Count > 2) { lblRecords.Text = $"# Records: {dtTestAppointments.Rows.Count}."; }
@@ -70,7 +70,7 @@ namespace DVLD.Mange_Applications
         private void btnAddAnApointment_Click(object sender, EventArgs e)
         {
 
-            if (clsTestAppointmets.DoseLocalDrivingLicenseHaveAnActiveAppointment(this.LDLAppID))
+            if (clsTestAppointment.DoseLocalDrivingLicenseHaveAnActiveAppointment(this.LDLAppID))
             {
                 MessageBox.Show("This application already has an active test appointment.", "Appointment Exists", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

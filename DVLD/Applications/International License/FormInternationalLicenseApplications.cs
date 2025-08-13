@@ -24,7 +24,7 @@ namespace DVLD.International_Applications
 
         private DataTable GetDataTable()
         {
-          return  clsInternationalLicenses.GetInternationalApplications();
+          return  clsInternationalLicense.GetInternationalApplications();
         }
 
         private void LoadComboBoxData()
@@ -193,14 +193,14 @@ namespace DVLD.International_Applications
 
         private void showPersonDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormShowPersonDetails formPerson = new FormShowPersonDetails(clsLicenses.GetPersonIDByLicenseID((int)dgvInternationalApplications.CurrentRow.Cells["L.License ID"].Value));
+            FormShowPersonDetails formPerson = new FormShowPersonDetails(clsLicense.GetPersonIDByLicenseID((int)dgvInternationalApplications.CurrentRow.Cells["L.License ID"].Value));
             formPerson.ShowDialog();
 
         }
 
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormShowPersonLicensesHistory formLicenses = new FormShowPersonLicensesHistory(clsLicenses.GetPersonIDByLicenseID((int)dgvInternationalApplications.CurrentRow.Cells["L.License ID"].Value));
+            FormShowPersonLicensesHistory formLicenses = new FormShowPersonLicensesHistory(clsLicense.GetPersonIDByLicenseID((int)dgvInternationalApplications.CurrentRow.Cells["L.License ID"].Value));
             formLicenses.ShowDialog();
         }
     }

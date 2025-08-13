@@ -29,10 +29,10 @@ namespace DVLD
 
             var culture = new CultureInfo("en-US");
 
-            var licenseClass = clsLicenses.FindLicense(LocalLicensID);
+            var licenseClass = clsLicense.FindLicense(LocalLicensID);
             if (licenseClass != null)
             {
-                this.lblExpDateValue.Text = licenseClass._ExpirationDate.ToString("dd/MMM/yyyy", culture);
+                this.lblExpDateValue.Text = licenseClass.ExpirationDate.ToString("dd/MMM/yyyy", culture);
             }
 
         }
@@ -55,7 +55,7 @@ namespace DVLD
 
             lblAppDate.Text = DateTime.Now.ToString("dd/MMM/yyyy",culture);
             lblIssueDateValue.Text = DateTime.Now.ToString("dd/MMM/yyyy", culture);
-            lblFeesValue.Text = clsApplicationTypes.FindApplication(6).ApplicationFees.ToString();
+            lblFeesValue.Text = clsApplicationType.FindApplication(6).ApplicationFees.ToString();
             this.lblLocalLicenseIDValue.Text = "???";
 
 

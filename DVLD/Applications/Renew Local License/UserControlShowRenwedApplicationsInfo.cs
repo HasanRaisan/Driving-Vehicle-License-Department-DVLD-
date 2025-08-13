@@ -22,7 +22,7 @@ namespace DVLD.Applcations_user_controls
 
         const int ApplicationsTypeID = 2;
 
-        decimal RenweAppFees = clsApplicationTypes.FindApplication(ApplicationsTypeID).ApplicationFees;
+        decimal RenweAppFees = clsApplicationType.FindApplication(ApplicationsTypeID).ApplicationFees;
 
         public void SetOldLicenseIDAndUsername(int OldLicensID, string Username)
         {
@@ -33,7 +33,7 @@ namespace DVLD.Applcations_user_controls
 
             var culture = new CultureInfo("en-US");
 
-            var licenseClass = clsLicenseClasses.FindLicenseClass(clsLicenses.FindLicense(OldLicensID)._LicenseClassID);
+            var licenseClass = clsLicenseClasses.FindLicenseClass(clsLicense.FindLicense(OldLicensID).LicenseClassID);
             if (licenseClass != null) {  
                 this.lblExpDateValue.Text = DateTime.Today.AddYears(licenseClass.DefaultValidityLength).ToString("dd/MMM/yyyy", culture);
                 this.lblLicenseFees.Text = licenseClass.ClassFees.ToString();

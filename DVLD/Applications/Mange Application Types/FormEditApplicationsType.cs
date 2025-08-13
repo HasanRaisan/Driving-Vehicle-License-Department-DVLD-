@@ -15,7 +15,7 @@ namespace DVLD
     public partial class FormEditApplicationsType : Form
     {
         int ApplicationTypeID = -1;
-        clsApplicationTypes clsApplicationType;
+        clsApplicationType clsApplicationType;
 
         public FormEditApplicationsType(int ApplicationTypeID)
         {
@@ -30,7 +30,7 @@ namespace DVLD
 
         private void LoadData()
         {
-            clsApplicationType = clsApplicationTypes.FindApplication(this.ApplicationTypeID);
+            clsApplicationType = clsApplicationType.FindApplication(this.ApplicationTypeID);
 
             if (clsApplicationType != null)
             {

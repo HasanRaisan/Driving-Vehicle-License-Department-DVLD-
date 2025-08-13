@@ -21,7 +21,7 @@ namespace DVLD.Applications
 
         void LoadDataToDataGridView()
         {
-            dgvApplicationType.DataSource = clsApplicationTypes.GetAllApplictionTypes();
+            dgvApplicationType.DataSource = clsApplicationType.GetAllApplictionTypes();
             lblRecordsNum.Text = "# Records: " + (dgvApplicationType.RowCount).ToString();
         }
 

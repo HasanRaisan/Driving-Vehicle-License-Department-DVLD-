@@ -9,26 +9,30 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-    public class clsUsers
+    public class clsUser
     {
-        public int UserID { get; set; }
+        public int UserID { get; private set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public int PersonID { get; set; }
         public bool IsActive { get; set; }
+
         public clsPerson PersonInfo { get; set; }
 
-        private enMode _Status { get; set; }
+        private enMode _Mode { get; set; }
         private enum enMode { AddNew = 0, Update = 1 };
 
 
-        public clsUsers() { _Status = enMode.AddNew;
+        public clsUser() { 
+            _Mode = enMode.AddNew;
             this.UserName = "";
             this.Password = "";
-         
+            this.PersonID = -1;
+            this.UserID = -1;
+
         }
 
-        clsUsers(int UseerID , string UserName, string Password, int PersonID , bool IsActive)
+        clsUser(int UseerID , string UserName, string Password, int PersonID , bool IsActive)
         {
             this.UserID = UseerID;
             this.UserName = UserName;
@@ -36,11 +40,11 @@ namespace BusinessLayer
             this.PersonID = PersonID;
             this.IsActive = IsActive;
             this.PersonInfo = clsPerson.FindPerson(PersonID);
-            _Status = enMode.Update;
+            _Mode = enMode.Update;
         }
 
 
-        static public clsUsers FindUser(int UserID)
+        static public clsUser FindUser(int UserID)
         {
             
 
@@ -54,13 +58,13 @@ namespace BusinessLayer
 
                 clsUserDataAccess.FindUser(UserID, ref UserName, ref Password, ref PersonID, ref IsActive);
 
-                return new clsUsers(UserID, UserName,Password,PersonID,IsActive);
+                return new clsUser(UserID, UserName,Password,PersonID,IsActive);
 
             }
             else return null;
         }
 
-        static public clsUsers FindUser(string UserName)
+        static public clsUser FindUser(string UserName)
         {
 
             if (clsUserDataAccess.IsUserExist(UserName))
@@ -74,7 +78,7 @@ namespace BusinessLayer
 
                 clsUserDataAccess.FindUser(UserName, ref UserID, ref Password, ref PersonID, ref IsActive);
 
-                return new clsUsers(UserID,  UserName, Password, PersonID, IsActive);
+                return new clsUser(UserID,  UserName, Password, PersonID, IsActive);
 
             }
             else { return null; }
@@ -120,13 +124,13 @@ namespace BusinessLayer
 
         public bool Save()
         {
-            switch (this._Status)
+            switch (this._Mode)
             {
                 case enMode.AddNew: 
 
                     if (_AddNewUser())
                     {
-                        this._Status = enMode.Update;
+                        this._Mode = enMode.Update;
                         return true;
                     }
                     else
@@ -141,7 +145,7 @@ namespace BusinessLayer
 
         }
 
-        public static clsUsers FindByUsernameAndPassword(string UserName, string Password)
+        public static clsUser FindByUsernameAndPassword(string UserName, string Password)
         {
             int UserID = -1;
             int PersonID = -1;
@@ -153,7 +157,7 @@ namespace BusinessLayer
 
             if (IsFound)
                 //we return new object of that User with the right data
-                return new clsUsers(UserID, UserName, Password, PersonID, IsActive);
+                return new clsUser(UserID, UserName, Password, PersonID, IsActive);
             else
                 return null;
         }

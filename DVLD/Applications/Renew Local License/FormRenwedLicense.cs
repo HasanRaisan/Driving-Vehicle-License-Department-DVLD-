@@ -18,25 +18,15 @@ namespace DVLD.Serveces
     {
 
         private int _OldLicenseID = -1;
-
-
-        private int _personID = -1;
-        private int GetPersonIDForLicenseID()
-        {
-            if (_personID == -1)
-            {
-                _personID = clsLicenses.GetPersonIDByLicenseID(this._OldLicenseID);
-            }
-            return _personID;
-        }
+        clsLicense OldLicenseInfo = null;
 
 
 
-        private clsLicenses _clsLicense = null;
-        private clsLicenses LicenseInfo()
+        private clsLicense _clsLicense = null;
+        private clsLicense LicenseInfo()
         {
             if (this._clsLicense == null)
-                this._clsLicense = clsLicenses.FindLicense(this._OldLicenseID);
+                this._clsLicense = clsLicense.FindLicense(this._OldLicenseID);
 
             return this._clsLicense;
 
@@ -51,7 +41,6 @@ namespace DVLD.Serveces
         }
 
 
-        clsLicenses OldLicenseInfo = null;
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -64,18 +53,18 @@ namespace DVLD.Serveces
 
 
             // check if exist and get license info
-            if (( OldLicenseInfo = clsLicenses.FindLicense(_OldLicenseID)) != null)
+            if (( OldLicenseInfo = clsLicense.FindLicense(_OldLicenseID)) != null)
             {
                 this.userControlDrivingLicenseInfo1.SetLicenseID(this._OldLicenseID);
                 this.linkLabelShoLicensesHistory.Enabled = true;
 
 
-                if (OldLicenseInfo._ExpirationDate < DateTime.Today)
+                if (OldLicenseInfo.ExpirationDate < DateTime.Today)
                 {
                     this.userControlShowRenwedApplicationsInfo1.SetOldLicenseIDAndUsername(this._OldLicenseID, clsGlobal.CurrentUser.UserName);
 
                     // check activation 
-                    if (OldLicenseInfo._IsActive)
+                    if (OldLicenseInfo.IsActive)
                     {
                         btnRenew.Enabled = true;
                     }
@@ -91,7 +80,7 @@ namespace DVLD.Serveces
                 else
                 {
 
-                    MessageBox.Show($"Selected License is not yet expiared, it will be ecpire on: {OldLicenseInfo._ExpirationDate.ToString("dd/MMM/yyyy")}", "Not allowed", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show($"Selected License is not yet expiared, it will be ecpire on: {OldLicenseInfo.ExpirationDate.ToString("dd/MMM/yyyy")}", "Not allowed", MessageBoxButtons.OK,MessageBoxIcon.Error);
                     this.userControlShowRenwedApplicationsInfo1.LoadDefaultValue();
 
                     return;
@@ -103,7 +92,7 @@ namespace DVLD.Serveces
                 this.userControlDrivingLicenseInfo1.LoadDefaultData();
                 this.userControlShowRenwedApplicationsInfo1.LoadDefaultValue();
                 this.linkLabelShoLicensesHistory.Enabled = false;
-                btnRenew.Enabled = false;
+                this.btnRenew.Enabled = false;
                 return ;
             }
 
@@ -119,78 +108,34 @@ namespace DVLD.Serveces
         }
 
 
-        private clsApplications SaveApplication()
-        {
-            const int ApplicationsTypeID = 2;
-
-            var clsAppType = clsApplicationTypes.FindApplication(ApplicationsTypeID);
-            var clsApplication = new clsApplications();
-            clsApplication._ApplicantPersonID = GetPersonIDForLicenseID();
-            clsApplication._PaidFees = clsAppType.ApplicationFees;
-            clsApplication._ApplicationTypeID = clsAppType.ApplicationID;
-            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            clsApplication._LicenseClassID = LicenseInfo()._LicenseClassID;
-
-            if (clsApplication.Save())
-            {
-                return clsApplication;
-            }
-            else return null;
-
-        }
 
         private void txtLicenseID_TextChanged(object sender, EventArgs e)
         {
             this._clsLicense = null;
-            this._personID = -1;
-
         }
 
-        void SetOldLicenseInactive()
-        {
-           
-            _clsLicense._IsActive = false;
-            _clsLicense.UpdateLicenseActivationStatus();
-        }
 
         private void btnRenew_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to renew the license?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                var clsApplication = SaveApplication();
-                if (clsApplication == null) { MessageBox.Show("Save Failed", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-                var NewLicense = new clsLicenses();
-
-                NewLicense._LicenseClassID = LicenseInfo()._LicenseClassID;
-                NewLicense._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-                NewLicense._PaidFees = LicenseInfo()._PaidFees;
-                NewLicense._DriverID = LicenseInfo()._DriverID;
-                NewLicense._ExpirationDate = DateTime.Today.AddYears(clsLicenseClasses.FindLicenseClass(NewLicense._LicenseClassID).DefaultValidityLength);
-                NewLicense._ApplicationID = clsApplication._ApplicationID;
-                NewLicense.IssueReason = clsLicenses.enIssueReason.Renew;
-                NewLicense._Notes = this.userControlShowRenwedApplicationsInfo1.GetNotes();
-                NewLicense._IsActive = true;
-
-                SetOldLicenseInactive();
-
-                if (NewLicense.Save())
+                clsLicense NewLicense = this.OldLicenseInfo.RenewLicense(this.userControlShowRenwedApplicationsInfo1.GetNotes(), clsGlobal.CurrentUser.UserID);
+                if (NewLicense != null)
                 {
 
-                    MessageBox.Show($"License has renewed successfully with ID [{NewLicense._LicenseID}]", "License Renewed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"License has renewed successfully with ID [{NewLicense.LicenseID}]", "License Renewed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     linkLabelShowLicnesInfo.Enabled = true;
                     this.btnClose.Visible = true;
                     this.btnCanel.Visible = false;
                     this.btnRenew.Visible = false;
 
-                    linkLabelShowLicnesInfo.Tag = NewLicense._LicenseID;
+                    linkLabelShowLicnesInfo.Tag = NewLicense.LicenseID;
 
-                    // application status turn to complete
-                    clsApplications.UpdateApplicationStatus(clsApplication._ApplicationID, 3);
                     this.userControlShowRenwedApplicationsInfo1.SetTxetBoxNotesNotEnabled();
-                    this.userControlShowRenwedApplicationsInfo1.SetRenwedAppAndLicenseID(clsApplication._ApplicationID, NewLicnseID:NewLicense._LicenseID);
-                    this.userControlDrivingLicenseInfo1.SetLicenseID(NewLicense._LicenseID);
+                    this.userControlShowRenwedApplicationsInfo1.SetRenwedAppAndLicenseID(NewLicense.ApplicationID, NewLicnseID:NewLicense.LicenseID);
+                    this.userControlDrivingLicenseInfo1.SetLicenseID(NewLicense.LicenseID);
                 }
                 else
                 {
@@ -220,7 +165,7 @@ namespace DVLD.Serveces
 
         private void linkLabelShoLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var formShow = new FormShowPersonLicensesHistory(GetPersonIDForLicenseID());
+            var formShow = new FormShowPersonLicensesHistory(this.OldLicenseInfo.DriverInfo.PersonID);
             formShow.ShowDialog();
         }
 

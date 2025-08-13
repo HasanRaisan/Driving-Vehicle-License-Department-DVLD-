@@ -20,7 +20,7 @@ namespace DVLD.Applcations_user_controls
         }
 
         const sbyte ApplicationTypeID = 5;
-        decimal ApplicationFees = clsApplicationTypes.FindApplication(ApplicationTypeID).ApplicationFees;
+        decimal ApplicationFees = clsApplicationType.FindApplication(ApplicationTypeID).ApplicationFees;
 
         public void SetDetainInfoAndUsername( clsDetainLicense DetainInfo, string username)
         {

@@ -1,4 +1,6 @@
 ﻿
+
+
 using clsDataAccessLayer;
 using ConnectionDataBaseLincense;
 using System;
@@ -74,7 +76,6 @@ namespace DataAccessLayer
             return isFound;
         }
 
-
         static public bool UpdateApplicationType(int ApplicationTypeID, decimal ApplicationFees, string ApplicationTypeTitle)
         {
             int rowAffected = 0;
@@ -103,6 +104,11 @@ namespace DataAccessLayer
             return (rowAffected > 0);
         }
 
-
+        [Obsolete("⚠️ Warning: This method is not yet implemented. It will only return -1.", false)]
+        static public int AddApplicationType(decimal ApplicationFees, string ApplicationTypeTitle)
+        {
+            // Not implemented  yet
+            throw new NotImplementedException("⚠️ Warning: This method is not yet implemented. It will only return -1.");
+        }
     }
 }

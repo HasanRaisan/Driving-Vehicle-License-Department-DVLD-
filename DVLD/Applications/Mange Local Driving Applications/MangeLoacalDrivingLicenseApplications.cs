@@ -240,7 +240,8 @@ namespace DVLD.Mange_Applications
 
             if (MessageBox.Show("Are you sure you want to cancel application [" + dgvApplications.CurrentRow.Cells[0].Value + "]", "Confirm Canceld", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                if (clsApplications.UpdateApplicationStatus(clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID((int)dgvApplications.CurrentRow.Cells[0].Value).BaseApplicationID, (byte)2))
+                int BaseApplicationID = clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID((int)dgvApplications.CurrentRow.Cells[0].Value).ApplicationID;
+                if (clsApplication.FindApplication(BaseApplicationID).Cancel())
                 {
                     MessageBox.Show("Application canceld successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadDataToDataGridView();
@@ -290,7 +291,7 @@ namespace DVLD.Mange_Applications
                 byte PassedTestCount = Convert.ToByte(dgvApplications.Rows[e.RowIndex].Cells["Passed Tests"].Value);
                 string ApplicationStatus = dgvApplications.Rows[e.RowIndex].Cells["Application Status"].Value.ToString();
 
-                this._LicenseID = clsLicenses.GetLicenseIDByApplicationID(clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID((int)dgvApplications.CurrentRow.Cells[0].Value).BaseApplicationID);
+                this._LicenseID = clsLicense.GetLicenseIDByApplicationID(clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID((int)dgvApplications.CurrentRow.Cells[0].Value).ApplicationID);
 
                 if (this._LicenseID != -1) 
                 {
@@ -375,24 +376,27 @@ namespace DVLD.Mange_Applications
         {
             if (MessageBox.Show("Are you sure you want to delete application [" + dgvApplications.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
+                clsLocalDrivingLicensesApplication LocalDrivingLicenseApplication =
+                clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID((int)dgvApplications.CurrentRow.Cells[0].Value);
 
-
-                if (clsLocalDrivingLicensesApplication.DeleteLocalDrivingLicense((int)dgvApplications.CurrentRow.Cells[0].Value))
+                if (LocalDrivingLicenseApplication != null)
                 {
-                    MessageBox.Show("Application deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    if (dgvApplications.Rows.Count == 1)
+                    if (LocalDrivingLicenseApplication.Delete())
                     {
-                        LoadComboBoxData();
-                        return;
+                        MessageBox.Show("Application deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        if (dgvApplications.Rows.Count == 1)
+                        {
+                            LoadComboBoxData();
+                            return;
+                        }
+
+                        LoadDataToDataGridView();
                     }
 
-                    LoadDataToDataGridView();
+                    else
+                        MessageBox.Show("This application has not deleted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                else
-                    MessageBox.Show("This application has not deleted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
 
@@ -413,7 +417,7 @@ namespace DVLD.Mange_Applications
 
         private void showPersonLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int PersonID = clsPerson.FindPerson((string)dgvApplications.CurrentRow.Cells["National No."].Value)._PersonID;
+            int PersonID = clsPerson.FindPerson((string)dgvApplications.CurrentRow.Cells["National No."].Value).PersonID;
             FormShowPersonLicensesHistory licensesHistory = new FormShowPersonLicensesHistory(PersonID);
             licensesHistory.ShowDialog();
             LoadDataToDataGridView();

@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using clsDataAccessLayer;
 using ConnectionDataBaseLincense;
 
@@ -15,19 +8,6 @@ namespace DataAccessLayer
 {
     public class clsApplicationsDataAccess
     {
-
-
-        //ApplicantPersonID
-        //ApplicationDate  
-        //ApplicationTypeID
-        //ApplicationStatus
-        //LastStatusDate   
-        //PaidFees         
-        //CreatedByUsername  
-
-        //Applications
-
-
        static  public int AddNewApplication(int ApplicantPersonID, int ApplicationTypeID, Decimal PaidFees, int CreatedByUsername, int LicenseClassID)
        {
             DateTime ApplicationDate = DateTime.Now;
@@ -108,7 +88,6 @@ namespace DataAccessLayer
             return (rowAffected > 0);
         }
 
-
         static public bool UpdateLicenseClass(int ApplicationID, int LicenseClassID)
         {
             
@@ -139,8 +118,6 @@ namespace DataAccessLayer
 
             return (rowAffected > 0);
         }
-
-
 
         static public DataTable GetAllApplications()
         {
@@ -261,8 +238,6 @@ namespace DataAccessLayer
 
             return isFound;
         }
-
-
         public static bool DeleteApplication(int ApplicationID)
         {          
             int rowAffected = 0;
@@ -287,11 +262,7 @@ namespace DataAccessLayer
             }
             return (rowAffected > 0);
         }
-
     }
-
-
-
 }
 
 

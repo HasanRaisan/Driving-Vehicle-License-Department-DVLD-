@@ -37,7 +37,7 @@ namespace DVLD
             try
             {
                 // Find the local Application view details
-                var clsLDLAppView = clsLocalDrivingLicenseViewsBusinessLayer.FindLDLAppView(this.LDLAppID);
+                var clsLDLAppView = clsLocalDrivingLicenseViews.FindLDLAppView(this.LDLAppID);
                 if (clsLDLAppView == null)
                 {
                     MessageBox.Show("Local Application view not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -46,14 +46,14 @@ namespace DVLD
 
 
                 // Find the associated (base) Application 
-                var clsApplication = clsApplications.FindApplication(clsLDLAppView.BaseApplicationID);
+                var clsApplication = BusinessLayer.clsApplication.FindApplication(clsLDLAppView.BaseApplicationID);
                 if (clsApplication == null)
                 {
                     MessageBox.Show("Application details not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 
-                llShowLicenseInfo.Enabled = (this._licenseID = clsLicenses.GetLicenseIDByApplicationID(clsApplication._ApplicationID)) != -1;
+                llShowLicenseInfo.Enabled = (this._licenseID = clsLicense.GetLicenseIDByApplicationID(clsApplication.ApplicationID)) != -1;
 
 
 
@@ -66,7 +66,7 @@ namespace DVLD
             }
         }
 
-        private void BindDataToControls(clsApplications Application, clsLocalDrivingLicenseViewsBusinessLayer LocalAppView)
+        private void BindDataToControls(clsApplication Application, clsLocalDrivingLicenseViews LocalAppView)
         {
             var usCulture = new CultureInfo("en-US"); 
 
@@ -76,23 +76,23 @@ namespace DVLD
             lblPassedTestValue.Text = $"{LocalAppView._PassedTestCount}/{TotalTest}"; 
             lblLicenseClassName.Text = LocalAppView._ClassName;
 
-            lblAppIDValue.Text = Application._ApplicationID.ToString();
-            lblCreatedByValue.Text = clsUsers.FindUser(Application._CreatedByUserID).UserName;
-            lblDateValue.Text = Application._ApplicationDate.ToString("yyyy-MMMM-dd",usCulture);
-            lblStatusDateValue.Text = Application._LastStatusDate.ToString("yyyy-MMMM-dd",usCulture);
+            lblAppIDValue.Text = Application.ApplicationID.ToString();
+            lblCreatedByValue.Text = clsUser.FindUser(Application.CreatedByUserID).UserName;
+            lblDateValue.Text = Application.ApplicationDate.ToString("yyyy-MMMM-dd",usCulture);
+            lblStatusDateValue.Text = Application.LastStatusDate.ToString("yyyy-MMMM-dd",usCulture);
             lblStatus.Text = LocalAppView._Status;
 
 
-            lblFees.Text = Application._PaidFees.ToString("C",usCulture);
+            lblFees.Text = Application.PaidFees.ToString("C",usCulture);
             lblApplicantPerson.Text = LocalAppView._FullName;
-            lblType.Text = clsApplicationTypes.FindApplication(Application._ApplicationTypeID).ApplicationTypeTitle;
+            lblType.Text = Application.ApplicationTypeInfo.ApplicationTypeTitle;
 
-            this.ApplicantPersonID = Application._ApplicantPersonID;
+            this.ApplicantPersonID = Application.ApplicantPersonID;
         }
 
         private void UserConShowBasicApplicationInfo_Load(object sender, EventArgs e)
         {
-            this.llShowLicenseInfo.Enabled = false;
+            //this.llShowLicenseInfo.Enabled = false;
         }
 
         private void lbViewPersonInfo_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)

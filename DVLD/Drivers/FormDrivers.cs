@@ -20,7 +20,7 @@ namespace DVLD
 
         void LoadDataToDataGridView()
         {
-            dgvDrivers.DataSource = clsDrivers.GetAllDrivers();
+            dgvDrivers.DataSource = clsDriver.GetAllDrivers();
 
             int DriversCount = (int)dgvDrivers.Rows.Count;
             lblRecords.Text = DriversCount > 2 ? $"# Rocords: {DriversCount}" : $"# Rocord: {DriversCount}";
@@ -35,14 +35,14 @@ namespace DVLD
 
         private void FilterDataGridView()
         {
-            DataView dataview = clsDrivers.GetAllDrivers().AsDataView();
+            DataView dataview = clsDriver.GetAllDrivers().AsDataView();
 
 
 
             if (cbFilterBy.SelectedIndex <= 0 || string.IsNullOrEmpty(txbFilter.Text))
             {
                 txbFilter.Text = "";
-                dgvDrivers.DataSource = clsDrivers.GetAllDrivers();
+                dgvDrivers.DataSource = clsDriver.GetAllDrivers();
                 return;
             }
       

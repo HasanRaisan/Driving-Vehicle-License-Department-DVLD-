@@ -32,14 +32,14 @@
             this.userControlDrivingLicenseInfo1 = new DVLD.UserControlDrivingLicenseInfo();
             this.lblHeadLine = new System.Windows.Forms.Label();
             this.GroupBoxFilter = new System.Windows.Forms.GroupBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnCanel = new System.Windows.Forms.Button();
-            this.btnDetain = new System.Windows.Forms.Button();
             this.linkLabelShowLicnesInfo = new System.Windows.Forms.LinkLabel();
             this.linkLabelShoLicensesHistory = new System.Windows.Forms.LinkLabel();
+            this.btnDetain = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnCanel = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.GroupBoxFilter.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,17 +80,6 @@
             this.GroupBoxFilter.TabStop = false;
             this.GroupBoxFilter.Text = "Filter By License ID";
             // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSearch.BackgroundImage = global::DVLD.Properties.Resources.eye;
-            this.btnSearch.Location = new System.Drawing.Point(678, 33);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(68, 48);
-            this.btnSearch.TabIndex = 2;
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // txtLicenseID
             // 
             this.txtLicenseID.BackColor = System.Drawing.SystemColors.Menu;
@@ -110,6 +99,44 @@
             this.label1.Size = new System.Drawing.Size(143, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "License ID:";
+            // 
+            // linkLabelShowLicnesInfo
+            // 
+            this.linkLabelShowLicnesInfo.AutoSize = true;
+            this.linkLabelShowLicnesInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelShowLicnesInfo.Location = new System.Drawing.Point(340, 1058);
+            this.linkLabelShowLicnesInfo.Name = "linkLabelShowLicnesInfo";
+            this.linkLabelShowLicnesInfo.Size = new System.Drawing.Size(172, 25);
+            this.linkLabelShowLicnesInfo.TabIndex = 147;
+            this.linkLabelShowLicnesInfo.TabStop = true;
+            this.linkLabelShowLicnesInfo.Text = "Show License Info";
+            this.linkLabelShowLicnesInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelShowLicnesInfo_LinkClicked);
+            // 
+            // linkLabelShoLicensesHistory
+            // 
+            this.linkLabelShoLicensesHistory.AutoSize = true;
+            this.linkLabelShoLicensesHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelShoLicensesHistory.Location = new System.Drawing.Point(8, 1058);
+            this.linkLabelShoLicensesHistory.Name = "linkLabelShoLicensesHistory";
+            this.linkLabelShoLicensesHistory.Size = new System.Drawing.Size(291, 25);
+            this.linkLabelShoLicensesHistory.TabIndex = 146;
+            this.linkLabelShoLicensesHistory.TabStop = true;
+            this.linkLabelShoLicensesHistory.Text = "Show Person\'s Licenses History";
+            this.linkLabelShoLicensesHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelShoLicensesHistory_LinkClicked);
+            // 
+            // btnDetain
+            // 
+            this.btnDetain.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDetain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetain.Image = global::DVLD.Properties.Resources.diskette__1_;
+            this.btnDetain.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDetain.Location = new System.Drawing.Point(1347, 1044);
+            this.btnDetain.Name = "btnDetain";
+            this.btnDetain.Size = new System.Drawing.Size(155, 50);
+            this.btnDetain.TabIndex = 148;
+            this.btnDetain.Text = "Detain";
+            this.btnDetain.UseVisualStyleBackColor = false;
+            this.btnDetain.Click += new System.EventHandler(this.btnDetain_Click);
             // 
             // btnClose
             // 
@@ -140,43 +167,17 @@
             this.btnCanel.UseVisualStyleBackColor = false;
             this.btnCanel.Click += new System.EventHandler(this.btnCanel_Click);
             // 
-            // btnDetain
+            // btnSearch
             // 
-            this.btnDetain.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDetain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDetain.Image = global::DVLD.Properties.Resources.diskette__1_;
-            this.btnDetain.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDetain.Location = new System.Drawing.Point(1347, 1044);
-            this.btnDetain.Name = "btnDetain";
-            this.btnDetain.Size = new System.Drawing.Size(155, 50);
-            this.btnDetain.TabIndex = 148;
-            this.btnDetain.Text = "Detain";
-            this.btnDetain.UseVisualStyleBackColor = false;
-            this.btnDetain.Click += new System.EventHandler(this.btnDetain_Click);
-            // 
-            // linkLabelShowLicnesInfo
-            // 
-            this.linkLabelShowLicnesInfo.AutoSize = true;
-            this.linkLabelShowLicnesInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelShowLicnesInfo.Location = new System.Drawing.Point(340, 1058);
-            this.linkLabelShowLicnesInfo.Name = "linkLabelShowLicnesInfo";
-            this.linkLabelShowLicnesInfo.Size = new System.Drawing.Size(172, 25);
-            this.linkLabelShowLicnesInfo.TabIndex = 147;
-            this.linkLabelShowLicnesInfo.TabStop = true;
-            this.linkLabelShowLicnesInfo.Text = "Show License Info";
-            this.linkLabelShowLicnesInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelShowLicnesInfo_LinkClicked);
-            // 
-            // linkLabelShoLicensesHistory
-            // 
-            this.linkLabelShoLicensesHistory.AutoSize = true;
-            this.linkLabelShoLicensesHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelShoLicensesHistory.Location = new System.Drawing.Point(8, 1058);
-            this.linkLabelShoLicensesHistory.Name = "linkLabelShoLicensesHistory";
-            this.linkLabelShoLicensesHistory.Size = new System.Drawing.Size(291, 25);
-            this.linkLabelShoLicensesHistory.TabIndex = 146;
-            this.linkLabelShoLicensesHistory.TabStop = true;
-            this.linkLabelShoLicensesHistory.Text = "Show Person\'s Licenses History";
-            this.linkLabelShoLicensesHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelShoLicensesHistory_LinkClicked);
+            this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSearch.BackgroundImage = global::DVLD.Properties.Resources.search__2_;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSearch.Location = new System.Drawing.Point(680, 25);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(85, 65);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // FormDetainLicense
             // 

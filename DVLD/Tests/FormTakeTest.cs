@@ -50,8 +50,8 @@ namespace DVLD.Mange_Applications
 
         private void LoadDate()
         {
-            var clsTestAppointment = clsTestAppointmets.FindTestAppointment(this.AppointmentID);
-           this.TestTypeInfo(clsTestAppointment._TestTypeID);
+            var clsTestAppointment = BusinessLayer.clsTestAppointment.FindTestAppointment(this.AppointmentID);
+           this.TestTypeInfo((int)clsTestAppointment.TestTypeID);
 
             if (clsTestAppointment == null)
             {
@@ -61,17 +61,17 @@ namespace DVLD.Mange_Applications
 
             if (clsTestAppointment.isLocked)
             {
-               var clsTest = clsTests.FindTestByTestAppointment(this.AppointmentID);
+               var clsTest = BusinessLayer.clsTest.FindTestByTestAppointment(this.AppointmentID);
 
                 if (clsTest != null)
                 {
-                    if (clsTest._TestResult)
+                    if (clsTest.TestResult)
                     { radioButtonPass.Checked = true; radioButtonFail.Enabled = false; }
                     else { radioButtonFail.Checked = true; radioButtonPass.Enabled = false; }
 
-                    lblTestIDValue.Text = clsTest._TestID.ToString();
-                    txtNotes.Text = clsTest._Notes;
-                    lblFees.Text = clsTestAppointment._PaidFees.ToString();
+                    lblTestIDValue.Text = clsTest.TestID.ToString();
+                    txtNotes.Text = clsTest.Notes;
+                    lblFees.Text = clsTestAppointment.PaidFees.ToString();
                 }
                 btnSave.Enabled = false;
                 lblTestAlreadyTakenMessage.Visible = true;
@@ -80,15 +80,15 @@ namespace DVLD.Mange_Applications
             }
 
 
-           var LocalDrvingLicenseApp = clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID(clsTestAppointment._LocalDrivingLicenseApplicationID);
+           var LocalDrvingLicenseApp = clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID(clsTestAppointment.LocalDrivingLicenseApplicationID);
 
 
            lblLDLAppID.Text = LocalDrvingLicenseApp.LocalDrivingLicenseApplicationID.ToString();
            lblApplicantPersonFullName.Text = LocalDrvingLicenseApp.PersonInfo.FullName();
            lblDLClass.Text = LocalDrvingLicenseApp.LicenseClassInfo.ClassName;
-           lblTestDateValue.Text = clsTestAppointment._AppointmentDate.ToString();
+           lblTestDateValue.Text = clsTestAppointment.AppointmentDate.ToString();
 
-           if (!clsTestAppointment.isLocked) lblFees.Text = clsTestTypes.FindTestType(clsTestAppointment._TestTypeID).TestTypeFees.ToString();
+           if (!clsTestAppointment.isLocked) lblFees.Text = clsTestType.FindTestType((clsTestType.enTestType)clsTestAppointment.TestTypeID).TestTypeFees.ToString();
 
         }
 
@@ -110,18 +110,18 @@ namespace DVLD.Mange_Applications
             if (MessageBox.Show("Do you want to save the result for this test? You will not be able to modify it afterward.", "Save Test Result", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult.Yes)
             {
 
-                var clsTest = new clsTests();
+                var clsTest = new clsTest();
 
-                clsTest._TestAppointmentID = this.AppointmentID;
-                clsTest._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-                clsTest._Notes = txtNotes.Text;
-                clsTest._TestResult = radioButtonPass.Checked? true: false;
+                clsTest.TestAppointmentID = this.AppointmentID;
+                clsTest.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+                clsTest.Notes = txtNotes.Text;
+                clsTest.TestResult = radioButtonPass.Checked? true: false;
 
             
 
 
                /* 
-                                 if(!clsTestAppointmets.LockedTestAppointment(this.AppointmentID))
+                                 if(!clsTestAppointment.LockedTestAppointment(this.AppointmentID))
                 {
                     MessageBox.Show("Failed to blocked the appointemt. Please try again.", "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

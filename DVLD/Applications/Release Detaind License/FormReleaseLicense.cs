@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,33 +17,10 @@ namespace DVLD.Serveces
 {
     public partial class FormReleaseLicense : Form
     {
-        //private string _username = string.Empty;
         private int _licenseID = -1;
         private bool _isDirect = false;
-        clsLicenses _clsLicenseInfo = null;
+        clsLicense _LicenseInfo = null;
         clsDetainLicense _DetainInfo = null;
-
-
-        private int _personID = -1;
-        private int GetPersonIDForLicenseID()
-        {
-            if (_personID == -1)
-            {
-                _personID = clsLicenses.GetPersonIDByLicenseID(this._licenseID);
-            }
-            return _personID;
-        }
-
-        //private int _userID = -1;
-        //private int GetUserID()
-        //{
-        //    if (_userID == -1)
-        //    {
-        //        _userID = clsUsers.GetUserIDByUserName(this._username);
-        //    }
-        //    return _userID;
-        //}
-
 
 
 
@@ -66,7 +44,7 @@ namespace DVLD.Serveces
 
         private void linkLabelShoLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var formShow = new FormShowPersonLicensesHistory(GetPersonIDForLicenseID());
+            var formShow = new FormShowPersonLicensesHistory(this._LicenseInfo.DriverInfo.PersonID);
             formShow.ShowDialog();
         }
 
@@ -86,7 +64,7 @@ namespace DVLD.Serveces
             }
             else return;
 
-            if ((this._clsLicenseInfo = clsLicenses.FindLicense(this._licenseID)) == null)
+            if ((this._LicenseInfo = clsLicense.FindLicense(this._licenseID)) == null)
             {
                 this.userControlDrivingLicenseInfo1.LoadDefaultData();
                 this.userControlReleaseLicense1.SetDefualtValue();
@@ -120,9 +98,7 @@ namespace DVLD.Serveces
 
         private void DefualtValue()
         {
-            this._clsLicenseInfo = null;
-            this._personID = -1;
-            //this._userID = -1;
+            this._LicenseInfo = null;
 
             this.btnRelease.Enabled = false;
             this.linkLabelShoLicensesHistory.Enabled = false;
@@ -150,39 +126,14 @@ namespace DVLD.Serveces
             this.userControlReleaseLicense1.SetDefualtValue();
         }
 
-
-        const byte ApplicationTypeID = 5;
-        private clsApplications SaveApplication()
-        {
-            var clsAppType = clsApplicationTypes.FindApplication(ApplicationTypeID);
-            var clsApplication = new clsApplications();
-            clsApplication._ApplicantPersonID = GetPersonIDForLicenseID();
-            clsApplication._PaidFees = clsAppType.ApplicationFees;
-            clsApplication._ApplicationTypeID = clsAppType.ApplicationID;
-            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            clsApplication._LicenseClassID = _clsLicenseInfo._LicenseClassID;
-
-            if (clsApplication.Save())
-            {
-                return clsApplication;
-            }
-            else return null;
-        }
-
         private void btnRelease_Click(object sender, EventArgs e)
         {
-            var ApplicationInfo = SaveApplication();
-            if (ApplicationInfo == null) { return; }
-
-            _DetainInfo.ReleaseDate = DateTime.Now;
-            _DetainInfo.ReleasedByUserID = clsGlobal.CurrentUser.UserID;
-            _DetainInfo.ReleaseApplicationID = ApplicationInfo._ApplicationID;
-
             if (MessageBox.Show("Are you sure you want to release this license?", "Relese License", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            { 
-               if (_DetainInfo.Save())
+            {
+                int ApplicationID = 0;
+               if (this._LicenseInfo.ReleaseDetainedLicense(clsGlobal.CurrentUser.UserID, ref ApplicationID))
                {
-                    this.userControlReleaseLicense1.SetApplicationID(ApplicationInfo._ApplicationID);
+                    this.userControlReleaseLicense1.SetApplicationID(ApplicationID);
                     this.userControlDrivingLicenseInfo1.SetLicenseID(this._licenseID);
                     this.GroupBoxFilter.Enabled = false;
                     this.linkLabelShowLicnesInfo.Enabled = true;
@@ -211,7 +162,7 @@ namespace DVLD.Serveces
 
 
 
-            if ((this._clsLicenseInfo = clsLicenses.FindLicense(this._licenseID)) == null)
+            if ((this._LicenseInfo = clsLicense.FindLicense(this._licenseID)) == null)
             {
                 this.userControlDrivingLicenseInfo1.LoadDefaultData();
                 this.userControlReleaseLicense1.SetDefualtValue();

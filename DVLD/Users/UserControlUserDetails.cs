@@ -29,7 +29,7 @@ namespace DVLD
 
         private void LoadUserInfo()
         {
-            clsUsers clsUser = clsUsers.FindUser(this.UserID);
+            clsUser clsUser = clsUser.FindUser(this.UserID);
 
             if (clsUser == null)
             {

@@ -28,7 +28,7 @@ namespace DVLD.Applcations_user_controls
 
         public void SetApplicationTypeID(int ApplicationsTypeID)
         {
-            this.lblApplicationFeesValue.Text = clsApplicationTypes.FindApplication(ApplicationsTypeID).ApplicationFees.ToString();
+            this.lblApplicationFeesValue.Text = clsApplicationType.FindApplication(ApplicationsTypeID).ApplicationFees.ToString();
         }
 
 

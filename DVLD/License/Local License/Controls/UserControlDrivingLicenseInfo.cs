@@ -17,7 +17,7 @@ namespace DVLD
     {
         int _LocalDrivingLicenseAppID = -1;
         int _LicenseID = -1;
-        public clsLicenseDetailsViewBusinessLayer LicenseDetailsInfo;
+        public clsLicenseDetailsView LicenseDetailsInfo;
 
         public UserControlDrivingLicenseInfo()
         {
@@ -46,12 +46,12 @@ namespace DVLD
                 var clsApp = clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID(this._LocalDrivingLicenseAppID);
                 if (clsApp != null)
                 {
-                    this._LicenseID = clsLicenses.GetLicenseIDByApplicationID(clsApp.BaseApplicationID);
+                    this._LicenseID = clsLicense.GetLicenseIDByApplicationID(clsApp.ApplicationID);
                 }
             }
 
 
-             LicenseDetailsInfo = clsLicenseDetailsViewBusinessLayer.FindLicenseDetailsByLicenseID(this._LicenseID);
+             LicenseDetailsInfo = clsLicenseDetailsView.FindLicenseDetailsByLicenseID(this._LicenseID);
 
             if (LicenseDetailsInfo == null) { return; }
 

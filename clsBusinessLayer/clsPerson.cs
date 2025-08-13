@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -11,19 +13,19 @@ namespace BusinessLayer
     public class clsPerson
     {
 
-        public int _PersonID { get; set; }
-        public string _NationalNo          { get; set; }
-        public string _FirstName           { get; set; }
-        public string _SecondName          { get; set; }
-        public string _ThirdName           { get; set; }
-        public string _LastName            { get; set; }
-        public DateTime _DateOfBirth       { get; set; }
-        public short _Gendor                { get; set; }
+        public int PersonID { get; private set; }
+        public string _NationalNo { get; set; }
+        public string _FirstName { get; set; }
+        public string _SecondName { get; set; }
+        public string _ThirdName { get; set; }
+        public string _LastName { get; set; }
+        public DateTime _DateOfBirth { get; set; }
+        public short _Gendor { get; set; }
         public string _Address { get; set; }
-        public string _Phone               { get; set; }
-        public string _Email               { get; set; }
-        public int _NationalityCountryID   { get; set; }
-        public string _ImagePath           { get; set; }
+        public string _Phone { get; set; }
+        public string _Email { get; set; }
+        public int _NationalityCountryID { get; set; }
+        public string _ImagePath { get; set; }
         private Status _Status { get; set; } 
 
         private enum Status { AddNew = 0, Update = 1 };
@@ -33,18 +35,30 @@ namespace BusinessLayer
             return _FirstName+" " + _SecondName + " " + _ThirdName + " " + _LastName;
         }
 
+        public clsCountry CountryInfo;
+
         public clsPerson() {
             this._Status = Status.AddNew;
+
             this._NationalNo = "";
             this._ImagePath = "";
             this._Email = "";
+            this.PersonID = -1;
+            this._FirstName = "";
+            this._SecondName = "";
+            this._ThirdName = "";
+            this._LastName = "";
+            this._DateOfBirth = DateTime.Now;
+            this._Address = "";
+            this._Phone = "";
+            this._NationalityCountryID = -1;
         }
 
         private clsPerson(int PersonID ,string NationalNo, string FirstName, string SecondName, string ThirdName,
               string LastName, DateTime DateOfBirth, short Gendor, string Address, string Phone, string Email,
               int NationalityCountryID, string ImagePath)
         {
-            this._PersonID = PersonID;
+            this.PersonID = PersonID;
             this._NationalNo = NationalNo;
             this._FirstName = FirstName;
             this._SecondName = SecondName;
@@ -57,7 +71,10 @@ namespace BusinessLayer
             this._Email = Email;
             this._NationalityCountryID = NationalityCountryID;
             this._ImagePath = ImagePath;
+
             this._Status = Status.Update;
+
+            this.CountryInfo = clsCountry.Find(this._NationalityCountryID);
 
         }
 
@@ -121,14 +138,14 @@ namespace BusinessLayer
 
         private bool _AddNewPerson()
         {
-            this._PersonID = clsPersonDataAccess.AddPerson(this._NationalNo, this._FirstName, this._SecondName, this._ThirdName, this._LastName,
+            this.PersonID = clsPersonDataAccess.AddPerson(this._NationalNo, this._FirstName, this._SecondName, this._ThirdName, this._LastName,
               this._DateOfBirth, this._Gendor, this._Address, this._Phone, this._Email, this._NationalityCountryID, this._ImagePath);
-          return (this._PersonID !=- 1);
+          return (this.PersonID !=- 1);
         }
 
         private bool _UpdatePerson()
         {
-            return clsPersonDataAccess.UpdatePerson(this._PersonID, this._NationalNo, this._FirstName, this._SecondName, this._ThirdName, this._LastName,
+            return clsPersonDataAccess.UpdatePerson(this.PersonID, this._NationalNo, this._FirstName, this._SecondName, this._ThirdName, this._LastName,
                 this._DateOfBirth, this._Gendor, this._Address, this._Phone, this._Email, this._NationalityCountryID, this._ImagePath);
         }
 
@@ -170,53 +187,64 @@ namespace BusinessLayer
         {
             switch (this._Status)
             {
-                case Status.AddNew: this._Status = Status.Update; return _AddNewPerson();
-                case Status.Update: return _UpdatePerson();
+                case Status.AddNew:
+
+                    if (_AddNewPerson())
+                    {
+                        this._Status = Status.Update;
+                        return true;    
+                    }
+                    else return false;
+
+                case Status.Update: 
+                    
+                    return _UpdatePerson();
+
                 default: return false;
 
             }
         }
     }
 
-    public class clsCountryBusinessLayer
-    {
-        public string CountryName { get; }
-        public int CountryID { get; }
+    //public class clsCountry
+    //{
+    //    public string CountryName { get; }
+    //    public int CountryID { get; }
 
-       public clsCountryBusinessLayer() { }
-      private  clsCountryBusinessLayer(string countryName, int countryID)
-        {
-            CountryName = countryName;
-            CountryID = countryID;
-        }
+    //    public clsCountry() {
+    //        CountryName = "";
+    //        CountryID = -1;
+    //    }
 
-        static public clsCountryBusinessLayer FindCountry(int CountryID)
-        {
-            string CountryName = "";
+    //    private  clsCountry(string countryName, int countryID)
+    //    {
+    //        CountryName = countryName;
+    //        CountryID = countryID;
+    //    }
 
-            if (clsCountriesDataAccess.FindCountry(CountryID, ref CountryName))
-                return new clsCountryBusinessLayer(CountryName,CountryID);
-            else return null;
+    //    static public clsCountry Find(int CountryID)
+    //    {
+    //        string CountryName = "";
+
+    //        if (clsCountriesDataAccess.FindCountry(CountryID, ref CountryName))
+    //            return new clsCountry(CountryName,CountryID);
+    //        else return null;
             
 
             
-        }
-        static public clsCountryBusinessLayer FindCountry(string countryName)
-        {
-            int CountryID = -1;
-            if (clsCountriesDataAccess.FindCountry(countryName, ref CountryID)) 
-                return new clsCountryBusinessLayer(countryName, CountryID); else return null;
+    //    }
+    //    static public clsCountry FindCountry(string countryName)
+    //    {
+    //        int CountryID = -1;
+    //        if (clsCountriesDataAccess.FindCountry(countryName, ref CountryID)) 
+    //            return new clsCountry(countryName, CountryID); else return null;
 
-        }
+    //    }
 
-        static public DataTable GetCountries()
-        {
-            return clsCountriesDataAccess.GetAllCountries();
-        }
-
-       
-
-
-    }
+    //    static public DataTable GetCountries()
+    //    {
+    //        return clsCountriesDataAccess.GetAllCountries();
+    //    }
+    //}
 
 }

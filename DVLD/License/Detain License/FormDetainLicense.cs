@@ -14,53 +14,14 @@ namespace DVLD.Serveces
 {
     public partial class FormDetainLicense : Form
     {
-
-       // string _username = string.Empty;
-
         private int _licenseID = -1;
-
-
-        private int _personID = -1;
-        private int GetPersonIDForLicenseID()
-        {
-            if (_personID == -1)
-            {
-                _personID = clsLicenses.GetPersonIDByLicenseID(this._licenseID);
-            }
-            return _personID;
-        }
-
-        //private int _userID = -1;
-        //private int GetUserID()
-        //{
-        //    if (_userID == -1)
-        //    {
-        //        _userID = clsUsers.GetUserIDByUserName(this._username);
-        //    }
-        //    return _userID;
-        //}
-
-        clsLicenses _clsLicenseInfo = null;
-        private clsLicenses LicenseInfo()
-        {
-            if (this._clsLicenseInfo == null)
-                this._clsLicenseInfo = clsLicenses.FindLicense(this._licenseID);
-
-            return this._clsLicenseInfo;
-        }
-
+        clsLicense _LicenseInfo = null;
 
 
         public FormDetainLicense()
         {
             InitializeComponent();
         }
-
-
-
-
-
-
 
         private void btnCanel_Click(object sender, EventArgs e)
         {
@@ -71,7 +32,7 @@ namespace DVLD.Serveces
 
         private void linkLabelShoLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var formShow = new FormShowPersonLicensesHistory(GetPersonIDForLicenseID());
+            var formShow = new FormShowPersonLicensesHistory(this._LicenseInfo.DriverInfo.PersonID);
             formShow.ShowDialog();
         }
 
@@ -113,7 +74,7 @@ namespace DVLD.Serveces
 
 
             // check if exist and get license info
-            if ((this._clsLicenseInfo = clsLicenses.FindLicense(this._licenseID)) != null)
+            if ((this._LicenseInfo = clsLicense.FindLicense(this._licenseID)) != null)
             {
                 this.userControlDrivingLicenseInfo1.SetLicenseID(this._licenseID);
                 this.linkLabelShoLicensesHistory.Enabled = true;
@@ -157,20 +118,21 @@ namespace DVLD.Serveces
                 return;
             }
 
-            var detain = new clsDetainLicense();
-            detain.LicenseID = this._licenseID;
-            detain.CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            detain.DetainDate = DateTime.Now;
-            detain.FineFees = FineFees;
+            //var detain = new clsDetainLicense();
+            //detain.LicenseID = this._licenseID;
+            //detain.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+            //detain.DetainDate = DateTime.Now;
+            //detain.FineFees = FineFees;
 
-            if (detain.Save())
+            int DetainID = this._LicenseInfo.Detain(FineFees, clsGlobal.CurrentUser.UserID);
+            if (DetainID != -1)
             {
                 MessageBox.Show("The license has been successfully detained.", "Detention Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
 
                 this.userControlDrivingLicenseInfo1.SetLicenseID(this._licenseID);
-                this.userControlDetainInfo1.SetDetainID(detain.DetainID);
+                this.userControlDetainInfo1.SetDetainID(DetainID);
                 this.btnDetain.Enabled = false;
                 this.btnCanel.Enabled = false;
                 this.btnClose.Enabled = true;
@@ -190,9 +152,7 @@ namespace DVLD.Serveces
 
         private void DefualtValue()
         {
-            this._clsLicenseInfo = null;
-            this._personID = -1;
-            //this._userID = -1;
+            this._LicenseInfo = null;
 
             this.btnDetain.Enabled = false;
             this.linkLabelShoLicensesHistory.Enabled = false;

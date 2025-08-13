@@ -25,7 +25,7 @@ namespace DVLD
             InitializeComponent();
         }
 
-        clsUsers clsUser = new clsUsers();
+        clsUser clsUser = new clsUser();
 
         bool IsUserActive = false;
 
@@ -47,7 +47,7 @@ namespace DVLD
 
         private bool _CheckUsernameAndPassword()
         {
-            clsUser = clsUsers.FindByUsernameAndPassword(txtUserName.Text.Trim(),txtPassword.Text.Trim());
+            clsUser = clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(),txtPassword.Text.Trim());
             if (clsUser != null)
             {
                 IsUserActive = clsUser.IsActive;

@@ -9,31 +9,56 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class clsInternationalLicenses
+    public class clsInternationalLicense : clsApplication
     {
+        public enum enMode { AddNew = 0, Update = 1 };
+        public enMode Mode = enMode.AddNew;
+
         public int InternationalLicenseID { get; private set; }
-        public int ApplicationID { get;  set; }
         public int DriverID { get; set; }
         public int IssuedUsingLocalLicenseID { get; set; }
         public DateTime IssueDate { get; private set; }
         public DateTime ExpirationDate { get; set; }
         public bool IsActive { get; set; }
-        public int CreatedByUserID { get; set; }
+
+        public clsDriver DriverInfo;
 
 
-
-        public clsInternationalLicenses() { }   
-        private clsInternationalLicenses(int licenseID, int applicationID, int driverID, int issuedUsingLocalLicenseID,
-                                                    DateTime issueDate, DateTime expirationDate, bool isActive, int createdByUserID)
+        public clsInternationalLicense() 
         {
+            this.ApplicationTypeID = (int)clsApplication.enApplicationType.NewInternationalLicense;
+            this.InternationalLicenseID = -1;
+            this.DriverID = -1;
+            this.IssuedUsingLocalLicenseID = -1;
+            this.IssueDate = DateTime.Now;
+            this.ExpirationDate = DateTime.Now;
+            this.IsActive = true;
+
+            Mode = enMode.AddNew;
+        }   
+        private clsInternationalLicense(int licenseID, int ApplicationID, int driverID, int issuedUsingLocalLicenseID,
+                                                    DateTime issueDate, DateTime expirationDate, bool isActive,
+                                        int ApplicantPersonID, DateTime ApplicationDate, enApplicationStatus ApplicationStatus, 
+                                        DateTime LastStatusDate, Decimal PaidFees, int CreatedByUserID)
+        {
+            // base constructor
+            base.ApplicationID = ApplicationID;
+            base.ApplicantPersonID = ApplicantPersonID;
+            base.ApplicationDate = ApplicationDate;
+            base.ApplicationTypeID = (int)clsApplication.enApplicationType.NewInternationalLicense;
+            base.ApplicationStatus = ApplicationStatus;
+            base.LastStatusDate = LastStatusDate;
+            base.PaidFees = PaidFees;
+            base.CreatedByUserID = CreatedByUserID;
+
             InternationalLicenseID = licenseID;
-            ApplicationID = applicationID;
             DriverID = driverID;
             IssuedUsingLocalLicenseID = issuedUsingLocalLicenseID;
             IssueDate = issueDate;
             ExpirationDate = expirationDate;
             IsActive = isActive;
-            CreatedByUserID = createdByUserID;
+
+            this.DriverInfo = clsDriver.FindDriver(this.DriverID);
         }
 
         private bool _AddNewLicense()
@@ -45,7 +70,7 @@ namespace BusinessLayer
 
         }
 
-        public static clsInternationalLicenses FindLicenseByID(int licenseID)
+        public static clsInternationalLicense FindLicenseByID(int licenseID)
         {
             int applicationID = 0;
             int driverID = 0;
@@ -61,8 +86,14 @@ namespace BusinessLayer
 
             if (isFound)
             {
-                return new clsInternationalLicenses(licenseID, applicationID, driverID, issuedUsingLocalLicenseID,
-                                                                issueDate, expirationDate, isActive, createdByUserID);
+                // find the base object of clsApplication
+                clsApplication Application = clsApplication.FindApplication(applicationID);
+
+
+                return new clsInternationalLicense(licenseID, applicationID, driverID, issuedUsingLocalLicenseID,
+                                                                issueDate, expirationDate, isActive,Application.ApplicantPersonID,
+                                                                Application.ApplicationDate, Application.ApplicationStatus, Application.LastStatusDate,
+                                                                Application.PaidFees,Application.CreatedByUserID);
             }
             else
             {
@@ -100,7 +131,33 @@ namespace BusinessLayer
 
         public bool Save()
         {
-            return this._AddNewLicense();
+            //B first we call the save method in the base class
+
+            base.Mode = (clsApplication.enMode)Mode;
+            if (!base.Save())
+                return false;
+
+            switch (Mode)
+            {
+                case enMode.AddNew:
+                    if (_AddNewLicense())
+                    {
+
+                        Mode = enMode.Update;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                //case enMode.Update:
+
+                    //return _UpdateInternationalLicense();
+
+            }
+
+            return false;
         }
 
     }
@@ -109,7 +166,7 @@ namespace BusinessLayer
 
 
     
-    /// FORM USER CONTROL
+    /// FOR USER CONTROL
  public class clsShowInternationalLicenseBusinessLayer
         {
             public int InternationalLicenseID { get; private set; }

@@ -10,8 +10,8 @@ namespace DVLD
 {
     internal static class clsGlobal
     {
-        private static clsUsers _CurrentUser;
-        public static clsUsers CurrentUser
+        private static clsUser _CurrentUser;
+        public static clsUser CurrentUser
         {
             get => _CurrentUser;
             set

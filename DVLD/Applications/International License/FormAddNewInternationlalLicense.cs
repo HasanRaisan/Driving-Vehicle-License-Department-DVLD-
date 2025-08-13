@@ -6,30 +6,10 @@ namespace DVLD.International_Applications
 {
     public partial class FormAddNewInternationlalLicense : Form
     {
-        private int _LicenseID = -1;
+        private int _LocalLicenseID = -1;
+        private clsLicense _LocalLicenseInfo = null;
 
 
-        private int _personID = -1;
-        private int GetPersonIDForLicenseID()
-        {
-            if (_personID == -1) 
-            {
-                _personID = clsLicenses.GetPersonIDByLicenseID(this._LicenseID);
-            }
-            return _personID; 
-        }
-
-
-
-        private clsLicenses _clsLicense = null;
-        private clsLicenses LicenseInfo()
-        {
-            if(this._clsLicense == null)
-            this._clsLicense = clsLicenses.FindLicense(this._LicenseID);
-
-            return this._clsLicense;
-            
-        }
 
         public FormAddNewInternationlalLicense()
         {
@@ -42,27 +22,28 @@ namespace DVLD.International_Applications
 
             if (!string.IsNullOrEmpty(txtLicenseID.Text))
             {
-                 this._LicenseID = Convert.ToInt32(txtLicenseID.Text);
+                 this._LocalLicenseID = Convert.ToInt32(txtLicenseID.Text);
             } else return;
 
 
 
             int InternationalLicenseID = int.MinValue;
-            if(clsInternationalLicenses.IsLocaLicenseLicenseUsedByID(this._LicenseID, ref InternationalLicenseID))
+
+            if(clsInternationalLicense.IsLocaLicenseLicenseUsedByID(this._LocalLicenseID, ref InternationalLicenseID))
             {
                 MessageBox.Show($"This person already has an active international license. With ID = [{InternationalLicenseID}]", "Not allwoed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                this.userControlDrivingLicenseInfo1.SetLicenseID(this._LicenseID);
+                this._LocalLicenseInfo = clsLicense.FindLicense(this._LocalLicenseID);
+                this.userControlDrivingLicenseInfo1.SetLicenseID(this._LocalLicenseID);
                 this.userControlShowInternationalLincenseApplicationDetails1.LoadDefaultValue();
                 this.linkLabelShoLicensesHistory.Enabled = true;
-                btnIssue.Enabled = false;
+                this.btnIssue.Enabled = false;
                 return;
             }
             
-            if (clsLicenses.IsLicenseExist(this._LicenseID))
+            if ((this._LocalLicenseInfo = clsLicense.FindLicense(this._LocalLicenseID)) != null)
             {
-                this.userControlDrivingLicenseInfo1.SetLicenseID(this._LicenseID);
-                this.userControlShowInternationalLincenseApplicationDetails1.SetLocalLicenseIDAndUsername(this._LicenseID, clsGlobal.CurrentUser.UserName);
+                this.userControlDrivingLicenseInfo1.SetLicenseID(this._LocalLicenseID);
+                this.userControlShowInternationalLincenseApplicationDetails1.SetLocalLicenseIDAndUsername(this._LocalLicenseID, clsGlobal.CurrentUser.UserName);
                 this.linkLabelShoLicensesHistory.Enabled = true;
        
             }
@@ -77,7 +58,7 @@ namespace DVLD.International_Applications
             }
 
             // check activation 
-            if(LicenseInfo()._IsActive)
+            if(this._LocalLicenseInfo.IsActive)
             {
                 btnIssue.Enabled = true;
             }
@@ -99,7 +80,7 @@ namespace DVLD.International_Applications
 
         private void linkLabelShoLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {   
-            var formShow = new FormShowPersonLicensesHistory(GetPersonIDForLicenseID());
+            var formShow = new FormShowPersonLicensesHistory(this._LocalLicenseInfo.DriverInfo.PersonID);
             formShow.ShowDialog();
         }
 
@@ -117,23 +98,6 @@ namespace DVLD.International_Applications
 
         }
 
-        private clsApplications SaveApplication()
-        {
-            var clsAppType =  clsApplicationTypes.FindApplication(6);
-            var clsApplication = new clsApplications();
-            clsApplication._ApplicantPersonID = GetPersonIDForLicenseID();
-            clsApplication._PaidFees = clsAppType.ApplicationFees;
-            clsApplication._ApplicationTypeID = clsAppType.ApplicationID;
-            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            clsApplication._LicenseClassID = LicenseInfo()._LicenseClassID;
-
-            if (clsApplication.Save())
-            {
-               
-              return clsApplication;
-            } else return null;
-
-        }
 
         private void btnIssue_Click(object sender, EventArgs e)
         {
@@ -141,20 +105,23 @@ namespace DVLD.International_Applications
 
             if (MessageBox.Show("Are you sure you want to issue the license?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-               var clsApplication = SaveApplication();
-               if(clsApplication == null) {   MessageBox.Show("Save Failed","Failed",MessageBoxButtons.OK,MessageBoxIcon.Error); return; }
-               
-               var clsIntLicense = new clsInternationalLicenses();
-               
-                clsIntLicense.ApplicationID = clsApplication._ApplicationID;
-                clsIntLicense.DriverID = clsDrivers.FindDriverByPersonID(clsApplication._ApplicantPersonID)._DriverID;
-                clsIntLicense.ExpirationDate =LicenseInfo()._ExpirationDate;
-                clsIntLicense.IssuedUsingLocalLicenseID = this._LicenseID;
-                clsIntLicense.IsActive = true;
+
+               var clsIntLicense = new clsInternationalLicense();
+                // base class
+                clsIntLicense.ApplicantPersonID = this._LocalLicenseInfo.DriverInfo.PersonID;
+                clsIntLicense.ApplicationStatus = clsApplication.enApplicationStatus.Completed; ;
+                clsIntLicense.PaidFees = clsApplicationType.FindApplication((int)clsApplication.enApplicationType.NewInternationalLicense).ApplicationFees;
                 clsIntLicense.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+                clsIntLicense.LicenseClassID = this._LocalLicenseInfo.LicenseClassID;
+
+                // sub class
+                clsIntLicense.DriverID = _LocalLicenseInfo.DriverID;
+                clsIntLicense.ExpirationDate = this._LocalLicenseInfo.ExpirationDate;
+                clsIntLicense.IssuedUsingLocalLicenseID = this._LocalLicenseID;
+                clsIntLicense.IsActive = true;
 
                 if ( clsIntLicense.Save())
-               {
+                {
                     MessageBox.Show($"Internationl license has issued successfully with ID [{clsIntLicense.InternationalLicenseID}]", "License Issued", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     linkLabelShowLicnesInfo.Enabled = true;
@@ -164,14 +131,11 @@ namespace DVLD.International_Applications
 
                     linkLabelShowLicnesInfo.Tag = clsIntLicense.InternationalLicenseID;
 
-                    clsApplications.UpdateApplicationStatus(clsApplication._ApplicationID, 3);
-                    // application status turn to complete
-               }
-               else
-               {
-                    // delete the application 
-                    clsApplication.DeleteApplication();
-               }
+                }
+                else
+                {
+                    MessageBox.Show("Faild to Issue International License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }              
         }
 
@@ -183,8 +147,7 @@ namespace DVLD.International_Applications
 
         private void txtLicenseID_TextChanged(object sender, EventArgs e)
         {
-            this._clsLicense = null;
-            this._personID = -1;
+            this._LocalLicenseInfo = null;
             this.linkLabelShowLicnesInfo.Enabled = false;
             this.linkLabelShoLicensesHistory.Enabled = false;
         }

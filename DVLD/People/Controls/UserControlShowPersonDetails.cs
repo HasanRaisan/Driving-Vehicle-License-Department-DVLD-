@@ -88,7 +88,7 @@ namespace DVLD
                 return;
             }
 
-            lblPersonIDValue.Text = Person._PersonID.ToString();
+            lblPersonIDValue.Text = Person.PersonID.ToString();
             lblName.Text = Person.FullName();
             lblNationlNo.Text = Person._NationalNo;
             lblAddress.Text = Person._Address;
@@ -106,7 +106,7 @@ namespace DVLD
             lblGender.Text = Person._Gendor == 0 ? "Female" : "Male";
 
             if (Person._Email != null) lblEmail.Text = Person._Email;
-            lblCountry.Text = clsCountryBusinessLayer.FindCountry(Person._NationalityCountryID).CountryName.ToString();
+            lblCountry.Text = clsCountry.Find(Person._NationalityCountryID).CountryName.ToString();
         }
        
 
@@ -117,7 +117,7 @@ namespace DVLD
 
         private void linlEditPerson_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int PersonID = GetPerson()._PersonID;
+            int PersonID = GetPerson().PersonID;
             AddEditPerson EidtPerson = new AddEditPerson(PersonID);
             
             EidtPerson.ShowDialog();

@@ -17,7 +17,7 @@ namespace DVLD.Serveces
 
         DataTable GetDataTabel()
         {
-            return clsDetainLicense.GetAllDetains();
+            return clsDetainLicense.GetAllDetainedLicense();
         }
 
         void LoadDataToDataGridView()
@@ -132,7 +132,7 @@ namespace DVLD.Serveces
         
         private void showPersonDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int PersonID = clsLicenses.GetPersonIDByLicenseID((int)dgvDetains.CurrentRow.Cells["L.ID"].Value);
+            int PersonID = clsLicense.GetPersonIDByLicenseID((int)dgvDetains.CurrentRow.Cells["L.ID"].Value);
             var ShowPersonDetails = new FormShowPersonDetails(PersonID);
             ShowPersonDetails.ShowDialog();
             LoadDataToDataGridView();
@@ -146,7 +146,7 @@ namespace DVLD.Serveces
 
         private void lToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int PersonID = clsLicenses.GetPersonIDByLicenseID((int)dgvDetains.CurrentRow.Cells["L.ID"].Value);
+            int PersonID = clsLicense.GetPersonIDByLicenseID((int)dgvDetains.CurrentRow.Cells["L.ID"].Value);
             var ShowLlicenseHistory = new FormShowPersonLicensesHistory(PersonID);
             ShowLlicenseHistory.ShowDialog();
         }

@@ -14,11 +14,6 @@ namespace DataAccessLayer
     public class clsTestTypeDataAccess
     {
 
-        //   TestTypes
-        //   TestTypeID
-        //   TestTypeTitle
-        //   TestTypeDescription
-        //   TestTypeFees      #deciaml
 
         static public DataTable GetAllTestType()
         {
@@ -112,6 +107,13 @@ namespace DataAccessLayer
                 clsGlobalDataAccess.LogError(ex);
             }
             return (rowAffected > 0);
+        }
+
+        [Obsolete("⚠️ Warning: This method is not yet implemented. It will only return -1.", false)]
+        static public int AddNewTestType(string Title, string Description, decimal Fees)
+        {
+            throw new NotImplementedException("⚠️ Warning: This method is not yet implemented. It will only return -1.");
+            // not implemented  yet
         }
     }
 }

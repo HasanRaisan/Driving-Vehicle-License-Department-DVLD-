@@ -26,10 +26,10 @@ namespace DVLD.Mange_Applications
 
         private clsLocalDrivingLicensesApplication _LocalDrivingLicenseApplication;
         private int _LocalDrivingLicenseApplicationID = -1;
-        private clsTestAppointmets _clsTestAppointment;
+        private clsTestAppointment _clsTestAppointment;
         private int _TestAppointmentID = -1;
 
-        clsTestTypes clsTestType;
+        clsTestType clsTestType;
 
         public FormAddUpdateApointment( int LDLAppID, int TestTypeID , int AppointmentID = -1)
         {
@@ -97,7 +97,7 @@ namespace DVLD.Mange_Applications
 
             if (_CreationMode == enCreationMode.RetakeTestSchedule)
             {
-                lblRetakeAppFees.Text = clsApplicationTypes.FindApplication(7).ApplicationFees.ToString();
+                lblRetakeAppFees.Text = clsApplicationType.FindApplication(7).ApplicationFees.ToString();
                 groupBoxRetakeTestInfo.Enabled = true;
                 lblHeadLine.Text = "Schedule Retake Test";
                 lblRetakeTestAppID.Text = "0";
@@ -118,11 +118,11 @@ namespace DVLD.Mange_Applications
 
             if (_Mode == enMode.AddNew)
             {
-                lblFees.Text = clsTestTypes.FindTestType(_TestTypeID).TestTypeFees.ToString();
+                lblFees.Text = clsTestType.FindTestType((clsTestType.enTestType)_TestTypeID).TestTypeFees.ToString();
                 dateTimePickerDate.MinDate = DateTime.Now;
                 lblRetakeTestAppID.Text = "N/A";
                 this.Text = "Add Appointment";
-                _clsTestAppointment = new clsTestAppointmets();
+                _clsTestAppointment = new clsTestAppointment();
             }
 
             else
@@ -212,7 +212,7 @@ namespace DVLD.Mange_Applications
 
         private bool _LoadTestAppointmentData()
         {
-            _clsTestAppointment = clsTestAppointmets.FindTestAppointment(_TestAppointmentID);
+            _clsTestAppointment = clsTestAppointment.FindTestAppointment(_TestAppointmentID);
 
             if (_clsTestAppointment == null)
             {
@@ -222,19 +222,19 @@ namespace DVLD.Mange_Applications
                 return false;
             }
 
-            lblFees.Text = _clsTestAppointment._PaidFees.ToString();
+            lblFees.Text = _clsTestAppointment.PaidFees.ToString();
             this.Text = "Update Appointment";
-            this._TestTypeID = _clsTestAppointment._TestTypeID;
+            this._TestTypeID = (int) _clsTestAppointment.TestTypeID;
             this.TestTypeInfo();
 
 
             //we compare the current date with the appointment date to set the min date.
-            if (DateTime.Compare(DateTime.Now, _clsTestAppointment._AppointmentDate) < 0)
+            if (DateTime.Compare(DateTime.Now, _clsTestAppointment.AppointmentDate) < 0)
                 dateTimePickerDate.MinDate = DateTime.Now;
             else
-                dateTimePickerDate.MinDate = _clsTestAppointment._AppointmentDate;
+                dateTimePickerDate.MinDate = _clsTestAppointment.AppointmentDate;
 
-            dateTimePickerDate.Value = _clsTestAppointment._AppointmentDate;
+            dateTimePickerDate.Value = _clsTestAppointment.AppointmentDate;
 
             if (_clsTestAppointment.RetakeTestApplicationID == -1)
             {
@@ -243,7 +243,7 @@ namespace DVLD.Mange_Applications
             }
             else
             {
-                lblRetakeAppFees.Text = _clsTestAppointment.RetakeTestAppInfo._PaidFees.ToString();
+                lblRetakeAppFees.Text = _clsTestAppointment.RetakeTestAppInfo.PaidFees.ToString();
                 groupBoxRetakeTestInfo.Enabled = true;
                 lblHeadLine.Text = "Schedule Retake Test";
                 lblRetakeTestAppID.Text = _clsTestAppointment.RetakeTestApplicationID.ToString();
@@ -259,15 +259,15 @@ namespace DVLD.Mange_Applications
             if (_Mode == enMode.AddNew && _CreationMode == enCreationMode.RetakeTestSchedule)
             {
 
-                var Application = new clsApplications();
+                var Application = new clsApplication();
 
-                Application._ApplicantPersonID = _LocalDrivingLicenseApplication.PersonInfo._PersonID;
-                Application._ApplicationDate = DateTime.Now;
-                Application._ApplicationTypeID = 7;
-                Application._LastStatusDate = DateTime.Now;
-                Application._PaidFees = clsApplicationTypes.FindApplication(7).ApplicationFees;
-                Application._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-                Application._LicenseClassID = _LocalDrivingLicenseApplication.LicenseClassID;
+                Application.ApplicantPersonID = _LocalDrivingLicenseApplication.PersonInfo.PersonID;
+                Application.ApplicationDate = DateTime.Now;
+                Application.ApplicationTypeID = (int)clsApplication.enApplicationType.RetakeTest;
+                Application.LastStatusDate = DateTime.Now;
+                Application.PaidFees = clsApplicationType.FindApplication(7).ApplicationFees;
+                Application.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+                Application.LicenseClassID = _LocalDrivingLicenseApplication.LicenseClassID;
 
                 if (!Application.Save())
                 {
@@ -276,8 +276,8 @@ namespace DVLD.Mange_Applications
                     return false;
                 }
 
-                _clsTestAppointment.RetakeTestApplicationID = Application._ApplicationID;
-                this.lblRetakeTestAppID.Text = Application._ApplicationID.ToString();
+                _clsTestAppointment.RetakeTestApplicationID = Application.ApplicationID;
+                this.lblRetakeTestAppID.Text = Application.ApplicationID.ToString();
             }
             return true;
         }
@@ -304,11 +304,11 @@ namespace DVLD.Mange_Applications
             if (!_SaveRetakeApplication())
                 return;
 
-            _clsTestAppointment._TestTypeID = _TestTypeID;
-            _clsTestAppointment._LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID;
-            _clsTestAppointment._AppointmentDate = dateTimePickerDate.Value;
-            _clsTestAppointment._PaidFees = Convert.ToDecimal(lblFees.Text);
-            _clsTestAppointment._CreatedByUserID = clsGlobal.CurrentUser.UserID;
+            _clsTestAppointment.TestTypeID = (clsTestType.enTestType) _TestTypeID;
+            _clsTestAppointment.LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID;
+            _clsTestAppointment.AppointmentDate = dateTimePickerDate.Value;
+            _clsTestAppointment.PaidFees = Convert.ToDecimal(lblFees.Text);
+            _clsTestAppointment.CreatedByUserID = clsGlobal.CurrentUser.UserID;
 
             if (_clsTestAppointment.Save())
             {

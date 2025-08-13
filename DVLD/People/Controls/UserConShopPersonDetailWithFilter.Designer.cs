@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAddPerson = new System.Windows.Forms.Button();
             this.lblFilterBy = new System.Windows.Forms.Label();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.cbFindBy = new System.Windows.Forms.ComboBox();
             this.txtFindBy = new System.Windows.Forms.TextBox();
+            this.btnAddPerson = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.userControlShowPersonDetails1 = new DVLD.UserControlShowPersonDetails();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -52,15 +52,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
-            // btnAddPerson
-            // 
-            this.btnAddPerson.Location = new System.Drawing.Point(1048, 49);
-            this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(85, 42);
-            this.btnAddPerson.TabIndex = 6;
-            this.btnAddPerson.UseVisualStyleBackColor = true;
-            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
-            // 
             // lblFilterBy
             // 
             this.lblFilterBy.AutoSize = true;
@@ -70,15 +61,6 @@
             this.lblFilterBy.Size = new System.Drawing.Size(92, 25);
             this.lblFilterBy.TabIndex = 2;
             this.lblFilterBy.Text = "Find By:";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(949, 49);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(85, 42);
-            this.btnSearch.TabIndex = 5;
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // cbFindBy
             // 
@@ -97,6 +79,28 @@
             this.txtFindBy.Name = "txtFindBy";
             this.txtFindBy.Size = new System.Drawing.Size(261, 26);
             this.txtFindBy.TabIndex = 4;
+            // 
+            // btnAddPerson
+            // 
+            this.btnAddPerson.BackgroundImage = global::DVLD.Properties.Resources.add1;
+            this.btnAddPerson.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAddPerson.Location = new System.Drawing.Point(1057, 36);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(85, 69);
+            this.btnAddPerson.TabIndex = 6;
+            this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSearch.Image = global::DVLD.Properties.Resources.search__2_;
+            this.btnSearch.Location = new System.Drawing.Point(947, 36);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(85, 69);
+            this.btnSearch.TabIndex = 5;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // userControlShowPersonDetails1
             // 

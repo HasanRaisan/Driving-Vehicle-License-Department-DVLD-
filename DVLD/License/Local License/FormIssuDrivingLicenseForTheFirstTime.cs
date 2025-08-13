@@ -15,7 +15,7 @@ namespace DVLD.Mange_Applications
     {
         int LDLAppID = -1;
 
-        clsLocalDrivingLicensesApplication LocalDrvingApplication;
+      private  clsLocalDrivingLicensesApplication _LocalDrivingLicenseApplication;
 
 
         public FormIssuDrivingLicenseForTheFirstTime(int LDLAppID)
@@ -33,87 +33,42 @@ namespace DVLD.Mange_Applications
             this.txtNotes.Focus();         
             this.btnClose.Visible = false;
 
-            if (!UpdateApplicationStatus())
+
+            this._LocalDrivingLicenseApplication = clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID(this.LDLAppID);
+
+            if (_LocalDrivingLicenseApplication == null)
             {
-                MessageBox.Show("Cannor issue the driver's license. The Application must pass the whole tests", "License Issue Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                MessageBox.Show("No Applicaiton with ID=" + _LocalDrivingLicenseApplication.ToString(), "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
                 return;
             }
 
-            // need to handle if person have a license in this class
-        }
-
-
-
-        private int SaveDriver()
-        {
-            // check if this person is already driver.
-
-            LocalDrvingApplication = clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID(this.LDLAppID);     
-            var CheckDriver = clsDrivers.FindDriverByPersonID(LocalDrvingApplication.PersonInfo._PersonID);
-
-            if (CheckDriver != null) return CheckDriver._DriverID;
-
-            clsDrivers clsDriver = new clsDrivers();
-            clsDriver._CreatedByUserID  = clsGlobal.CurrentUser.UserID;
-            clsDriver._PersonID = LocalDrvingApplication.PersonInfo._PersonID;
-
-            if(clsDriver.Save()) {return clsDriver._DriverID; } else return -1;
-
-                
-        }
-
-        private bool UpdateApplicationStatus()
-        {
-
-            // Find the local Application view details
-            var clsLDLAppView = clsLocalDrivingLicenseViewsBusinessLayer.FindLDLAppView(this.LDLAppID);
-            if (clsLDLAppView != null)
+            if (!_LocalDrivingLicenseApplication.PassedAllTests())
             {
-                if (clsLDLAppView._PassedTestCount == 3)
-                {          
-                    // There are three tests, so if any application completes these tests, its status must be changed to "complete."    
-                    clsApplications.UpdateApplicationStatus(clsLDLAppView.BaseApplicationID, 3);
-                    return true;
-                }
-                else
-                    return false;
-            }
-            else
-            {
-                return false;
+                MessageBox.Show("Cannot issue the driver's license. The Application must pass the whole tests", "License Issue Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
             }
 
+            int LicenseID = _LocalDrivingLicenseApplication.GetActiveLicenseID();
+            if (LicenseID != -1)
+            {
+
+                MessageBox.Show("Person already has License before with License ID=" + LicenseID.ToString(), "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+
+            }
+
+            this.UserConShowBasicApplicationInfo1.SetLDLAppID(LDLAppID);
+
         }
+
 
         private void btnIssue_Click(object sender, EventArgs e)
         {
-            clsLicenses License = new clsLicenses();
-
-            int DriverID = this.SaveDriver();
-
-            if (DriverID == -1)
-            {
-                MessageBox.Show("Failed to issue the driver's license. Driver Wasn't saved", "License Issue Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (!UpdateApplicationStatus())
-            {
-                MessageBox.Show("Failed to issue the driver's license. The Application must pass the whole tests", "License Issue Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            License._LicenseClassID = LocalDrvingApplication.LicenseClassInfo.LicenseClassID;
-            License._DriverID = DriverID;
-            License._ApplicationID = LocalDrvingApplication.BaseApplicationID;
-            License._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            License._PaidFees = LocalDrvingApplication.LicenseClassInfo.ClassFees; 
-            License._IsActive = true;
-            License.IssueReason = clsLicenses.enIssueReason.FirstTime;
-            License._Notes = txtNotes.Text;
-            License._ExpirationDate = DateTime.Now.AddYears(LocalDrvingApplication.LicenseClassInfo.DefaultValidityLength); 
-
-            if (License.Save())
+            if(_LocalDrivingLicenseApplication.IssueLicenseForTheFirtTime(txtNotes.Text, clsGlobal.CurrentUser.UserID) != -1)
             {
                 
                 MessageBox.Show("The driver's license has been successfully issued.", "License Issued", MessageBoxButtons.OK, MessageBoxIcon.Information);

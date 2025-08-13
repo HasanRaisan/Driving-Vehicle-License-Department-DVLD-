@@ -26,7 +26,7 @@ namespace DVLD
 
         private void LoadData()
         {
-            dgvTestType.DataSource = clsTestTypes.GetAllTestType();
+            dgvTestType.DataSource = clsTestType.GetAllTestType();
             lblRecordsNum.Text = "# Records " + dgvTestType.RowCount;
         }
 

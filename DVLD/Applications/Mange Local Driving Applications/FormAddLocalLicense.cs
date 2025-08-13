@@ -90,48 +90,22 @@ namespace DVLD.Driving_Licenses_Services
         }
 
 
-
-
-        private int SaveApplication()
-        {
-            clsApplications clsApplication = new BusinessLayer.clsApplications();
-
-            clsApplication._ApplicantPersonID = this.PersonID;
-            clsApplication._CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            clsApplication._ApplicationTypeID = 1; // local driving license ID in apps types
-            clsApplication._PaidFees = (decimal) Convert.ToSingle(lblFees.Text); // local driving license fees (from apps types table)
-            clsApplication._LicenseClassID = cbLicenseClass.SelectedIndex + 1;
-            clsApplication.Save();
-            
-            return clsApplication._ApplicationID;
-        }
-
-
-
         private void btnSave_Click(object sender, EventArgs e)
         {
 
             this.LicenseClassID = clsLicenseClasses.FindLicenseClass(cbLicenseClass.Text).LicenseClassID;
-
-
-
             if (!_CheckMinimumAllowedAge())
             {
                 MessageBox.Show("Person's age not allowed for this license.", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
-
-            if (clsLicenses.isLicenseExistByPersonIDAndLicenseClassID(this.PersonID, this.LicenseClassID))
+            if (clsLicense.isLicenseExistByPersonIDAndLicenseClassID(this.PersonID, this.LicenseClassID))
             {
                 MessageBox.Show("Person already have a license with the same applied driving class, Choose diffrent driving class", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return;
             }
-
-
-            int LDLAppID = clsApplications.GetActiveApplicationIDForLicenseClass(this.PersonID, 1,this.LicenseClassID);
+            int LDLAppID = clsApplication.GetActiveApplicationIDForLicenseClass(this.PersonID, clsApplication.enApplicationType.NewDrivingLicense ,this.LicenseClassID);
             if (LDLAppID != -1) 
             {
                 MessageBox.Show($"This Person has a new application in this class with ID [{LDLAppID}]", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -142,8 +116,13 @@ namespace DVLD.Driving_Licenses_Services
 
 
             clsLocalDrivingLicensesApplication clsLDLA = new clsLocalDrivingLicensesApplication();
-            int BaseApplicationID =  SaveApplication();
-            clsLDLA.BaseApplicationID = BaseApplicationID;
+            clsLDLA.ApplicantPersonID = this.PersonID;
+            clsLDLA.ApplicationDate = DateTime.Now;
+            clsLDLA.ApplicationTypeID = (int)clsApplication.enApplicationType.NewDrivingLicense;
+            clsLDLA.ApplicationStatus = clsApplication.enApplicationStatus.New;
+            clsLDLA.LastStatusDate = DateTime.Now;
+            clsLDLA.PaidFees = (decimal)Convert.ToSingle(lblFees.Text);
+            clsLDLA.CreatedByUserID = clsGlobal.CurrentUser.UserID;
             clsLDLA.LicenseClassID = this.LicenseClassID;
 
             if (clsLDLA.Save()) 
@@ -153,11 +132,10 @@ namespace DVLD.Driving_Licenses_Services
                 this.btnClose.BringToFront();
                 this.btnCancel.Visible = false;
                 this.cbLicenseClass.Enabled = false;
-            }
+            } 
             else
             {
-                clsApplications.DeleteApplication(BaseApplicationID);
-                MessageBox.Show("The application could not be saved. Please try again.", "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to save the application.", "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

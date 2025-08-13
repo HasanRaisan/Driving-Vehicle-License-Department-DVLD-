@@ -8,125 +8,20 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-
-    /*
-    
     public class clsDetainLicense
-    {
-        public int LicenseID { get; set; }
-        public int DetainID { get; set; }
-        public DateTime DetainDate { get; set; }
-        public decimal FineFees { get; set; }
-        public int CreatedByUserID { get; set; }
-        public bool IsReleased { get; private set; }
-        public DateTime? _ReleaseDate { get; private set; }
-        public int? _ReleasedByUserID { get; private set; }
-        public int? _ReleaseApplicationID { get; private set; }
-
-
-
-        private bool _isRetrievedFromDatabase;
-
-        private enMode _Status { get; set; }
-
+    {        
+        private enMode _Mode { get; set; }
         private enum enMode { AddNew = 0, Update = 1 };
 
 
-        public int? ReleasedByUserID
-        {
-            get
-            {
-                return _ReleasedByUserID;
-            }
-            set
-            {
-                if (_isRetrievedFromDatabase)
-                    _ReleasedByUserID = value;
-                else
-                    throw new InvalidOperationException("Cannot modify ReleasedByUserID for a new object.");
-            }
-        }
-
-
-        public clsDetainLicense()
-        {
-            this._Status = enMode.AddNew;
-        }
-
-        private clsDetainLicense(int LicenseID, DateTime DetainDate, decimal FineFees, int CreatedByUserID,
-                                              bool IsReleased, DateTime? ReleaseDate, int? ReleasedByUserID, int? ReleaseApplicationID)
-        {
-            this.LicenseID = LicenseID;
-            this.DetainDate = DetainDate;
-            this.FineFees = FineFees;
-            this.CreatedByUserID = CreatedByUserID;
-            this.IsReleased = IsReleased;
-            this._ReleaseDate = ReleaseDate;
-            this._ReleasedByUserID = ReleasedByUserID;
-            this._ReleaseApplicationID = ReleaseApplicationID;
-            this._Status = enMode.Update;
-        }
-
-        private bool _DetainLicense()
-        {
-            this.DetainID = clsDetainLicenseDataAccess.DetaineLicense(this.LicenseID, this.DetainDate, this.FineFees, this.CreatedByUserID);
-
-            return (this.DetainID != -1);
-
-        }
-
-        private bool _ReleaseDetainedLicense()
-        {
-            return clsDetainLicenseDataAccess.ReleaseDetainedLicense(this.LicenseID, this._ReleaseDate.Value, this._ReleasedByUserID.Value, this._ReleaseApplicationID.Value);
-        }
-
-        public bool SetReleaseDetails(DateTime releaseDate, int releasedByUserID, int releaseApplicationID)
-        {
-            if (!_isRetrievedFromDatabase)
-                throw new InvalidOperationException("Cannot modify release details for a new object.");
-
-            this._ReleaseDate = releaseDate;
-            this._ReleasedByUserID = releasedByUserID;
-            this._ReleaseApplicationID = releaseApplicationID;
-
-            return true;
-        }
-
-        public bool Save()
-        {
-            switch (this._Status)
-            {
-                case enMode.AddNew:
-                    this._Status = enMode.Update;
-                    return _DetainLicense();
-
-                case enMode.Update:
-                 return _ReleaseDetainedLicense();
-
-                default:
-                    return false;
-            }
-        }
-
-  
-    }
-
-
-    */
-
-
-
-
-
-
-    public class clsDetainLicense
-    {
         public int LicenseID { get; set; }
         public int DetainID { get; private set; }
         public DateTime DetainDate { get; set; }
         public decimal FineFees { get; set; }
         public int CreatedByUserID { get; set; }
         public bool IsReleased { get; private set; }
+
+        public clsUser CreatedByUserInfo { get; set; }
 
 
 
@@ -135,26 +30,10 @@ namespace BusinessLayer
         private int? _ReleasedByUserID;
         private int? _ReleaseApplicationID;
 
-        private bool _isRetrievedFromDatabase;
-        private Status _Status { get; set; }
-        private enum Status { AddNew = 0, Update = 1 };
+        public clsUser ReleasedByUserInfo { get; set; }
 
 
-        public DateTime? ReleaseDate
-        {
-            get
-            {
-                return _ReleaseDate;
-            }
-            set
-            {
-                if (_isRetrievedFromDatabase)
-                    _ReleaseDate = value;
-                else
-                    throw new InvalidOperationException("Cannot modify ReleaseDate for a new object.");
-            }
-        }
-
+        //Cannot modify release details for a new object.
         public int? ReleasedByUserID
         {
             get
@@ -163,13 +42,12 @@ namespace BusinessLayer
             }
             set
             {
-                if (_isRetrievedFromDatabase)
+                if (this._Mode == enMode.Update)
                     _ReleasedByUserID = value;
                 else
                     throw new InvalidOperationException("Cannot modify ReleasedByUserID for a new object.");
             }
         }
-
         public int? ReleaseApplicationID
         {
             get
@@ -178,32 +56,25 @@ namespace BusinessLayer
             }
             set
             {
-                if (_isRetrievedFromDatabase)
+                if (this._Mode == enMode.Update)
                     _ReleaseApplicationID = value;
                 else
                     throw new InvalidOperationException("Cannot modify ReleaseApplicationID for a new object.");
             }
         }
 
-        //public bool SetReleaseDetails(DateTime releaseDate, int releasedByUserID, int releaseApplicationID)
-        //{
-        //    if (!_isRetrievedFromDatabase)
-        //        throw new InvalidOperationException("Cannot modify release details for a new object.");
-
-        //    this._ReleaseDate = releaseDate;
-        //    this._ReleasedByUserID = releasedByUserID;
-        //    this._ReleaseApplicationID = releaseApplicationID;
-
-        //    return true;
-        //}
-
-
 
 
         public clsDetainLicense()
         {
-            this._Status = Status.AddNew;
-            this._isRetrievedFromDatabase = false;
+            this.LicenseID = -1;
+            this.DetainID = -1;
+            this.DetainDate = DateTime.MinValue;
+            this.FineFees = 0;
+            this.CreatedByUserID = -1;
+            this.IsReleased = false;
+
+            this._Mode = enMode.AddNew;
         }
 
         private clsDetainLicense(int LicenseID, int DetainID, DateTime DetainDate, decimal FineFees, int CreatedByUserID,
@@ -218,8 +89,9 @@ namespace BusinessLayer
             this._ReleaseDate = ReleaseDate;
             this._ReleasedByUserID = ReleasedByUserID;
             this._ReleaseApplicationID = ReleaseApplicationID;
-            this._Status = Status.Update;
-            this._isRetrievedFromDatabase = true;
+            this.CreatedByUserInfo = clsUser.FindUser(CreatedByUserID);
+            this.ReleasedByUserInfo = clsUser.FindUser(ReleasedByUserID.HasValue ? ReleasedByUserID.Value : -1);
+            this._Mode = enMode.Update;
         }
 
         private bool _DetainLicense()
@@ -230,7 +102,8 @@ namespace BusinessLayer
 
         private bool _ReleaseDetainedLicense()
         {
-            if (_ReleaseDate == null || _ReleasedByUserID == null || _ReleaseApplicationID == null)
+            this._ReleaseDate = DateTime.Now;
+            if (_ReleasedByUserID == null || _ReleaseApplicationID == null)
                 throw new InvalidOperationException("Release details must be set before releasing the license.");
 
             return clsDetainLicenseDataAccess.ReleaseDetainedLicense(this.LicenseID, this._ReleaseDate.Value, this._ReleasedByUserID.Value, this._ReleaseApplicationID.Value);
@@ -239,13 +112,13 @@ namespace BusinessLayer
 
         public bool Save()
         {
-            switch (this._Status)
+            switch (this._Mode)
             {
-                case Status.AddNew:
-                    this._Status = Status.Update;
+                case enMode.AddNew:
+                    this._Mode = enMode.Update;
                     return _DetainLicense();
 
-                case Status.Update:
+                case enMode.Update:
                     return _ReleaseDetainedLicense();
 
                 default:
@@ -289,7 +162,7 @@ namespace BusinessLayer
             return clsDetainLicenseDataAccess.IsThisDetainReleaseByDetainID(DetainID);
         }
 
-        public static DataTable GetAllDetains()
+        public static DataTable GetAllDetainedLicense()
         {
           return  clsDetainLicenseDataAccess.GetAllDetains();
         }

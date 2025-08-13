@@ -22,7 +22,7 @@ namespace DVLD
 
         private DataTable GetDataTable()
         {
-            return clsUsers.GetUsers();
+            return clsUser.GetUsers();
         }
 
         private void LoadDataToDataGridView()
@@ -222,7 +222,7 @@ namespace DVLD
 
             if (MessageBox.Show("Are you sure you want to delete user [" + dgvUsers.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                if (clsUsers.DeleteUser((int)dgvUsers.CurrentRow.Cells[0].Value))
+                if (clsUser.DeleteUser((int)dgvUsers.CurrentRow.Cells[0].Value))
                 {
                     MessageBox.Show("User deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadDataToDataGridView();

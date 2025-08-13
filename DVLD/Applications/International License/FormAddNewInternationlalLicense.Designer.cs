@@ -58,10 +58,11 @@
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSearch.BackgroundImage = global::DVLD.Properties.Resources.eye;
-            this.btnSearch.Location = new System.Drawing.Point(678, 33);
+            this.btnSearch.BackgroundImage = global::DVLD.Properties.Resources.search__2_;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSearch.Location = new System.Drawing.Point(697, 25);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(68, 48);
+            this.btnSearch.Size = new System.Drawing.Size(85, 65);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);

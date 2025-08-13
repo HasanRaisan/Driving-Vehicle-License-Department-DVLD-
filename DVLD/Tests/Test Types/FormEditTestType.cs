@@ -15,7 +15,7 @@ namespace DVLD.Applications
     {
 
         int TestTypeID;
-        clsTestTypes clsTestType = new clsTestTypes();
+        clsTestType clsTestType = new clsTestType();
 
 
         public FormEditTestType(int TestTypeID)
@@ -27,11 +27,11 @@ namespace DVLD.Applications
 
         private void LoadData()
         {
-            clsTestType = clsTestTypes.FindTestType(this.TestTypeID);
+            clsTestType = clsTestType.FindTestType((clsTestType.enTestType)this.TestTypeID);
 
             if (clsTestType != null)
             {
-                lblIDValue.Text = clsTestType.TestTypesID.ToString();
+                lblIDValue.Text = clsTestType.ID.ToString();
                 txtTestFees.Text = clsTestType.TestTypeFees.ToString();
                 txtTestTital.Text = clsTestType.TestTypeTitle.ToString();
                 txtDescription.Text = clsTestType.TestTypeDescription.ToString();

@@ -288,7 +288,6 @@ namespace DataAccessLayer
             return isExist;
         }
 
-
         static public DataTable GetUsers()
         {
             DataTable dtUsers = new DataTable();
@@ -399,8 +398,5 @@ namespace DataAccessLayer
             }
             return (rowsAffected > 0);
         }
-
-
-
     }
 }

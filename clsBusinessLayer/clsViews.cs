@@ -7,7 +7,7 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-    public class clsLocalDrivingLicenseViewsBusinessLayer
+    public class clsLocalDrivingLicenseViews
     {
        public int _LocalDrivingLicenseApplicationID { get; set; }
        public string _ClassName { get; set; }
@@ -19,9 +19,9 @@ namespace BusinessLayer
        public int BaseApplicationID { get; set; }
 
 
-        public clsLocalDrivingLicenseViewsBusinessLayer () { }
+        public clsLocalDrivingLicenseViews () { }
 
-        clsLocalDrivingLicenseViewsBusinessLayer(int LocalDrivingLicenseApplicationID, string ClassName, string NationalNo,  string FullName,
+        clsLocalDrivingLicenseViews(int LocalDrivingLicenseApplicationID, string ClassName, string NationalNo,  string FullName,
                                               DateTime ApplicationDate, int PassedTestCount, string Status, int BaseApplicationID)
         {
             this._LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
@@ -36,7 +36,7 @@ namespace BusinessLayer
         }
         
 
-        static public  clsLocalDrivingLicenseViewsBusinessLayer FindLDLAppView(int LocalDrivingLicenseApplicationID)
+        static public  clsLocalDrivingLicenseViews FindLDLAppView(int LocalDrivingLicenseApplicationID)
         {
                string ClassName  = string.Empty;
                string NationalNo  = string.Empty;
@@ -49,7 +49,7 @@ namespace BusinessLayer
 
             if (clsViewsDataAccess.FindLDLApp_View(LocalDrivingLicenseApplicationID, ref ClassName, ref NationalNo, ref FullName, ref ApplicationDate, ref PassedTestCount, ref Status, ref BaseApplicationID))
             {
-                return new clsLocalDrivingLicenseViewsBusinessLayer(LocalDrivingLicenseApplicationID,  ClassName,  NationalNo,  FullName,  ApplicationDate,  PassedTestCount,  Status, BaseApplicationID);
+                return new clsLocalDrivingLicenseViews(LocalDrivingLicenseApplicationID,  ClassName,  NationalNo,  FullName,  ApplicationDate,  PassedTestCount,  Status, BaseApplicationID);
             }
             else return null;
         }
@@ -58,11 +58,7 @@ namespace BusinessLayer
 
 
 
-
-
-
-
-    public class clsLicenseDetailsViewBusinessLayer
+    public class clsLicenseDetailsView
     {
         public int _LicenseID { get; set; }
         public string _ClassName { get; set; }
@@ -85,9 +81,9 @@ namespace BusinessLayer
             get { return GetIssueReasonText(_IssueReason); }
         }
 
-        public clsLicenseDetailsViewBusinessLayer() { }
+        public clsLicenseDetailsView() { }
 
-        private clsLicenseDetailsViewBusinessLayer(int LicenseID, string ClassName, string FullName, string NationalNo,
+        private clsLicenseDetailsView(int LicenseID, string ClassName, string FullName, string NationalNo,
                                                string Gender, DateTime IssueDate, enIssueReason IssueReason, string Notes,
                                                string IsActive, DateTime DateOfBirth, DateTime ExpirationDate,
                                                string IsDetained, int DriverID)
@@ -108,7 +104,7 @@ namespace BusinessLayer
             this.PersonInfo = clsPerson.FindPerson(NationalNo);
         }
 
-        static public clsLicenseDetailsViewBusinessLayer FindLicenseDetailsByLicenseID(int LicenseID)
+        static public clsLicenseDetailsView FindLicenseDetailsByLicenseID(int LicenseID)
         {
             string ClassName = string.Empty;
             string FullName = string.Empty;
@@ -127,7 +123,7 @@ namespace BusinessLayer
                                                                       ref IssueDate, ref IssueReason, ref Notes, ref IsActive,
                                                                       ref DateOfBirth, ref ExpirationDate, ref IsDetained, ref DriverID))
             {
-                return new clsLicenseDetailsViewBusinessLayer(LicenseID, ClassName, FullName, NationalNo, Gender, IssueDate,
+                return new clsLicenseDetailsView(LicenseID, ClassName, FullName, NationalNo, Gender, IssueDate,
                                                            (enIssueReason)IssueReason, Notes, IsActive, DateOfBirth, ExpirationDate,
                                                           IsDetained, DriverID);
             }

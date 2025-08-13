@@ -21,7 +21,7 @@ namespace DVLD.Mange_Applications
         {
             InitializeComponent();
             clsLDLApp = clsLocalDrivingLicensesApplication.FindLocalDrvingLicenseAppByID(LocalDrivingLicenseID);
-            this.PersonID = clsApplications.FindApplication(clsLDLApp.BaseApplicationID)._ApplicantPersonID;
+            this.PersonID = clsLDLApp.PersonInfo.PersonID;
             this.userControlShowPersonDetails1.SetPersonID(this.PersonID);
           
             
@@ -87,7 +87,7 @@ namespace DVLD.Mange_Applications
 
 
 
-            if (clsLicenses.isLicenseExistByPersonIDAndLicenseClassID(this.PersonID, this.LicenseClassID))
+            if (clsLicense.isLicenseExistByPersonIDAndLicenseClassID(this.PersonID, this.LicenseClassID))
             {
                 MessageBox.Show("Person already have a license with the same applied driving class, Choose diffrent driving class", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -96,7 +96,7 @@ namespace DVLD.Mange_Applications
 
 
 
-            int LDLAppID = clsApplications.GetActiveApplicationIDForLicenseClass(this.PersonID, 1, this.LicenseClassID);
+            int LDLAppID = clsApplication.GetActiveApplicationIDForLicenseClass(this.PersonID, clsApplication.enApplicationType.NewDrivingLicense, this.LicenseClassID);
             if (LDLAppID != -1)
             {
                 MessageBox.Show($"This Person has a new application in this class with ID [{LDLAppID}]", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
