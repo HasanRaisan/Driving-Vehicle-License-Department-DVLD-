@@ -1,0 +1,18 @@
+Upcoming Updates:
+
+1- Implement a Publisher/Subscriber pattern for payment operations.
+-When a payment is processed, the system will publish an event that subscribers can handle for actions such as notifications, logging, or additional business workflows.
+
+2- Enhance password security by storing user passwords in the database using hashing with salting.
+-PBKDF2 (or other secure algorithms such as bcrypt or Argon2) will be used to protect credentials and improve authentication security.
+
+3- Use Stored Procedures Instead of Dynamic SQL:
+-Replace all inline SQL queries with stored procedures for all People-related operations.
+This will improve database security, enforce consistent structure, and enhance maintainability.
+
+4- Database Triggers like People Table:
+-Implement soft delete and logging.
+-Add an INSTEAD OF DELETE trigger to perform soft deletes instead of physical deletions.
+-Add AFTER INSERT and AFTER UPDATE triggers to capture changes.
+-Create dedicated log tables.
+-Log records will include UserID and a timestamp to support auditing and traceability.
