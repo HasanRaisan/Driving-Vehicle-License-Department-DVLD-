@@ -1,7 +1,8 @@
 Upcoming Updates:
 
-1- Implement a Publisher/Subscriber pattern for payment operations.
+1- Implement a Publisher/Subscriber pattern for payment operations and Error Logging.
 -When a payment is processed, the system will publish an event that subscribers can handle for actions such as notifications, logging, or additional business workflows.
+-When an error occurs in the Windows application (database errors, runtime exceptions, etc.), the system will also publish an error event and subscribers can log them into database and send alerts. 
 
 2- Enhance password security by storing user passwords in the database using hashing with salting.
 -PBKDF2 (or other secure algorithms such as bcrypt or Argon2) will be used to protect credentials and improve authentication security.
@@ -16,3 +17,8 @@ This will improve database security, enforce consistent structure, and enhance m
 -Add AFTER INSERT and AFTER UPDATE triggers to capture changes.
 -Create dedicated log tables.
 -Log records will include UserID and a timestamp to support auditing and traceability.
+
+5- Implement Page-Based Data Restore
+-Instead of restoring an entire table during recovery, add functionality to restore data page by page.
+-Supports faster recovery and minimizes downtime.
+-Provides administrators flexibility to restore only the necessary pages/rows.
