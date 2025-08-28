@@ -63,17 +63,6 @@ namespace DVLD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap @__frame_ripped_paper_with_torn_edges_window_text_with_copy_space_yellow_blue_colors_shreds_notebook_pages_abstract_background_154092_26362___نسخة {
-            get {
-                object obj = ResourceManager.GetObject("__frame-ripped-paper-with-torn-edges-window-text-with-copy-space-yellow-blue-colo" +
-                        "rs-shreds-notebook-pages-abstract-background_154092-26362 - نسخة", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _lock {
             get {
                 object obj = ResourceManager.GetObject("lock", resourceCulture);
