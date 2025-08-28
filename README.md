@@ -39,11 +39,11 @@ A desktop application designed to manage the issuance and renewal of various typ
 
 ## 👨‍💻 Developer
 
-- **Hassan Risan**  
+- **Hassan Risan**
 - [GitHub: HassanRisan](https://github.com/HassanRisan)
 
 ---
 
 ## 📜 License
 
-This project is for educational or experimental purposes. It has not been officially approved by any government authority.
+This project is for educational or experimental purposes.
