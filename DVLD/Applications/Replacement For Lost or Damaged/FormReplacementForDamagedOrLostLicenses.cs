@@ -42,7 +42,7 @@ namespace DVLD.Serveces
                 }
                 else if (radioButton == rbDamagedLicense)
                 {
-                    this._ReplaceReason = clsApplication.enApplicationType.ReplaceLostDrivingLicense;
+                    this._ReplaceReason = clsApplication.enApplicationType.ReplaceDamagedDrivingLicense;
                     this.lblHeadLine.Text = "Replacement For Damaged License";
                     this.userControlShowReplacementApplicationDetails1.SetApplicationTypeID((int)this._ReplaceReason);
                 }
