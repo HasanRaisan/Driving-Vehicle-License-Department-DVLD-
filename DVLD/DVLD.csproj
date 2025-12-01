@@ -599,9 +599,6 @@
     <None Include="Resources\admin_female1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\__frame-ripped-paper-with-torn-edges-window-text-with-copy-space-yellow-blue-colors-shreds-notebook-pages-abstract-background_154092-26362 - نسخة.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\road_closed_sign.png" />
   </ItemGroup>
   <ItemGroup>

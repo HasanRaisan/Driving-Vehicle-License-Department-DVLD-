@@ -30,6 +30,18 @@ A desktop application designed to manage the issuance and renewal of various typ
 
 ---
 
+## 🚀 Preview
+
+- [Login](https://drive.google.com/file/d/1NAI7zFQeRH2M22WGtmpxVeOpDTv-RYv3/view?usp=drive_link)
+- [Home](https://drive.google.com/file/d/1X6llV_rLHUgL0FV5qNlzEl2ImL92WQMK/view?usp=drive_link)
+- [Driving License Service](https://drive.google.com/file/d/1Ii3e8dr7y8NkRQ8y1LufIpC_PpOs2i0Z/view?usp=drive_link)
+- [Detain License](https://drive.google.com/file/d/1oznx6fQ1jrQbXT0_qRqsVcr07goRYKh1/view?usp=drive_link)
+- [Drivers](https://drive.google.com/file/d/1PmtJmigdNjvdM8ZoB12QoNGd9bP3StHH/view?usp=drive_link)
+- [Mange Users](https://drive.google.com/file/d/1B2DJ8vjlsVLtZkxxx9safmaLsqF23-GY/view?usp=drive_link)
+- [New Local Driving License](https://drive.google.com/file/d/1d7tjHa3x_VBoMn0bT9teGyolFh8VBwNH/view?usp=drive_link)
+
+---
+
 ## 📦 Notes
 
 - The system is desktop-based and does not require an internet connection.
