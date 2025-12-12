@@ -206,7 +206,6 @@ DVLD_Shared
 ### **People Pictures**
 
 ```
-DVLD_Shared
 │
 │
 
