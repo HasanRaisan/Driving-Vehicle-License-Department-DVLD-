@@ -42,6 +42,178 @@ A desktop application designed to manage the issuance and renewal of various typ
 
 ---
 
+## 📁 Folder Structure
+
+### **DVLD**
+
+```
+DVLD
+│   DVLD.sln
+│   MainForm.cs
+│   Program.cs
+│
+├── Applications
+│   ├── International License
+│   │       FormAddNewInternationlalLicense.cs
+│   │       FormInternationalLicenseApplications.cs
+│   │       UserControlShowInternationalLincenseApplicationDetails.cs
+│   │
+│   ├── Mange Application Types
+│   │       FormApplicationsTypes.cs
+│   │       FormEditApplicationsType.cs
+│   │
+│   ├── Mange Local Driving Applications
+│   │       FormAddLocalLicense.cs
+│   │       FormEditeLocalDrivingLicenseApplication.cs
+│   │       FormShowApplicationDetails.cs
+│   │       MangeLoacalDrivingLicenseApplications.cs
+│   │       UserConShowLocalApplicationInfo.cs
+│   │
+│   ├── Release Detaind License
+│   │       FormManageDetainLicense.cs
+│   │       FormReleaseLicense.cs
+│   │       Controls
+│   │           UserControlDetainInfo.cs
+│   │           UserControlReleaseLicense.cs
+│   │
+│   ├── Renew Local License
+│   │       FormRenwedLicense.cs
+│   │       UserControlShowRenwedApplicationsInfo.cs
+│   │
+│   └── Replacement For Lost or Damaged
+│           FormReplacementForDamagedOrLostLicenses.cs
+│           UserControlShowReplacementApplicationDetails.cs
+│
+├── Drivers
+│       FormDrivers.cs
+│
+├── Driving Licenses Services
+│       FormAddLocalLicense.cs
+│
+├── Global Classes
+│       clsGlobal.cs
+│       clsUtil.cs
+│       clsValidatoin.cs
+│
+├── License
+│   │   FormShowPersonLicensesHistory.cs
+│   │
+│   ├── Detain License
+│   │       FormDetainLicense.cs
+│   │
+│   ├── International License
+│   │       FormShowInternatonalLicenseInfo.cs
+│   │       Controls
+│   │           UserControlShowInternationalLicenseDetails.cs
+│   │
+│   └── Local License
+│           FormIssuDrivingLicenseForTheFirstTime.cs
+│           FormShowLicense.cs
+│           Controls
+│               UserControlDrivingLicenseInfo.cs
+│
+├── Login
+│       FormLoginScreen.cs
+│
+├── People
+│   │   AddEditPerson.cs
+│   │   FormShowPersonDetails.cs
+│   │   MangePeople.cs
+│   │
+│   └── Controls
+│           ucnAddEitedPerson.cs
+│           UserConShopPersonDetailWithFilter.cs
+│           UserControlShowPersonDetails.cs
+│
+├── Tests
+│   │   FormAddUpdateApointment.cs
+│   │   FormListAppointmentTest.cs
+│   │   FormTakeTest.cs
+│   │
+│   └── Test Types
+│           FormEditTestType.cs
+│           FormTestTypes.cs
+│
+└── Users
+        FormAddEditUser.cs
+        FormChangePassword.cs
+        FormMangeUsers.cs
+        FormShowUserDetails.cs
+        UserControlUserDetails.cs
+
+```
+
+### **Business Layer**
+
+```
+clsBusinessLayer
+│   clsApplication.cs
+│   clsApplicationType.cs
+│   clsCountry.cs
+│   clsDetainLicense.cs
+│   clsDriver.cs
+│   clsInternationalLicense.cs
+│   clsLicense.cs
+│   clsLicenseClasses.cs
+│   clsLicenseClassesBusinnessLayer.cs
+│   clsLocalDrivingLicensesApplication.cs
+│   clsLocalDrivingLicenseViews.cs
+│   clsPerson.cs
+│   clsTest.cs
+│   clsTestAppointment.cs
+│   clsTestType.cs
+│   clsUser.cs
+│   clsViews.cs
+│   clsViewsBusinessLayer.cs
+│   DVLD_Buisness.csproj
+
+```
+
+### **Data Access Layer**
+
+```
+clsDataAccessLayer
+│   clsApplicationsDataAccess.cs
+│   clsApplicationTypesDataAceess.cs
+│   clsCountriesDataAccess.cs
+│   clsDataAccessSettings.cs
+│   clsDetainLicenseDataAccess.cs
+│   clsDriverDataAccess.cs
+│   clsGlobalDataAccess.cs
+│   clsInternationalLicenseDataAccess.cs
+│   clsLicenseClassDataAccess.cs
+│   clsLicenseDataAccess.cs
+│   clsLocalDrivingLicenseApplicationsDataAccess.cs
+│   clsPersonDataAccess.cs
+│   clsTestAppointmetsDataAccess.cs
+│   clsTestsDataAccess.cs
+│   clsTestTypeDataAccess.cs
+│   clsUserDataAccess.cs
+│   clsViewsDataAccess.cs
+│   DVLD_DataAccess.csproj
+
+```
+
+### **Shared**
+
+```
+DVLD_Shared
+│   ClsGlobal.cs
+│   DVLD_Shared.csproj
+
+```
+
+### **People Pictures**
+
+```
+DVLD_Shared
+│
+│
+
+```
+
+---
+
 ## 📦 Notes
 
 - The system is desktop-based and does not require an internet connection.
@@ -52,7 +224,8 @@ A desktop application designed to manage the issuance and renewal of various typ
 ## 👨‍💻 Developer
 
 - **Hassan Risan**
-- [GitHub: HassanRisan](https://github.com/HassanRisan)
+- hasan.raisann@gmail.com
+- Full-Stack Developer
 
 ---
 
