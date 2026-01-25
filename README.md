@@ -1,4 +1,4 @@
-# 🪪 DVLD Driving License Management System
+F# 🪪 DVLD Driving License Management System
 
 A desktop application designed to manage the issuance and renewal of various types of driving licenses, providing an environment that facilitates handling driver data and requests.
 
@@ -39,6 +39,15 @@ A desktop application designed to manage the issuance and renewal of various typ
 - [Drivers](https://drive.google.com/file/d/1PmtJmigdNjvdM8ZoB12QoNGd9bP3StHH/view?usp=drive_link)
 - [Mange Users](https://drive.google.com/file/d/1B2DJ8vjlsVLtZkxxx9safmaLsqF23-GY/view?usp=drive_link)
 - [New Local Driving License](https://drive.google.com/file/d/1d7tjHa3x_VBoMn0bT9teGyolFh8VBwNH/view?usp=drive_link)
+
+---
+
+## How to Run the App
+
+You can find the executable files in the `/Distributions` folder:
+
+1. **Production-Ready**: Single EXE file, no installation required (Recommended).
+2. **Releas-Build**: Standard build including external DLLs for debugging purposes.
 
 ---
 
