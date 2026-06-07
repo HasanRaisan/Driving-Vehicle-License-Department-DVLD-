@@ -1,7 +1,6 @@
 # 🪪 DVLD Driving License Management System
 
-A desktop application designed to manage the issuance and renewal of various types of driving licenses, providing an environment that facilitates handling driver data and requests.
----
+## A desktop application designed to manage the issuance and renewal of various types of driving licenses, providing an environment that facilitates handling driver data and requests.
 
 ## 🚀 Core Services
 
@@ -30,7 +29,9 @@ A desktop application designed to manage the issuance and renewal of various typ
 ---
 
 ## 🚀 Preview
+
 **Featured screens:**
+
 - [Login](https://drive.google.com/file/d/1NAI7zFQeRH2M22WGtmpxVeOpDTv-RYv3/view?usp=drive_link)
 - [Home](https://drive.google.com/file/d/1X6llV_rLHUgL0FV5qNlzEl2ImL92WQMK/view?usp=drive_link)
 - [Driving License Service](https://drive.google.com/file/d/1Ii3e8dr7y8NkRQ8y1LufIpC_PpOs2i0Z/view?usp=drive_link)
@@ -43,10 +44,50 @@ A desktop application designed to manage the issuance and renewal of various typ
 
 ## How to Run the App
 
-You can find the executable files in the `/Distributions` folder:
+---
 
-1. **Production-Ready**: Single EXE file, no installation required (Recommended).
-2. **Releas-Build**: Standard build including external DLLs for debugging purposes.
+## 🗄️ Essential Prerequisite: Database Restoration
+
+Before executing the application via any method, you must restore the SQL Server database backup file (`DVLD Database/DVLD.bak`) provided with the project.
+Open **SQL Server Management Studio (SSMS)** and restor the database.
+
+---
+
+### 📁 Method 1: Running the Application Instantly via `.exe` File
+
+_(Best for quick testing, product demonstrations, or QA teams who do not need to view or modify the source code)_
+
+1. Install exe. file from `Distributions/Production-Ready.zip`
+2. Double on setup, then go to "Application Files/DVLD_1_0_0_1/DVLD.exe.config.deploy"
+3. Update Connection String: Locate the `<connectionStrings>` block and modify the `connectionString` attribute to match your local SQL Server environment data source and authentication credentials:
+   ```xml
+   <connectionStrings>
+       <add name="DVLDconnection"
+            connectionString="Server=YOUR_SERVER_NAME;Database=DVLD;User Id=sa;Password=YOUR_PASSWORD;"
+            providerName="System.Data.SqlClient"/>
+   </connectionStrings>
+   ```
+
+### 💻 Method 2: Running & Exploring the Project via Visual Studio
+
+_(Best for software engineers who want to review architecture patterns, inspect code layers, or extend functionalities)_
+
+1. Open Solution: Launch Visual Studio 2022 (or your preferred compatible IDE) and open the main solution file: `DVLD.sln.`
+
+2. Open the development configuration file: `App.config.` to Configure Connection String: Modify the connection settings under the <connectionStrings> section to point to your active database server instance:
+
+### 🔑 Default Administrator Credentials
+
+- Username: U2
+- Paaword: 123
+
+---
+
+## 📊 Database Schema Diagram
+
+![alt text](DatabaseDiagram.svg)
+
+- See PDF and PNG versoins in: `Database Schema Diagram` Folder.
 
 ---
 
