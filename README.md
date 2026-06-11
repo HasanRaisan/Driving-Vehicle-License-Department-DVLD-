@@ -65,12 +65,12 @@ This enables flexible parent-child communication without tight coupling.
 
 ## How to Run the App
 
----
+
 
 ## 🗄️ Essential Prerequisite: Database Restoration
 
 Before executing the application via any method, you must restore the SQL Server database backup file (`DVLD Database/DVLD.bak`) provided with the project.
-Open **SQL Server Management Studio (SSMS)** and restor the database.
+Open **SQL Server Management Studio (SSMS)** and restore the database.
 
 ---
 
@@ -95,7 +95,7 @@ _(Best for software engineers who want to review architecture patterns, inspect 
 
 1. Open Solution: Launch Visual Studio 2022 (or your preferred compatible IDE) and open the main solution file: `DVLD.sln.`
 
-2. Open the development configuration file: `App.config.` to Configure Connection String: Modify the connection settings under the <connectionStrings> section to point to your active database server instance:
+2. Open the development configuration file: `App.config.` to configure the connection string: Modify the connection settings under the <connectionStrings> section to point to your active database server instance:
 
 ### 🔑 Default Administrator Credentials
 
@@ -108,7 +108,7 @@ _(Best for software engineers who want to review architecture patterns, inspect 
 
 ![alt text](DatabaseDiagram.svg)
 
-- See PDF and PNG versoins in: `Database Schema Diagram` Folder.
+- See PDF and PNG versions in: `Database Schema Diagram` Folder.
 
 ---
 
