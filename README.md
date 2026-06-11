@@ -49,7 +49,7 @@ This enables flexible parent-child communication without tight coupling.
 
 ---
 
-## �🚀 Preview
+## 🚀 Preview
 
 **Featured screens:**
 
