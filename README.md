@@ -1,7 +1,8 @@
 # 🪪 DVLD Driving License Management System
 
-## A desktop application designed to manage the issuance and renewal of various types of driving licenses, providing an environment that facilitates handling driver data and requests.
-
+**A desktop application designed to manage the issuance and renewal of various types of driving licenses, providing an environment that facilitates handling driver data and requests.**
+<br> 
+- Architecture: **Three-Tier architecture** 
 ## 🚀 Core Services
 
 - 🆕 Issue a new driving license for the first time.
