@@ -1,8 +1,20 @@
+<div align="center">
+
 # 🪪 DVLD Driving License Management System
 
+[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.7.2%2B-512BD4?logo=.net&logoColor=white)](https://dotnet.microsoft.com/)
+[![C#](https://img.shields.io/badge/C%23-239120?logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![Windows Forms](https://img.shields.io/badge/UI-Windows%20Forms-0078D7?logo=windows&logoColor=white)](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-Database-CC2927?logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/sql-server/)
+[![Architecture](https://img.shields.io/badge/Architecture-3--Tier-blue)](#-folder-structure)
+[![License](https://img.shields.io/badge/License-Educational-green)](LICENSE)
+
 **A desktop application designed to manage the issuance and renewal of various types of driving licenses, providing an environment that facilitates handling driver data and requests.**
-<br> 
-- Architecture: **Three-Tier architecture** 
+
+</div>
+
+---
+
 ## 🚀 Core Services
 
 -  Issue a new driving license for the first time.
