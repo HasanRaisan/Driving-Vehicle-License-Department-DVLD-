@@ -5,13 +5,16 @@
 - Architecture: **Three-Tier architecture** 
 ## 🚀 Core Services
 
-- 🆕 Issue a new driving license for the first time.
-- ♻️ Renew an expired license.
-- 🔁 Replace a lost or damaged license.
-- 🌍 Issue an international driving license.
-- 🔓 Release a suspended license.
+-  Issue a new driving license for the first time.
+-  Renew an expired license.
+-  Replace a lost or damaged license.
+-  Issue an international driving license.
+-  Release a suspended license.
 
 ---
+## 🎥 Project Video
+
+[![DVLD Project Video Preview](https://img.youtube.com/vi/4HXOAKhBVR0/hqdefault.jpg)](https://youtu.be/4HXOAKhBVR0)
 
 ## ⚙️ Technologies Used
 
@@ -23,9 +26,9 @@
 
 ## 🎯 Features
 
-- 🖥️ Simple graphical interface for adding drivers and managing all types of requests.
-- ✅ Internal verification system to ensure requests meet conditions and regulations before execution.
-- 📋 Clear data organization with easy browsing and searching.
+- Simple graphical interface for adding drivers and managing all types of requests.
+- Internal verification system to ensure requests meet conditions and regulations before execution.
+- Clear data organization with easy browsing and searching.
 
 ---
 
