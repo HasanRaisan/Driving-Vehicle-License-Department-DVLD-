@@ -46,9 +46,9 @@
 
 ## � Featured Code
 
-### Delegate Pattern for Component Communication
+### Event and Delegate Pattern for Component Communication
 
-The `UserConShopPersonDetailWithFilter` control uses a delegate to send PersonID back to parent forms:
+The `UserConShopPersonDetailWithFilter` control uses a delegate and event to send PersonID back to parent forms:
 
 ```csharp
 public delegate void DelSendPersonIDBack(int PersonID);
@@ -60,7 +60,15 @@ private void _SendPersonID()
         SendPersonIDBack.Invoke(PersonID);
 }
 ```
-
+```csharp
+public event Action<int> OnPersonSelected;
+public void PersonSelected(int PersonID)
+{
+    Action<int> Handler = OnPersonSelected;
+    if (Handler != null)
+        Handler(PersonID);
+}
+```
 This enables flexible parent-child communication without tight coupling.
 
 ---
